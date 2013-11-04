@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load static %}
+{% load url from future %}
+
+{% block extrahead %}
+    <style type="text/css">
+        img { max-width: none; }
+    </style>
+    <script src="{% static 'OpenLayers.js' %}"></script>
+
+    <!-- bring in the OpenStreetMap OpenLayers layers.
+         Using this hosted file will make sure we are kept up
+         to date with any necessary changes -->
+    <script src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        // Start position for the map
+        // Center of the tour route, or just Manhattan
+        var lon = {{ center.0 }};
+        var lat = {{ center.1 }};
+        var zoom = 15;
+
+        var map; //complex object of type OpenLayers.Map
+
+        //Initialise the 'map' object
+        function init() {
+            map = new OpenLayers.Map("map", {
+                controls:[
+                    new OpenLayers.Control.Navigation(),
+                    new OpenLayers.Control.PanZoomBar(),
+                    new OpenLayers.Control.Permalink(),
+                    new OpenLayers.Control.ScaleLine({geodesic:true}),
+                    new OpenLayers.Control.Permalink('permalink'),
+                    new OpenLayers.Control.MousePosition(),
+                    new OpenLayers.Control.Attribution()],
+                maxExtent:new OpenLayers.Bounds(-20037508.34, -20037508.34, 20037508.34, 20037508.34),
+                maxResolution:156543.0339,
+                numZoomLevels:19,
+                units:'m',
+                projection:new OpenLayers.Projection("EPSG:900913"),
+                displayProjection:new OpenLayers.Projection("EPSG:4326")
+            });
+
+            // This is the layer that uses the locally stored tiles
+            var newLayer = new OpenLayers.Layer.OSM("Local Tiles", "{% if map_tile_server %}{{ map_tile_server }}{% endif %}/osm/${z}/${x}/${y}.png", {numZoomLevels:19});
+            map.addLayer(newLayer);
+            // This is the end of the layer
+
+            if (!map.getCenter()) {
+                var lonLat = new OpenLayers.LonLat(lon, lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
+                map.setCenter(lonLat, zoom);
+            }
+        }
+    </script>
+    
+    <script src="/static/drawRiderPoints.js"></script>
+    <script src="/static/drawTourRoute.js"></script>
+
+{% endblock %}
+{% block page_help %}
+  <div><b>Map Description</b></div>
+  <p>
+    This map shows the most recent locations for each rider.Most recent locations
+    for each rider are shown darker on the map.
+  </p>
+  <dl>
+    <dt style="color:green;">Green</dt>
+    <dd>Riders going out a normal speed.</dd>
+    <dt style="color:orange;">Orange</dt>
+    <dd>Possible congestion or bottleneck.</dd>
+    <dt style="color:red;">Red</dt>
+    <dd>Likely congestion or bottleneck.</dd>      
+  </dl>
+{% endblock %}
+{% block content %}
+        <div class="row-fluid">
+        {#        {% block links %}#}
+        <div class="span3">
+            <div  style="height: 75%" class="well sidebar-nav">
+                <ul class="nav nav-list">
+
+                    <li class="nav-header">Sidebar</li>
+                    <li class="active"><a href="#">Recent Updates</a></li>
+                    <li><a href="{% url 'playback' %}">Play Back Mode</a></li>
+                </ul>
+            </div><!--/.well -->
+        </div><!--/span-->
+
+        <div class="span9" id="map_container">
+            <div style="width:100%; height:500px" id="map"></div>
+        </div><!--/span-->
+        </div>
+
+    <!-- define a DIV into which the map will appear. Make it take up the whole window -->
+{% endblock %}

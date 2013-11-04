@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load url from future %}
+
+{% block content %}
+    <h1>Admin Panel</h1>
+        <h3>Please Log in</h3>
+<form action="{% url 'login' %}?next={% firstof next '/home/' %}" method="post" class="form-horizontal">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="control-group">
+        {% if not field.is_hidden %}
+        <label class="control-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {% endif %}
+        <div class="controls">
+        {{ field }}
+        </div>
+    </div>
+    {% endfor %}
+    <div class="control-group">
+        <div class="controls">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load url from future %}
+{% load admin_modify %}
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static "css/tourroute.css" %}" />
+{% endblock %}
+{% block extrahead %}
+{{ media }}
+{% endblock %}
+{% block page_help %}
+  <div><b>Create New Route</b></div>
+  <p>
+    To draw the tour route on the map begin by clicking on the map. 
+    Continue to connect the lines until you have connected all the lines.
+    Doubleclick to stop drawing and complete the route.
+  </p>
+  <div><b>Editing the Route</b></div>
+  <p>
+    If you need to edit the route after it has been completed, you can
+    select the left-most icon on the top-right of the map. The veritices of
+    the points on the map will become moveable.
+  </p>
+  <div><b>Panning</b></div>
+  <p>While drawing you can pan the map by holding down the left mouse button and dragging the map.</p>
+{% endblock %}
+{% block content %}
+<div class="row-fluid">
+{% if messages %}
+    {% for message in messages %}
+    <div style="width:30%" class="alert alert-success"><a class="close" data-dismiss="alert">&times;</a>{{ message }}</div>
+    {% endfor %}
+{% endif %}
+<div class="span12">
+<form action="{{ form_url }}" method="post" id="{{ opts.module_name }}_form">{% csrf_token %}{% block form_top %}{% endblock %}
+<div>
+{% if is_popup %}<input type="hidden" name="_popup" value="1" />{% endif %}
+{% if save_on_top %}{% block submit_buttons_top %}{% submit_row %}{% endblock %}{% endif %}
+{% if errors %}
+    <p class="errornote">
+    Please correct the error(s) below.
+    </p>
+    {{ adminform.form.non_field_errors }}
+{% endif %}
+
+{% block field_sets %}
+{% for fieldset in adminform %}
+  {% include "admin/includes/fieldset.html" %}
+{% endfor %}
+{% endblock %}
+
+{% block after_field_sets %}{% endblock %}
+
+{% block inline_field_sets %}
+{% for inline_admin_formset in inline_admin_formsets %}
+    {% include inline_admin_formset.opts.template %}
+{% endfor %}
+{% endblock %}
+
+{% block after_related_objects %}{% endblock %}
+
+{% block submit_buttons_bottom %}{% submit_row %}{% endblock %}
+
+{% if adminform and add %}
+   <script type="text/javascript">document.getElementById("{{ adminform.first_field.id_for_label }}").focus();</script>
+{% endif %}
+
+{# JavaScript for prepopulated fields #}
+{% prepopulated_fields_js %}
+
+</div>
+</form>
+</div>
+</div>
+{% endblock %}

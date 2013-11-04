@@ -1,0 +1,23 @@
+{
+    "rider_id": "badriderid",
+    "locations": [
+        {
+            "latitude": 43.083958,
+            "longitude": -77.679734,
+            "accuracy": 1,
+            "speed": 0,
+            "bearing": 37.444657,
+            "time": 1359488523,
+            "provider": "GPS"
+        },
+        {
+            "latitude": 43.82953,
+            "longitude": -77.680099,
+            "accuracy": 11,
+            "speed": 0,
+            "bearing": 0,
+            "time": 1359488553,
+            "provider": "WIFI"
+        }
+    ]
+}

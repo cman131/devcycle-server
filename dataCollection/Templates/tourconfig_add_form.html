@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% load static %}
+{% block extrahead %}
+<link rel="stylesheet" type="text/css" href="{% static "css/tourconfig.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "css/jquery-ui.css" %}" />
+<script type="text/javascript" src="{% static "jquery-1.9.1.js" %}"></script>
+<script type="text/javascript" src="{% static "jquery-ui.js" %}"></script>
+<script type="text/javascript">
+$(function() {
+    $( "#id_start_time_0" ).datepicker({
+        showOtherMonths: true,
+        selectOtherMonths: true,
+        dateFormat: "yy-mm-dd"
+    });
+    $( "#id_max_tour_time_0" ).datepicker({
+        showOtherMonths: true,
+        selectOtherMonths: true,
+        dateFormat: "yy-mm-dd"
+    });
+});
+</script>
+{% endblock %}
+{% block page_help %}
+  <div><b>Creating a New Tour</b></div>
+  <p>
+    This page allows you to create a new tour that will be used throughout
+    the admin dashboard. Note this will not update user's mobile
+    phones with the new tour information. The Tour-ID, the GCM Sender ID, and
+    the DCS URL parameters will not be able to be changed once the tour has been
+    created.
+  </p>
+{% endblock %}
+{% block content %}
+    {# nav #}
+    <div class="row-fluid">
+            {# mapping #}
+            <div class="span9">
+            <h2>Set Tour Configuration</h2>
+            <form action="{% url 'tourconfig-add' %}" method="post">
+               {% csrf_token %}
+               {% if form.non_field_errors %}
+               <span class="text-error">
+               {{ form.non_field_errors }}
+               </span>
+               {% endif %}
+               {% for field in form %} 
+                <div{% if not form.fields|length_is:'1' %} class="field-box{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% if not field.is_readonly and field.errors %} errors{% endif %}"{% endif %}> 
+                    {% if not form.fields|length_is:'1' and not field.is_readonly %}<span class="text-error">{{ field.errors }}</span>{% endif %} 
+                    {% if field.is_checkbox %} 
+                        {{ field.field }}{{ field.label_tag }} 
+                    {% else %} 
+                        {{ field.label_tag }} 
+                        {% if field.is_readonly %} 
+                            <p>{{ field.contents }}</p> 
+                        {% else %} 
+                            {{ field }} 
+                        {% endif %} 
+                    {% endif %} 
+                    {% if field.field.help_text %} 
+                        <p class="help">{{ field.field.help_text|safe }}</p> 
+                    {% endif %} 
+                </div> 
+            {% endfor %} 
+               {# {{ form }} #}
+               <button type="submit" class="btn">Submit</button>
+            </form>
+            </div><!--/span-->
+          </div>
+    {# container #}
+    <div class="">
+{#        <div style="width:75%; height:75%" id="map"></div>#}
+    </div>
+
+        <!-- define a DIV into which the map will appear. Make it take up the whole window -->
+{% endblock %}

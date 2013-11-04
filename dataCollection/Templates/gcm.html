@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% load static %}
+{% block extrahead %}
+<link rel="stylesheet" type="text/css" href="{% static "css/tourconfig.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "css/jquery-ui.css" %}" />
+<script type="text/javascript" src="{% static "jquery-1.9.1.js" %}"></script>
+<script type="text/javascript" src="{% static "jquery-ui.js" %}"></script>
+<script type="text/javascript">
+$(function() {
+    $( "#id_start_time_0" ).datepicker({
+        showOtherMonths: true,
+        selectOtherMonths: true,
+        dateFormat: "yy-mm-dd"
+    });
+    $( "#id_max_tour_time_0" ).datepicker({
+        showOtherMonths: true,
+        selectOtherMonths: true,
+        dateFormat: "yy-mm-dd"
+    });
+});
+</script>
+{% endblock %}
+{% block page_help %}
+  <div><b>Tour Updating</b></div>
+  <p>
+    This page allows you to update tour configuration values
+    that are being used in the mobile app. With exception of the tour
+    times, configuration parameters can be changed at anytime.
+  </p>
+  <div><b>Changing Tour Times</b></div>
+  <p>
+    In the event that the tour is delayed and the original start time of the
+    tour has not yet passed, you have the ability to send a new time configuration
+    to riders. Automatic tracking will be disabled until the rider re-enters their
+    new start time in the mobile app.
+  </p>
+  <div><b>Multi-Day Tours</b></div>
+  <p>
+    After the previous day's tour has ended, you are able to extend the tour
+    to the next day by updating the dates and times of the currently configured
+    tour. Simply enter the new date and time, and riders will be prompted
+    to set their automatic tracking for the next day of the tour.
+  </p>
+{% endblock %}
+{% block content %}
+    {# nav #}
+    <div class="row-fluid">
+            <div class="span3">
+              <div  style="height: 75%" class="well sidebar-nav">
+                <ul class="nav nav-list">
+                  <li class="nav-header">Update Type</li>
+                  <li class="active"><a href="#">Tour Info</a></li>
+                  <li><a href="#">Cancel Tour</a></li>
+
+                </ul>
+              </div><!--/.well -->
+            </div><!--/span-->
+            {# mapping #}
+            <div class="span9">
+            <h2>{{ title }}</h2>
+              {% if messages %}
+                  {% for message in messages %}
+                    <div style="width:30%" class="alert alert-success"><a class="close" data-dismiss="alert">&times;</a>{{ message }}</div>
+                  {% endfor %}
+              {% endif %}
+            <form action="{% url 'gcm' %}{#/gcm/#}" method="post">
+               {% csrf_token %}
+               {% for field in form %} 
+                <div{% if not form.fields|length_is:'1' %} class="field-box{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% if not field.is_readonly and field.errors %} errors{% endif %}"{% endif %}> 
+                    {% if not form.fields|length_is:'1' and not field.is_readonly %}{{ field.errors }}{% endif %} 
+                    {% if field.is_checkbox %} 
+                        {{ field.field }}{{ field.label_tag }} 
+                    {% else %} 
+                        {{ field.label_tag }} 
+                        {% if field.is_readonly %} 
+                            <p>{{ field.contents }}</p> 
+                        {% else %} 
+                            {{ field }} 
+                        {% endif %} 
+                    {% endif %} 
+                    {% if field.field.help_text %} 
+                        <p class="help">{{ field.field.help_text|safe }}</p> 
+                    {% endif %} 
+                </div> 
+            {% endfor %} 
+               {# {{ form }} #}
+               <button type="submit" class="btn">Submit</button>
+            </form>
+            </div><!--/span-->
+          </div>
+    {# container #}
+    <div class="">
+{#        <div style="width:75%; height:75%" id="map"></div>#}
+    </div>
+
+        <!-- define a DIV into which the map will appear. Make it take up the whole window -->
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if perms_lacking or protected %}
+    {% if perms_lacking %}
+        <p>Deleting the {% if objects_name %}selected {{ objects_name }}{% else %}{{ object_name }} "{{ object }}"{% endif %} would result in deleting related objects, but your account doesn't have permission to delete the following types of objects:</p>
+        <ul>
+        {% for obj in perms_lacking %}
+            <li>{{ obj }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    {% if protected %}
+        <p>Deleting the {% if objects_name %}selected {{ objects_name }}{% else %}{{ object_name }} "{{ object }}"{% endif %} would require deleting the following protected related objects:</p>
+        <ul>
+        {% for obj in protected %}
+            <li>{{ obj }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% else %}
+    <p>Are you sure you want to delete the {% if objects_name %}selected {{ objects_name }}{% else %}{{ object_name }} "{{ object }}"{% endif %}? All of the following related items will be deleted:</p>
+    <ul>{{ deleted_objects|unordered_list }}</ul>
+    <form action="" method="post">{% csrf_token %}
+    <div>
+    <input type="hidden" name="post" value="yes" />
+    <input type="submit" value="Yes, I'm sure" />
+    </div>
+    </form>
+{% endif %}
+{% endblock %}

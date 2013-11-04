@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{% load url from future %}
+
+{% block extrahead %}
+    <script src="{% static 'chart/Chart.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="row-fluid">
+        {#        {% block links %}#}
+        <div class="span3">
+            <div  style="height: 75%" class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li class="nav-header">Rider Info</li>
+                    <li><a href="{% url 'graphs-os' %}">OS Graph</a></li>
+                    <li><a href="{% url 'graphs-registered' %}">Registration</a></li>
+                    <li class="nav-header">Tour Info</li>
+                    <li><a href="{% url 'graphs-updates' %}">Updates Over Time</a></li>
+                    <li><a href="{% url 'graphs-battery' %}">Rider Battery</a></li>
+
+
+                </ul>
+            </div><!--/.well -->
+        </div><!--/span-->
+
+        <div class="span8" id=graph_container">
+        <div class="row">
+            {% if graph_values %}
+
+                <div class="offset1"><h4>{{ title }}</h4></div>
+                <div><canvas id="canvas" height="450" width="600"></canvas></div>
+
+                <script>
+                    var lineChartData = {
+                        labels : {{ graph_label|safe }},
+
+                        datasets : [
+                            {
+                                fillColor : "rgba(220,220,220,0.5)",
+                                strokeColor : "rgba(220,220,220,1)",
+                                pointColor : "rgba(220,220,220,1)",
+                                pointStrokeColor : "#000000",
+                                data : {{ graph_values }}
+                            }
+                        ]
+
+                    };
+                    var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData);
+                </script>
+            {% else %}
+                <h3>No Data Available</h3>
+            {% endif %}
+        </div>
+    </div>
+    </div>
+
+
+    <!-- define a DIV into which the map will appear. Make it take up the whole window -->
+{% endblock %}

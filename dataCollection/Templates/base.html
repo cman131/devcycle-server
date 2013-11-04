@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+{% load static %}
+{% load admin_urls %}
+{% load url from future %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>TourTrak</title>
+    <meta name="description" content="">
+    <meta name="author" content="Evan Moreshead">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap-responsive.css' %}" />
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+        }
+        @media (min-width: 768px) {
+          .page-help {
+            padding:10px;
+            font-size:0.9em;
+            min-width:240px; 
+          }
+        } 
+    </style>
+    {% block extrastyle %}{% endblock %}
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="{% static 'bootstrap.min.js' %}"></script>
+    {% block extrahead %}{% endblock %}
+</head>
+
+<body {% block body_attr %}{% endblock %}>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="#">TourTrak</a>
+            <div class="nav-collapse collapse">
+            <ul class="nav">
+                <li><a href="{% url 'home' %}"><i class="icon-home"></i> Home</a></li>
+                <li><a href="{% url 'map' %}">Maps</a></li>
+                
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tours <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="{% url 'gcm' %}">Update Current Tour</a></li>
+                    <li><a href="/admin/tour_config/tourroute/">View Tour Routes</a></li>
+                    <li><a href="{% url 'tourconfig-add' %}">Create New Tour</a></li>
+				          </ul>
+			          </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actions <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="{% url 'send_message' %}">Message Riders</a></li>
+				          </ul>
+			          </li>
+                <li><a href="{% url 'graphs-os' %}">Graphs</a></li>
+            </ul>
+            <ul class="nav pull-right">
+            {% if user.is_authenticated %}
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> {{ user.username }} <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                  {% url 'logout' as logout_url %}
+                  {% if logout_url %}
+                      <li><a class="navbar-link" href="{{ logout_url }}">
+                  {% else %}
+                      <li><a class="navbar-link" href="{{ root_path }}logout/">
+                  {% endif %}
+                  Log Out</a></li>
+				          </ul>
+              </li>
+              {% else %}
+                  <li><a href="{% url 'login' %}"><i class="icon-user"></i> Log In</a></li>
+              {% endif %}
+              
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-question-sign"></i> Help <b class="caret"></b></a>
+                <div class="dropdown-menu page-help">
+                  {% block page_help %}There is no help available for this page :({% endblock %}
+                </div>
+              </li>
+            </ul>        
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+
+    {% block content %}Empty page{% endblock %}
+    <p><hr></p>
+
+        <footer class="row">
+            <div class="span6">
+                <a href="http://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangomade124x25_grey.gif" border="0" alt="Made with Django." title="Made with Django." /></a>
+            </div>
+            <div class="span6" style="text-align:right">
+                <p>
+                    &copy; <a href="http://www.se.rit.edu/~cycl-ops/">Cycl-ops</a> 2013
+                </p>
+            </div>
+        </footer>
+</div> <!-- container -->
+
+</body>
+
+</html>

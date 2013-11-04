@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+{% load url from future %}
+
+{% block extrahead %}
+    <script src="{% static 'chart/Chart.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+  <div class="row-fluid">
+    {%if current_tour %}
+      <div class="span4 well">
+        <h3>Current Tour</h3>
+        <dl class="dl-horizontal">
+        <dt>Tour Name</dt>
+        <dd>{{ current_tour.tour_name }}</dd>
+        <dt>Tour ID</dt>
+        <dd>{{ current_tour.tour_id }}</dd>
+        <dt>Organization</dt>
+        <dd>{{ current_tour.tour_organization }}</dd>
+        <dt>Start Time</dt>
+        <dd>{{current_tour.start_time|date:"m/d/Y h:i A"}}</dd>
+        <dt>End Time</dt>
+        <dd>{{current_tour.max_tour_time|date:"m/d/Y h:i A"}}</dd>
+        <dt>Config Link</dt>
+        <dd>
+          <a href="{{ current_tour.config_link }}">Click Here</a>
+        </dd>
+        </dl>
+        <div style="text-align:center">
+          <a class="btn btn-large btn btn-primary" href="{% url 'gcm' %}">Update Tour</a>
+        </div>
+      </div>
+      <div class="span4 well">
+        <h3>Tour Statistics</h3>
+        <dl class="dl-horizontal">
+        <dt>Registered Riders</dt>
+        <dd>{{current_stats.riders}}</dd>
+        </dl>
+        <div style="text-align:center">
+          <a class="btn btn-large btn btn-primary" href="{% url 'graphs-registered' %}">More Stats</a>
+        </div>
+      </div>
+    {% else %}
+      <div class="span9">
+        <h2>Welcome to TourTrak</h2>
+        <p>There is currently no tour configured.<p>
+        <div>
+          <a class="btn btn-large btn btn-primary" href="{% url 'tourconfig-add' %}">Create a Tour</a>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+
+
+    <!-- define a DIV into which the map will appear. Make it take up the whole window -->
+{% endblock %}

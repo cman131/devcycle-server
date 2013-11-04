@@ -1,0 +1,59 @@
+{% extends "admin/base.html" %}
+{% block title %}TourTrak{% endblock %}
+{% block branding %}TourTrak{% endblock %}
+{% block userlinks %}
+    {% url 'admin:password_change' as password_change_url %}
+    {% if password_change_url %}
+        <a href="{{ password_change_url }}">
+    {% else %}
+        <a href="{{ root_path }}password_change/">
+    {% endif %}
+    Change Password</a> /
+    {% url 'admin:logout' as logout_url %}
+    {% if logout_url %}
+        <a href="{{ logout_url }}">
+    {% else %}
+        <a href="{{ root_path }}logout/">
+    {% endif %}
+    Log out</a>
+{% endblock %}
+{% block nav-global %}
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="#">TourTrak</a>
+            <div class="nav-collapse collapse">
+            <ul class="nav">
+                <li><a href="/admin/home/" class="">Home</a></li>
+                <li><a href="/admin/map/" class="">Map</a></li>
+                <li><a href="/admin/gcm/" class="">Alert</a></li>
+                <li><a href="/admin/tour_config/tourroute/" class="">Tour Routes</a></li>
+            </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block pretitle %}{% endblock %}
+{% block content_title %}{% endblock %}
+{% block content %}Empty page{% endblock %}
+{% block footer %}
+<footer class="row">
+    <div class="span6">
+        <a href="http://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangomade124x25_grey.gif" border="0" alt="Made with Django." title="Made with Django." /></a>
+    </div>
+    <div class="span6" style="text-align:right">
+        <p>
+            &copy; <a href="http://www.se.rit.edu/~cycl-ops/">Cycl-ops</a> 2013
+        </p>
+    </div>
+{% endblock %}
+

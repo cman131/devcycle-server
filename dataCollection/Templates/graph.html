@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% load url from future %}
+
+{% block extrahead %}
+    <script src="{% static 'chart/Chart.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="row-fluid">
+        {#        {% block links %}#}
+        <div class="span3">
+            <div  style="height: 75%" class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li class="nav-header">Rider Info</li>
+                    <li><a href="{% url 'graphs-os' %}">OS Graph</a></li>
+                    <li><a href="{% url 'graphs-registered' %}">Registration</a></li>
+                    <li class="nav-header">Tour Info</li>
+                    <li><a href="{% url 'graphs-updates' %}">Updates Over Time</a></li>
+                    <li><a href="{% url 'graphs-battery' %}">Rider Battery</a></li>
+
+
+                </ul>
+            </div><!--/.well -->
+        </div><!--/span-->
+
+        <div class="span8" id=graph_container">
+        <div class="row">
+        <h3>Welcome to TourTrak</h3>
+            {% if num_riders %}
+                <h4>There are currently <b>{{ num_riders }}</b> registered riders.</h4>
+            {% endif %}
+            {% if num_riders %}
+                <h4>There have been <b>{{ num_locations }}</b> sent.</h4>
+            {% endif %}
+        </div>
+
+    </div>
+    </div>
+
+
+    <!-- define a DIV into which the map will appear. Make it take up the whole window -->
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+{% load url from future %}
+
+{% block extrahead %}
+    <script src="{% static 'chart/Chart.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="row-fluid">
+        {#        {% block links %}#}
+        <div class="span3">
+            <div  style="height: 75%" class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li class="nav-header">Rider Info</li>
+                    <li><a href="{% url 'graphs-os' %}">OS Graph</a></li>
+                    <li><a href="{% url 'graphs-registered' %}">Registration</a></li>
+                    <li class="nav-header">Tour Info</li>
+                    <li><a href="{% url 'graphs-updates' %}">Updates Over Time</a></li>
+                    <li><a href="{% url 'graphs-battery' %}">Rider Battery</a></li>
+
+
+                </ul>
+            </div><!--/.well -->
+        </div><!--/span-->
+
+        <div class="span8" id=graph_container">
+        <div class="row">
+            {% if os_data  %}
+
+                <div class="offset1"><h4>{{ title }}</h4></div>
+
+                <div class="span6"><canvas id="canvas2" height="450" width="450"></canvas></div>
+                <div class="span4"><ul>
+                    {% for o in os_data %}
+                        <li>
+                            <canvas id="title1" height="10" width="10" style="background-color:{{ o.color}}"></canvas>
+                            {{ o.os }} : {{ o.count }}
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                </div>
+
+                <script>
+                    var pieData = [
+                        {% for o in os_data %}
+                            {
+                                value:{{ o.count }},
+                                color: "{{ o.color}}"
+                            },
+                        {% endfor %}
+                    ];
+                    var myPie = new Chart(document.getElementById("canvas2").getContext("2d")).Pie(pieData);
+                </script>
+            {% else %}
+                <h3>No Data Available</h3>
+            {% endif %}
+        </div>
+    </div><!--/span-->
+    </div>
+
+
+    <!-- define a DIV into which the map will appear. Make it take up the whole window -->
+{% endblock %}

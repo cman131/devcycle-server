@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load url from future %}
+
+{% block page_help %}
+  <div><b>Send Message</b></div>
+  <p>
+    This page allows you send a message to all riders
+    who have registered with the app. Please note this
+    feature should be used in moderation as excessive
+    messaging may annoy users.
+  </p>
+{% endblock %}
+{% block content %}
+    {# nav #}
+    <div class="row-fluid">
+      <div class="span9">
+      <h2>Send Message</h2>
+              {% if messages %}
+                  {% for message in messages %}
+                    <div style="width:30%" class="alert alert-success"><a class="close" data-dismiss="alert">&times;</a>{{ message }}</div>
+                  {% endfor %}
+              {% endif %}
+              <form action="{% url 'send_message' %}" method="post">{% csrf_token %}
+              {{ form.as_p }}
+              <button type="submit" class="btn btn-primary">Send Message</button>
+              </form>
+      </div>
+    </div>
+{% endblock %}
