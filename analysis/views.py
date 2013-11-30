@@ -18,9 +18,26 @@ from urllib2 import urlopen, Request, URLError, HTTPError
 from django.db.models import Count
 import time
 import json
-import datetime
 import urllib
+from datetime import timedelta, date, timedelta, tzinfo
+import datetime
+import calendar
 
+ZERO = timedelta(0)
+
+# A UTC class.
+
+class UTC(tzinfo):
+    """UTC"""
+
+    def utcoffset(self, dt):
+        return ZERO
+
+    def tzname(self, dt):
+        return "UTC"
+
+    def dst(self, dt):
+        return ZERO
 
 @ensure_csrf_cookie
 def login_view(request):
@@ -59,10 +76,16 @@ def logout_view(request):
 @login_required(login_url='/login/')
 def home_view(request):
     data = {}
-    current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url').latest('pk')
+    try:
+        current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url').latest('pk') 
+    except TourConfig.DoesNotExist:
+        current_tour = False
+
     if current_tour:
         current_stats = {}
         current_stats['riders'] = Rider.objects.count()
+	#current_time = datetime.datetime.utcnow()
+	#current_time = current_time.replace(tzinfo=UTC())
         if time.time() > current_tour['start_time']:
             pass
             #current_stats['total_updates'] = Location.objects.filter(tour_id=current_tour['tour_id']).count()

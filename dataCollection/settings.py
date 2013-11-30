@@ -19,8 +19,8 @@ DATABASES = {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'DCS',
 #        'NAME':'dev_test1',
-        'USER': 'collector',
-        'PASSWORD': 'pass',
+        'USER': 'dev',
+        'PASSWORD': 'password',
         'HOST': 'localhost',
 #        'HOST':'cycl-ops.se.rit.edu',
         'PORT': '',
@@ -70,7 +70,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = '/var/www/static/'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
@@ -80,6 +80,9 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    '/public/static/',
+    '/static/',
+    '/usr/local/devcycle/tour_config/static/',
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -134,6 +137,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     'django.contrib.auth.context_processors.auth',
     'django.contrib.messages.context_processors.messages',
+    'django.core.context_processors.static',
 )
 
 INSTALLED_APPS = (
@@ -174,7 +178,7 @@ LOGGING = {
         'default': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': 'logs/mylog.log',
+            'filename': 'django-logs/default.log',
             'maxBytes': 1024*1024*5,  # 5 MB
             'backupCount': 5,
             'formatter': 'standard',
@@ -182,7 +186,7 @@ LOGGING = {
         'request_handler': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': 'logs/django_request.log',
+            'filename': 'django-logs/requests.log',
             'maxBytes': 1024*1024*5,  # 5 MB
             'backupCount': 5,
             'formatter': 'standard',
@@ -279,7 +283,9 @@ CELERYBEAT_SCHEDULE = {
 GCM_SEND_URL = 'https://android.googleapis.com/gcm/send'
 GCM_API_KEY_HEADER = 'Authorization'
 GCM_API_KEY = 'AIzaSyAQAY5vKcs8c3h-Js_Tl38d97MMCJ4aHE4'
-DEFAULT_MAP_LAT = 40.72931
-DEFAULT_MAP_LON = -73.99979
+#DEFAULT_MAP_LAT = 40.72931
+#DEFAULT_MAP_LON = -73.99979
+DEFAULT_MAP_LAT = 43.0844
+DEFAULT_MAP_LON = 77.6749
 MAP_TILE_SERVER = 'http://cycl-ops.se.rit.edu'
 
