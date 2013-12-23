@@ -50,15 +50,15 @@ class LocationAPI(APIView):
                                   point.get(settings.JSON_KEYS['LOC']['LAT'])
                                   ),
                         accuracy=point.get(
-                                  settings.JSON_KEYS['LOC']['ACC'], ''),
+                                  settings.JSON_KEYS['LOC']['ACC']),
                         speed=point.get(
-                                  settings.JSON_KEYS['LOC']['SPEED'], ''),
+                                  settings.JSON_KEYS['LOC']['SPEED']),
                         bearing=point.get(
-                                  settings.JSON_KEYS['LOC']['BEARING'], ''),
+                                  settings.JSON_KEYS['LOC']['BEARING']),
                         battery=point.get(
-                                  settings.JSON_KEYS['LOC']['BATT_LVL'], ''),
+                                  settings.JSON_KEYS['LOC']['BATT_LVL']),
                         provider=point.get(
-                                  settings.JSON_KEYS['LOC']['PROVIDER'], ''),
+                                  settings.JSON_KEYS['LOC']['PROVIDER']),
                         time=(time/1000)
                     )
                 
