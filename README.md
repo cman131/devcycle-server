@@ -18,7 +18,7 @@ The server component to the TourTrak system built using Django.
 * memcached
 * rabbitmq-server
 
-###Setup
+##Setup
 
 1. Install pip `apt-get install python pip`, and then upgrade: `pip install --upgrade pip`
 2. Install Django `pip install python-django`
@@ -29,23 +29,21 @@ The server component to the TourTrak system built using Django.
 postgreSQL extention for handling spatial data: `apt-get install postgresql-9.1-postgis`
 
 6. Setup the postgreSQL database:
-  a) switch to the default postgresql user by running `su postgres`
-  b) create a user w/ read and write permissions: `createuser --pwprompt`
-  c) Create the DCS database used to collect rider information: `createdb DCS`
-  d) Setup the postGIS functions:
+* switch to the default postgresql user by running `su postgres`
+* create a user w/ read and write permissions: `createuser --pwprompt`
+* Create the DCS database used to collect rider information: `createdb DCS`
+* Setup the postGIS functions:
 
 ```
   psql -d DCS -f /usr/share/postgresql/9.1/contrib/postgis-1.5/postgis.sql
   psql -d DCS -f /usr/share/postgresql/9.1/contrib/postgis-1.5/spatial_ref_sys.sql
   
 ```
-  e) Importation of database schema are under Installation instructions.
-  
-Now your server is ready for the application to be installed.
+Importation of database schema are under Installation instructions. Now your server is ready for the application to be installed.
 
-###Installation
+##Installation
 
-#Install application dependencies
+###Install application dependencies
 1. Install postgreSQL-9.1
 
 ```
@@ -176,10 +174,10 @@ Restart server again:
 /etc/init.d/apache2 reload
 ```
 
-###Install a local OpenStreetMap Tile Server
+##Install a local OpenStreetMap Tile Server
 1. Follow instructions from http://switch2osm.org/serving-tiles/building-a-tile-server-from-packages/
 
-###Install the Analysis Dashboard
+##Install the Analysis Dashboard
 1. Edit the settings file in '/usr/local/devcycle/dataCollections/settings.py'
 
 * TIME_ZONE to reflect the timezone of the server in “tz database” format (e.g. ‘America/New_York’)
