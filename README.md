@@ -20,63 +20,24 @@ The server component to the TourTrak system built using Django.
 
 ###Setup
 
-1. Install pip
-
-```
-apt-get install python pip
-```
-
-and then upgrade:
-
-```
-pip install --upgrade pip
-```
-
-2. Install Django
-
-```
-pip install python-django
-```
-
-3. Install the Apache Server
-
-```
-aptitude install apache2 apache2.2-common apache2-mpm-prefork apache2-utils libexpat1 ssl-cert
-```
-
-4. Install mod_wsgi
-
-```
-aptitude install libapache2-mod-wsgi
-```
-Then, restart apache server by running:
-```
-service apache2 restart
-```
+1. Install pip `apt-get install python pip`, and then upgrade: `pip install --upgrade pip`
+2. Install Django `pip install python-django`
+3. Install the Apache Server `aptitude install apache2 apache2.2-common apache2-mpm-prefork apache2-utils libexpat1 ssl-cert`
+4. Install mod_wsgi `aptitude install libapache2-mod-wsgi`. Then, restart apache server by running: `service apache2 restart`
 
 5. Install postgreSQL. Refer to official documentation. After, install postGIS, which is a 
-postgreSQL extention for handling spatial data:
-
-```
-apt-get install postgresql-9.1-postgis
-```
+postgreSQL extention for handling spatial data: `apt-get install postgresql-9.1-postgis`
 
 6. Setup the postgreSQL database:
   a) switch to the default postgresql user by running `su postgres`
-  b) create a user w/ read and write permissions:
-
-```
-  createuser --pwprompt
-```
-
-  c) Create the DCS database used to collect rider information:
-```
-  createdb DCS
-```
+  b) create a user w/ read and write permissions: `createuser --pwprompt`
+  c) Create the DCS database used to collect rider information: `createdb DCS`
   d) Setup the postGIS functions:
+
 ```
   psql -d DCS -f /usr/share/postgresql/9.1/contrib/postgis-1.5/postgis.sql
   psql -d DCS -f /usr/share/postgresql/9.1/contrib/postgis-1.5/spatial_ref_sys.sql
+  
 ```
   e) Importation of database schema are under Installation instructions.
   
