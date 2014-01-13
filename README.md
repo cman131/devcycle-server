@@ -129,16 +129,16 @@ WSGIPythonPath usr/local/devcycle
 nano /usr/local/devcycle/dataCollection/settings.py
 ```
 
-* Set DEBUG to False
-* Under DATABASES, modify USER and PASSWORD fields to reflect user created in SETUP (above).
-* HOST should be localhost.
-* STATIC_ROOT to point to '/var/www/static' unless you modified where to collect these in 
+** Set DEBUG to False
+** Under DATABASES, modify USER and PASSWORD fields to reflect user created in SETUP (above).
+** HOST should be localhost.
+** STATIC_ROOT to point to '/var/www/static' unless you modified where to collect these in 
 step 6.
-* SECRET_KEY is a string of at least 32 random characters
-* KEY to a random string of hex characters a multiple of 16 long
-* SECRET to a random string of numeric characters a multiple of 16
-* STATIC_URL = '/static/'
-* STATICFILES_DIRS = (
+** SECRET_KEY is a string of at least 32 random characters
+** KEY to a random string of hex characters a multiple of 16 long
+** SECRET to a random string of numeric characters a multiple of 16
+** STATIC_URL = '/static/'
+** STATICFILES_DIRS = (
   '‘/usr/local/devcycle/tour_config/static/’
   )
 
