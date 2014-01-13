@@ -24,10 +24,8 @@ The server component to the TourTrak system built using Django.
 2. Install Django `pip install python-django`
 3. Install the Apache Server `aptitude install apache2 apache2.2-common apache2-mpm-prefork apache2-utils libexpat1 ssl-cert`
 4. Install mod_wsgi `aptitude install libapache2-mod-wsgi`. Then, restart apache server by running: `service apache2 restart`
-
 5. Install postgreSQL. Refer to official documentation. After, install postGIS, which is a 
 postgreSQL extention for handling spatial data: `apt-get install postgresql-9.1-postgis`
-
 6. Setup the postgreSQL database:
 * switch to the default postgresql user by running `su postgres`
 * create a user w/ read and write permissions: `createuser --pwprompt`
@@ -44,7 +42,7 @@ Importation of database schema are under Installation instructions. Now your ser
 ##Installation
 
 ###Install application dependencies
-1. Install postgreSQL-9.1
+* Install postgreSQL-9.1
 
 ```
 apt-get update
@@ -52,13 +50,13 @@ apt-get install postgresql-9.1
 apt-get install postgresql-server-dev-9.1
 ```
 
-2. Install postgresSQL database adapter
+* Install postgresSQL database adapter
 
 ```
 pip install psycopg2
 ```
 
-3. Install the rest of the dependencies:
+* Install the rest of the dependencies:
 
 ```
 apt-get install binutils
@@ -68,8 +66,8 @@ apt-get install memcached
 apt-get install rabbitmq-server
 ```
 
-4. Create a new folder called 'devcycle' under '/usr/local'. Git clone this repo here and stay in this directory.
-5. Install the required python eggs:
+* Create a new folder called 'devcycle' under '/usr/local'. Git clone this repo here and stay in this directory.
+* Install the required python eggs:
 
 ```
 pip install distribute
@@ -93,7 +91,7 @@ pip install psycopg2
 pip install django-admin-bootstrapped
 ```
 
-6. Create a virtual host & WSGI file for the Apache server to display the Django application.
+* Create a virtual host & WSGI file for the Apache server to display the Django application.
 Open the httpd.conf file 'nano /etc/apache2/httpd.conf'. Copy and paste the following, you may edit 
 these values if desired (such as where to collect static files).
 
@@ -125,7 +123,7 @@ WSGIPythonPath usr/local/devcycle
 </VirtualHost>
 ```
 
-7. Change the application settings:
+* Change the application settings:
 
 ```
 nano /usr/local/devcycle/dataCollection/settings.py
@@ -144,13 +142,13 @@ step 6.
   '‘/usr/local/devcycle/tour_config/static/’
   )
 
-8. Restart the apache server to put all changes into effect. 
+* Restart the apache server to put all changes into effect. 
 
 ```
 etc/init.d/apache2 reload
 ```
 
-8. Migrate the database scheme with the SQL script included.
+* Migrate the database scheme with the SQL script included.
 
 ```
 psql DCS < DCS.sql
@@ -162,7 +160,7 @@ Restart server again.
 /etc/init.d/apache2 reload
 ```
 
-9. Import all static files.
+* Import all static files.
 
 ```
 python manage.py collectstatic
