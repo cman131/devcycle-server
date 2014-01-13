@@ -129,7 +129,6 @@ WSGIPythonPath usr/local/devcycle
 nano /usr/local/devcycle/dataCollection/settings.py
 ```
 
-```
 Set DEBUG to False
 Under DATABASES, modify USER and PASSWORD fields to reflect user created in SETUP (above).
 HOST should be localhost.
@@ -143,8 +142,6 @@ STATICFILES_DIRS = (
   '‘/usr/local/devcycle/tour_config/static/’
   )
   
-```
-
 Restart the apache server to put all changes into effect. 
 
 ```
