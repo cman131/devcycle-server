@@ -185,7 +185,8 @@ def send_message_view(request):
                 data = {}
                 data['registration_ids'] = push_ids
                 data['data'] = {}
-                data['data']['msg'] = form.cleaned_data['message']
+                data['data']['msg'] = form.cleaned_data['message'] # For legacy sake (last sr project)
+		data['data']['message'] = form.cleaned_data['message']
 
                 req = Request(settings.GCM_SEND_URL, json.dumps(data), headers)
                 urlopen(req)

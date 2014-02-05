@@ -287,5 +287,6 @@ GCM_API_KEY = 'AIzaSyAQAY5vKcs8c3h-Js_Tl38d97MMCJ4aHE4'
 #DEFAULT_MAP_LON = -73.99979
 DEFAULT_MAP_LAT = 43.0844
 DEFAULT_MAP_LON = 77.6749
-MAP_TILE_SERVER = 'http://cycl-ops.se.rit.edu'
+#MAP_TILE_SERVER = 'http://cycl-ops.se.rit.edu'
+MAP_TILE_SERVER = 'http://otile1.mqcdn.com/tiles/1.0.0'
 
