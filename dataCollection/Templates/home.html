@@ -51,14 +51,13 @@
       </div>
     {% endif %}
     <!-- Polling Rate Div -->
-    <div class="span4">
+    <div class="span4 well">
       <h3>Polling Rate</h3>
       <dl class="dl-horizontal">
         <dt>Current Polling Rate</dt>
-        <!--Current Polling Rate Here -->
       </dl>
       <div style="text-align:center">
-        <a class="btn btn-large btn btn-primary" href="{}">Update Rate</a> <!-- URL Here -->
+        <a class="btn btn-large btn btn-primary" href="{% url 'polling_rate' %}">Update Rate</a> <!-- URL Here -->
       </div>
     </div>
 

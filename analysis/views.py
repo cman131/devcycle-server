@@ -96,6 +96,12 @@ def home_view(request):
         current_tour['config_link'] = "tourtrak://?" + urllib.urlencode({'tour_id': current_tour['tour_id'], 'dcs_url': current_tour['dcs_url'], 'tour_name': current_tour['tour_name']}) 
         data['current_tour'] = current_tour
     return render_to_response('home.html',data, context_instance=RequestContext(request))
+    
+@requires_csrf_token
+@login_required(login_url='/login/')
+def polling_rate(request):
+    data = {}
+    return render_to_response()
 
 @requires_csrf_token
 @login_required(login_url='/login/')
