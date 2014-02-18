@@ -1,0 +1,7 @@
+# Compiled Sources #
+####################
+*.pyc
+
+# Environment Specific #
+#####################
+/Projects/SeniorProject/devcycle-server/dataCollection/wsgi.py
