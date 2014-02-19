@@ -145,7 +145,7 @@ STATICFILES_DIRS = (
 Restart the apache server to put all changes into effect. 
 
 ```
-etc/init.d/apache2 reload
+/etc/init.d/apache2 reload
 ```
 
 * Migrate the database scheme with the SQL script included.

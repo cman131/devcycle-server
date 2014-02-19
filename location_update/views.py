@@ -71,7 +71,10 @@ class LocationAPI(APIView):
             if not rider_count:
                 rider_count = 1
 
-            return Response(
+            # Get the polling rate from cache 
+
+            # TODO- Here we want to return the polling rate as well. 
+            return Response( 
                 {settings.JSON_KEYS['RIDER_CNT']: rider_count},
                 status=status.HTTP_201_CREATED
                 )
