@@ -76,7 +76,7 @@ class LocationAPI(APIView):
 
             return Response( 
                 {
-                settings.JSON_KEYS['RIDER_CNT']: rider_count
+                settings.JSON_KEYS['RIDER_CNT']: rider_count,
                 settings.JSON_KEYS['POLLING_RATE']: polling_rate
                 },
                 status=status.HTTP_201_CREATED
