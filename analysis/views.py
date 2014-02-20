@@ -4,6 +4,7 @@ from django.http import Http404
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, render_to_response
 from django.template import RequestContext
+from django.core.cache import cache
 from forms import LoginForm, SendMessageForm
 from django.views.decorators.csrf import requires_csrf_token, ensure_csrf_cookie
 from django.contrib.auth.decorators import login_required
@@ -77,13 +78,15 @@ def logout_view(request):
 def home_view(request):
     data = {}
     try:
-        current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url').latest('pk') 
+        current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url', 'polling_rate').latest('pk') 
     except TourConfig.DoesNotExist:
         current_tour = False
 
     if current_tour:
         current_stats = {}
         current_stats['riders'] = Rider.objects.count()
+        #cache polling rate here
+        cache.set(settings.JSON_KEYS['POLLING_RATE'], current_tour['polling_rate'])
 	#current_time = datetime.datetime.utcnow()
 	#current_time = current_time.replace(tzinfo=UTC())
         if time.time() > current_tour['start_time']:

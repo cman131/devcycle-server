@@ -258,7 +258,7 @@ JSON_KEYS = {
     'BAD_REQ': u'bad_request',
     'RIDER_CNT': u'rider_count',
     'TOUR_CONFIG': u'config',
-    'POLL_RATE' : u'poll_rate', 
+    'POLLING_RATE' : u'poll_rate', 
 }
 
 #celery
