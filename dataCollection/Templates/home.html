@@ -41,27 +41,26 @@
           <a class="btn btn-large btn btn-primary" href="{% url 'graphs-registered' %}">More Stats</a>
         </div>
       </div>
-    {% else %}
-      <div class="span9">
-        <h2>Welcome to TourTrak</h2>
-        <p>There is currently no tour configured.<p>
-        <div>
-          <a class="btn btn-large btn btn-primary" href="{% url 'tourconfig-add' %}">Create a Tour</a>
+      <!-- Polling Rate Div -->
+      <div class="span4 well">
+        <h3>Polling Rate</h3>
+        <dl class="dl-horizontal">
+          <dt>Current Polling Rate</dt>
+        </dl>
+        <div style="text-align:center">
+          <a class="btn btn-large btn btn-primary" href="{% url 'polling_rate' %}">Update Rate</a> <!-- URL Here -->
         </div>
       </div>
-    {% endif %}
-    <!-- Polling Rate Div -->
-    <div class="span4 well">
-      <h3>Polling Rate</h3>
-      <dl class="dl-horizontal">
-        <dt>Current Polling Rate</dt>
-      </dl>
-      <div style="text-align:center">
-        <a class="btn btn-large btn btn-primary" href="{% url 'polling_rate' %}">Update Rate</a> <!-- URL Here -->
-      </div>
+      {% else %}
+        <div class="span9">
+          <h2>Welcome to TourTrak</h2>
+          <p>There is currently no tour configured.<p>
+          <div>
+            <a class="btn btn-large btn btn-primary" href="{% url 'tourconfig-add' %}">Create a Tour</a>
+          </div>
+        </div>
+      {% endif %}
     </div>
-
-  </div>
 
 
     <!-- define a DIV into which the map will appear. Make it take up the whole window -->
