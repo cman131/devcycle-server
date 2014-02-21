@@ -72,7 +72,8 @@ class LocationAPI(APIView):
                 rider_count = 1
 
             # Get the polling rate from cache 
-            polling_rate = TourConfig.objects.get(tour_id='sussex')
+            #polling_rate = cache.get(settings.JSON_KEYS['POLLING_RATE'])
+            polling_rate = TourConfig.objects.get(id=9)
 
             return Response( 
                 {
