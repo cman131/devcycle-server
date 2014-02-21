@@ -86,7 +86,7 @@ class LocationAPI(APIView):
             logger.info(traceback.format_exc())
 
             return Response(
-                {settings.JSON_KEYS['BAD_REQ']: ex.message},
+                {settings.JSON_KEYS['BAD_REQ']: ex.args},
                 status=status.HTTP_400_BAD_REQUEST
             )
         # end except
