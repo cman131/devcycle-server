@@ -33,7 +33,7 @@ class LocationAPI(APIView):
             ###
 
             loc_data = data.get(settings.JSON_KEYS['LOCATIONS'])
-            tour_id = data.get('tour_id')
+            tour_id = 'sussex'# data.get('tour_id')
             # get and decrypt the UUID
             rider = decrypt_uuid(data[settings.JSON_KEYS['RIDER_ID']])
 
