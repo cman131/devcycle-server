@@ -18,8 +18,11 @@ urlpatterns = patterns('',
                            views.home_view,
                            name='home'),
                        url(r'^pollingrate/update/$',
-                           views.poll_rate_update_view,
-                           name='polling-rate-update'),
+                            login_required(
+                              TourConfigPollRateUpdate.as_view()
+                            ),
+                           name='polling-rate-update'
+                           ),
                        url(r'^graphs/$',
                            views.graph_view_os,
                            name='graphs'),

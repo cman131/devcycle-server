@@ -34,3 +34,20 @@ class TourConfigUpdateForm(TourConfigAddForm):
     class Meta:
         model = TourConfig
         exclude = ( 'is_cancelled', 'tour_id', 'gcm_sender_id', 'dcs_url' )
+
+
+class TourConfigPollRateUpdateForm(TourConfigAddForm):
+    class Meta:
+        model = TourConfig
+        #exclude all but the poll rate
+        exclude = ( 'tour_name', 'tour_logo', 'tour_organization', 'start_time', 'max_tour_time', 'tour_route', 'is_cancelled', 'tour_id', 'gcm_sender_id', 'dcs_url')
+
+
+    def clean(self):
+        cleaned_data = super(TourConfigPollRateUpdateForm, self).clean()
+        poll_rate = cleaned_data.get('polling_rate')
+
+        # Ensure that the polling rate is 30 seconds or greater
+        if polling_rate <= 30:
+            raise forms.ValidationError("Polling Rate must be 30 seconds or greater")
+        return cleaned_data

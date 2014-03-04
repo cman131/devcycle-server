@@ -4,7 +4,7 @@ from rest_framework import status
 from tour_config.models import TourConfig
 from django.views.generic.edit import UpdateView, CreateView
 from django.views.generic.list import ListView
-from tour_config.forms import TourConfigAddForm, TourConfigUpdateForm
+from tour_config.forms import TourConfigAddForm, TourConfigUpdateForm, TourConfigPollRateUpdateForm
 from django.core.urlresolvers import reverse_lazy, reverse
 from urllib2 import urlopen, Request, URLError, HTTPError
 from django.conf import settings
@@ -16,6 +16,7 @@ from django import forms
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from tour_config.models import TourConfig
+from tour_config.utils import set_polling_rate
 
 
 import logging
@@ -100,9 +101,7 @@ class TourConfigUpdate(UpdateView):
         self.object = form.save()
         messages.success(self.request, 'Tour updated successfully.')
 
-        #Set Polling Rate in Cache on Update 
-        tour = TourConfig.objects.latest('pk')
-        cache.set(settings.JSON_KEYS['POLLING_RATE'], tour.polling_rate)
+        set_polling_rate()
 
         return HttpResponseRedirect(self.get_success_url())
 
@@ -128,8 +127,29 @@ class TourConfigAdd(CreateView):
         response = super(TourConfigAdd, self).form_valid(form)
         messages.success(self.request, 'Tour created successfully.')
 
-        #Set Polling Rate in Cache on Creation
-        tour = TourConfig.objects.latest('pk')
-        cache.set(settings.JSON_KEYS['POLLING_RATE'], tour.polling_rate)
+        set_polling_rate()
+
+        return response
+
+class TourConfigPollRateUpdate(CreateView):
+    model = TourConfig
+    template_name = 'tourconfig_pollrate_update_form.html'
+    form_class = TourConfigPollRateUpdateForm 
+
+     def get_success_url(self):
+        """
+        Return to same page on success. This view should be named
+        'tour_config-update' in the urls of the admin site.
+        """
+        return reverse('pollingrate/update/')
+
+    def form_valid(self, form):
+        """
+        Display a message upon successful tour creation.
+        """
+        response = super(TourConfigPollRateUpdate, self).form_valid(form)
+        messages.success(self.request, 'Poll Rate Updated Successfully.')
+
+        set_polling_rate()
 
         return response
