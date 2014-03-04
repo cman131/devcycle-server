@@ -136,7 +136,7 @@ class TourConfigPollRateUpdate(CreateView):
     template_name = 'tourconfig_pollrate_update_form.html'
     form_class = TourConfigPollRateUpdateForm 
 
-     def get_success_url(self):
+    def get_success_url(self):
         """
         Return to same page on success. This view should be named
         'tour_config-update' in the urls of the admin site.
