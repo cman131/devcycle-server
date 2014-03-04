@@ -10,6 +10,7 @@ from urllib2 import urlopen, Request, URLError, HTTPError
 from django.conf import settings
 import json
 from django.core import serializers
+from django.core.cache import cache
 from rider.models import Rider
 from django import forms
 from django.http import HttpResponseRedirect
