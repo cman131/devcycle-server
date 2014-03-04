@@ -1,6 +1,6 @@
 from django.core.cache import cache
 from tour_config.models import TourConfig
-
+from django.conf import settings
 
 def set_polling_rate():
     """ Cache the Polling Rate """
