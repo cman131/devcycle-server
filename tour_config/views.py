@@ -131,7 +131,7 @@ class TourConfigAdd(CreateView):
 
         return response
 
-class TourConfigPollRateUpdate(CreateView):
+class TourConfigPollRateUpdate(UpdateView):
     model = TourConfig
     template_name = 'tourconfig_pollrate_update_form.html'
     form_class = TourConfigPollRateUpdateForm 
@@ -142,6 +142,14 @@ class TourConfigPollRateUpdate(CreateView):
         'tour_config-update' in the urls of the admin site.
         """
         return reverse('pollingrate/update/')
+
+    def get_object(self, queryset=None):
+        """
+        Always grab the most recent TourConfig from the database, since for the
+        initial release, we will only be working with a single tour at a time.
+        """
+        config = TourConfig.objects.latest('pk')
+        return config if ( config is not None ) else None    
 
     def form_valid(self, form):
         """
