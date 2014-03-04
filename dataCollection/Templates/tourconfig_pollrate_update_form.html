@@ -15,7 +15,7 @@
 		{# mapping #}
 		<div class="span9">
 		<h2>Update Polling Rate</h2>
-		<form action="{% url 'poll-rate-update' %}" method="post">
+		<form action="{% url 'polling-rate-update' %}" method="post">
 			{%csrf_token %}
 			{% if form.non_field_errors%}
 				<span class="text-error">
