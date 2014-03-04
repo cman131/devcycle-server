@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url, include
 from django.contrib.auth.decorators import login_required
-from tour_config.views import TourConfigUpdate, TourConfigAdd
+from tour_config.views import TourConfigUpdate, TourConfigAdd, TourConfigPollRateUpdate
 from analysis import views
 from sites import tt_admin
 from django.views.generic import ListView
