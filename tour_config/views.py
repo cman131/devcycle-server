@@ -141,7 +141,7 @@ class TourConfigPollRateUpdate(UpdateView):
         Return to same page on success. This view should be named
         'tour_config-update' in the urls of the admin site.
         """
-        return reverse('pollingrate/update/')
+        return reverse('polling-rate-update')
 
     def get_object(self, queryset=None):
         """
