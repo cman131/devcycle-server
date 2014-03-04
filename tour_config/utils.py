@@ -8,3 +8,4 @@ def set_polling_rate():
     #Set Polling Rate in Cache on Creation
     tour = TourConfig.objects.latest('pk') # Get the latest tour
     cache.set(settings.JSON_KEYS['POLLING_RATE'], tour.polling_rate)
+    return
