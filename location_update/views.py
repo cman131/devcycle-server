@@ -76,7 +76,7 @@ class LocationAPI(APIView):
             #polling_rate = cache.get(settings.JSON_KEYS['POLLING_RATE'])
             #polling_rate = TourConfig.objects.get(id=9)
 	    polling_rate = TourConfig.objects.get(gcm_sender_id=22)		
-	    serialized_rate = serializers.serialize("json", [polling_rate,])
+	    #serialized_rate = serializers.serialize("json", [polling_rate,])
 
             return Response( 
                 {
