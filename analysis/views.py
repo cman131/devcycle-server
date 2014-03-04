@@ -102,6 +102,7 @@ def home_view(request):
 @login_required(login_url='/login/')
 def poll_rate_update_view(request):
     data = {}
+    data["hello"] = "world"
     return render_to_response('polling_rate.html', data, context_instance=RequestContext(request))
 
 @requires_csrf_token
