@@ -100,9 +100,9 @@ def home_view(request):
     
 @requires_csrf_token
 @login_required(login_url='/login/')
-def polling_rate(request):
+def poll_rate_update_view(request):
     data = {}
-    return render_to_response()
+    return render_to_response('polling_rate.html', data, context_instance=RequestContext(request))
 
 @requires_csrf_token
 @login_required(login_url='/login/')
