@@ -14,6 +14,8 @@ from rider.models import Rider
 from django import forms
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from tour_config.models import TourConfig
+
 
 import logging
 
@@ -96,6 +98,11 @@ class TourConfigUpdate(UpdateView):
 
         self.object = form.save()
         messages.success(self.request, 'Tour updated successfully.')
+
+        #Set Polling Rate in Cache on Update 
+        tour = TourConfig.objects.latest('pk')
+        cache.set(settings.JSON_KEYS['POLLING_RATE'], tour.polling_rate)
+
         return HttpResponseRedirect(self.get_success_url())
 
     def get_push_ids(self):
@@ -119,4 +126,9 @@ class TourConfigAdd(CreateView):
         """
         response = super(TourConfigAdd, self).form_valid(form)
         messages.success(self.request, 'Tour created successfully.')
+
+        #Set Polling Rate in Cache on Creation
+        tour = TourConfig.objects.latest('pk')
+        cache.set(settings.JSON_KEYS['POLLING_RATE'], tour.polling_rate)
+
         return response

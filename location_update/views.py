@@ -34,7 +34,7 @@ class LocationAPI(APIView):
             ###
 
             loc_data = data.get(settings.JSON_KEYS['LOCATIONS'])
-            tour_id = 'sussex'# data.get('tour_id')
+            tour_id = data.get('tour_id')
             # get and decrypt the UUID
             rider = decrypt_uuid(data[settings.JSON_KEYS['RIDER_ID']])
 
@@ -73,15 +73,16 @@ class LocationAPI(APIView):
                 rider_count = 1
 
             # Get the polling rate from cache 
-            #polling_rate = cache.get(settings.JSON_KEYS['POLLING_RATE'])
-            #polling_rate = TourConfig.objects.get(id=9)
-	    polling_rate = TourConfig.objects.get(gcm_sender_id=22)		
-	    #serialized_rate = serializers.serialize("json", [polling_rate,])
+            polling_rate = cache.get(settings.JSON_KEYS['POLLING_RATE'])
+
+            # Get polling rate from db
+	        #polling_rate = TourConfig.objects.get(tour_id=tour_id).polling_rate
+	       
 
             return Response( 
                 {
                 settings.JSON_KEYS['RIDER_CNT']: rider_count,
-                settings.JSON_KEYS['POLLING_RATE']: polling_rate.polling_rate
+                settings.JSON_KEYS['POLLING_RATE']: tourConfig.polling_rate
                 },
                 status=status.HTTP_201_CREATED
                 )
