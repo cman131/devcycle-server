@@ -16,6 +16,7 @@ from django.db import connection
 from tour_config.models import TourConfig
 import time
 import math
+from django.core import serializers
 
 
 logger = logging.getLogger(__name__)
@@ -72,10 +73,18 @@ class LocationAPI(APIView):
                 rider_count = 1
 
             # Get the polling rate from cache 
+            # polling rate is set in cache in the TourConfigAdd form methods
+            polling_rate = cache.get(settings.JSON_KEYS['POLLING_RATE'])
 
-            # TODO- Here we want to return the polling rate as well. 
+            # Get polling rate from db
+	        #polling_rate = TourConfig.objects.get(tour_id=tour_id).polling_rate
+	       
+
             return Response( 
-                {settings.JSON_KEYS['RIDER_CNT']: rider_count},
+                {
+                settings.JSON_KEYS['RIDER_CNT']: rider_count,
+                settings.JSON_KEYS['POLLING_RATE']: polling_rate
+                },
                 status=status.HTTP_201_CREATED
                 )
 
@@ -83,7 +92,7 @@ class LocationAPI(APIView):
             logger.info(traceback.format_exc())
 
             return Response(
-                {settings.JSON_KEYS['BAD_REQ']: ex.message},
+                {settings.JSON_KEYS['BAD_REQ']: ex.args},
                 status=status.HTTP_400_BAD_REQUEST
             )
         # end except

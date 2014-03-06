@@ -810,3 +810,466 @@ DoesNotExist: TourConfig matching query does not exist.
 2014-02-16 19:40:55,665 [DEBUG] django.db.backends: (0.001) INSERT INTO "auth_user" ("password", "last_login", "is_superuser", "username", "first_name", "last_name", "email", "is_staff", "is_active", "date_joined") VALUES ('pbkdf2_sha256$10000$yyhz5E5tHE3E$4gcKxnsYWiyVu9CPxOG6YYRHy/wJouh68A72VY3gInc=', '2014-02-17 00:40:55.618475+00:00', false, 'ian', '', '', 'img4583@g.rit.edu', false, true, '2014-02-17 00:40:55.618475+00:00') RETURNING "auth_user"."id"; args=(u'pbkdf2_sha256$10000$yyhz5E5tHE3E$4gcKxnsYWiyVu9CPxOG6YYRHy/wJouh68A72VY3gInc=', u'2014-02-17 00:40:55.618475+00:00', False, 'ian', u'', u'', u'img4583@g.rit.edu', False, True, u'2014-02-17 00:40:55.618475+00:00')
 2014-02-16 19:40:55,667 [DEBUG] django.db.backends: (0.000) SELECT (1) AS "a" FROM "auth_user" WHERE "auth_user"."id" = 4  LIMIT 1; args=(4,)
 2014-02-16 19:40:55,668 [DEBUG] django.db.backends: (0.000) UPDATE "auth_user" SET "password" = 'pbkdf2_sha256$10000$yyhz5E5tHE3E$4gcKxnsYWiyVu9CPxOG6YYRHy/wJouh68A72VY3gInc=', "last_login" = '2014-02-17 00:40:55.618475+00:00', "is_superuser" = true, "username" = 'ian', "first_name" = '', "last_name" = '', "email" = 'img4583@g.rit.edu', "is_staff" = true, "is_active" = true, "date_joined" = '2014-02-17 00:40:55.618475+00:00' WHERE "auth_user"."id" = 4 ; args=(u'pbkdf2_sha256$10000$yyhz5E5tHE3E$4gcKxnsYWiyVu9CPxOG6YYRHy/wJouh68A72VY3gInc=', u'2014-02-17 00:40:55.618475+00:00', True, 'ian', u'', u'', u'img4583@g.rit.edu', True, True, u'2014-02-17 00:40:55.618475+00:00', 4)
+2014-02-20 01:27:12,168 [DEBUG] django.db.backends: (0.003) 
+            SELECT c.relname
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('r', 'v', '')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid); args=()
+2014-02-20 01:27:12,173 [DEBUG] django.db.backends: (0.003) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'permission'  AND "django_content_type"."app_label" = 'auth' ); args=('permission', u'auth')
+2014-02-20 01:27:12,174 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'group'  AND "django_content_type"."app_label" = 'auth' ); args=('group', u'auth')
+2014-02-20 01:27:12,175 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'user'  AND "django_content_type"."app_label" = 'auth' ); args=('user', u'auth')
+2014-02-20 01:27:12,178 [DEBUG] django.db.backends: (0.001) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (1, 2, 3) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(1, 2, 3)
+2014-02-20 01:27:12,179 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'auth'  ORDER BY "django_content_type"."name" ASC; args=(u'auth',)
+2014-02-20 01:27:12,180 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'contenttype'  AND "django_content_type"."app_label" = 'contenttypes' ); args=('contenttype', u'contenttypes')
+2014-02-20 01:27:12,181 [DEBUG] django.db.backends: (0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (4) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(4,)
+2014-02-20 01:27:12,182 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'contenttypes'  ORDER BY "django_content_type"."name" ASC; args=(u'contenttypes',)
+2014-02-20 01:27:12,183 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'session'  AND "django_content_type"."app_label" = 'sessions' ); args=('session', u'sessions')
+2014-02-20 01:27:12,184 [DEBUG] django.db.backends: (0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (5) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(5,)
+2014-02-20 01:27:12,185 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'sessions'  ORDER BY "django_content_type"."name" ASC; args=(u'sessions',)
+2014-02-20 01:27:12,186 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'site'  AND "django_content_type"."app_label" = 'sites' ); args=('site', u'sites')
+2014-02-20 01:27:12,187 [DEBUG] django.db.backends: (0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (6) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(6,)
+2014-02-20 01:27:12,188 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'sites'  ORDER BY "django_content_type"."name" ASC; args=(u'sites',)
+2014-02-20 01:27:12,192 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'migrationhistory'  AND "django_content_type"."app_label" = 'south' ); args=('migrationhistory', u'south')
+2014-02-20 01:27:12,193 [DEBUG] django.db.backends: (0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (22) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(22,)
+2014-02-20 01:27:12,194 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'south'  ORDER BY "django_content_type"."name" ASC; args=(u'south',)
+2014-02-20 01:27:12,195 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'logentry'  AND "django_content_type"."app_label" = 'admin' ); args=('logentry', u'admin')
+2014-02-20 01:27:12,196 [DEBUG] django.db.backends: (0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (23) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(23,)
+2014-02-20 01:27:12,197 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'admin'  ORDER BY "django_content_type"."name" ASC; args=(u'admin',)
+2014-02-20 01:27:12,205 [DEBUG] django.db.backends: (0.000) SET CONSTRAINTS ALL IMMEDIATE; args=()
+2014-02-20 01:27:12,205 [DEBUG] django.db.backends: (0.000) SET CONSTRAINTS ALL DEFERRED; args=()
+2014-02-20 01:28:28,124 [DEBUG] django.db.backends: (0.001) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE "south_migrationhistory"."applied" IS NOT NULL ORDER BY "south_migrationhistory"."applied" ASC; args=()
+2014-02-20 01:28:28,131 [DEBUG] django.db.backends: (0.000) SET CONSTRAINTS ALL IMMEDIATE; args=()
+2014-02-20 01:28:28,131 [DEBUG] django.db.backends: (0.000) SET CONSTRAINTS ALL DEFERRED; args=()
+2014-02-20 01:28:36,034 [DEBUG] django.db.backends: (0.001) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE "south_migrationhistory"."applied" IS NOT NULL ORDER BY "south_migrationhistory"."applied" ASC; args=()
+2014-02-20 01:28:36,043 [DEBUG] django.db.backends: (0.002) CREATE TABLE DDL_TRANSACTION_TEST (X INT); args=()
+2014-02-20 01:28:36,044 [DEBUG] django.db.backends: (0.001) CREATE TABLE DDL_TRANSACTION_TEST (X INT); args=()
+2014-02-20 01:28:36,044 [DEBUG] django.db.backends: (0.000) DROP TABLE DDL_TRANSACTION_TEST; args=()
+2014-02-20 01:28:36,048 [DEBUG] south: execute "ALTER TABLE "location_update_location" ADD COLUMN "tour_id_id" varchar(64) NOT NULL;" with params "[]"
+2014-02-20 01:28:36,049 [DEBUG] django.db.backends: (0.001) ALTER TABLE "location_update_location" ADD COLUMN "tour_id_id" varchar(64) NOT NULL;; args=[]
+2014-02-20 01:28:53,883 [DEBUG] django.db.backends: (0.001) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE "south_migrationhistory"."applied" IS NOT NULL ORDER BY "south_migrationhistory"."applied" ASC; args=()
+2014-02-20 01:28:53,891 [DEBUG] django.db.backends: (0.001) CREATE TABLE DDL_TRANSACTION_TEST (X INT); args=()
+2014-02-20 01:28:53,892 [DEBUG] django.db.backends: (0.000) CREATE TABLE DDL_TRANSACTION_TEST (X INT); args=()
+2014-02-20 01:28:53,892 [DEBUG] django.db.backends: (0.000) DROP TABLE DDL_TRANSACTION_TEST; args=()
+2014-02-20 01:28:53,894 [DEBUG] south: execute "
+                SELECT kc.constraint_name, kc.column_name, c.constraint_type
+                FROM information_schema.constraint_column_usage AS kc
+                JOIN information_schema.table_constraints AS c ON
+                    kc.table_schema = c.table_schema AND
+                    kc.table_name = c.table_name AND
+                    kc.constraint_name = c.constraint_name
+                WHERE
+                    kc.table_schema = %s AND
+                    kc.table_name = %s
+            " with params "['public', 'tour_config_tourconfig']"
+2014-02-20 01:28:54,037 [DEBUG] django.db.backends: (0.142) 
+                SELECT kc.constraint_name, kc.column_name, c.constraint_type
+                FROM information_schema.constraint_column_usage AS kc
+                JOIN information_schema.table_constraints AS c ON
+                    kc.table_schema = c.table_schema AND
+                    kc.table_name = c.table_name AND
+                    kc.constraint_name = c.constraint_name
+                WHERE
+                    kc.table_schema = 'public' AND
+                    kc.table_name = 'tour_config_tourconfig'
+            ; args=['public', 'tour_config_tourconfig']
+2014-02-20 01:28:54,037 [DEBUG] south: execute "
+                SELECT kc.constraint_name, kc.column_name, c.constraint_type
+                FROM information_schema.key_column_usage AS kc
+                JOIN information_schema.table_constraints AS c ON
+                    kc.table_schema = c.table_schema AND
+                    kc.table_name = c.table_name AND
+                    kc.constraint_name = c.constraint_name
+                WHERE
+                    kc.table_schema = %s AND
+                    kc.table_name = %s
+            " with params "['public', 'tour_config_tourconfig']"
+2014-02-20 01:28:54,058 [DEBUG] django.db.backends: (0.020) 
+                SELECT kc.constraint_name, kc.column_name, c.constraint_type
+                FROM information_schema.key_column_usage AS kc
+                JOIN information_schema.table_constraints AS c ON
+                    kc.table_schema = c.table_schema AND
+                    kc.table_name = c.table_name AND
+                    kc.constraint_name = c.constraint_name
+                WHERE
+                    kc.table_schema = 'public' AND
+                    kc.table_name = 'tour_config_tourconfig'
+            ; args=['public', 'tour_config_tourconfig']
+2014-02-20 01:28:54,058 [DEBUG] south: execute "
+                SELECT kc.constraint_name, kc.column_name, c.constraint_type
+                FROM information_schema.constraint_column_usage AS kc
+                JOIN information_schema.table_constraints AS c ON
+                    kc.table_schema = c.table_schema AND
+                    kc.table_name = c.table_name AND
+                    kc.constraint_name = c.constraint_name
+                WHERE
+                    kc.table_schema = %s AND
+                    kc.table_name = %s
+            " with params "['public', 'tour_config_tourconfig']"
+2014-02-20 01:28:54,062 [DEBUG] django.db.backends: (0.004) 
+                SELECT kc.constraint_name, kc.column_name, c.constraint_type
+                FROM information_schema.constraint_column_usage AS kc
+                JOIN information_schema.table_constraints AS c ON
+                    kc.table_schema = c.table_schema AND
+                    kc.table_name = c.table_name AND
+                    kc.constraint_name = c.constraint_name
+                WHERE
+                    kc.table_schema = 'public' AND
+                    kc.table_name = 'tour_config_tourconfig'
+            ; args=['public', 'tour_config_tourconfig']
+2014-02-20 01:28:54,063 [DEBUG] south: execute "
+                SELECT kc.constraint_name, kc.column_name, c.constraint_type
+                FROM information_schema.key_column_usage AS kc
+                JOIN information_schema.table_constraints AS c ON
+                    kc.table_schema = c.table_schema AND
+                    kc.table_name = c.table_name AND
+                    kc.constraint_name = c.constraint_name
+                WHERE
+                    kc.table_schema = %s AND
+                    kc.table_name = %s
+            " with params "['public', 'tour_config_tourconfig']"
+2014-02-20 01:28:54,066 [DEBUG] django.db.backends: (0.003) 
+                SELECT kc.constraint_name, kc.column_name, c.constraint_type
+                FROM information_schema.key_column_usage AS kc
+                JOIN information_schema.table_constraints AS c ON
+                    kc.table_schema = c.table_schema AND
+                    kc.table_name = c.table_name AND
+                    kc.constraint_name = c.constraint_name
+                WHERE
+                    kc.table_schema = 'public' AND
+                    kc.table_name = 'tour_config_tourconfig'
+            ; args=['public', 'tour_config_tourconfig']
+2014-02-20 01:28:54,066 [DEBUG] south: execute "ALTER TABLE "tour_config_tourconfig" ALTER COLUMN "tour_id" TYPE varchar(256), ALTER COLUMN "tour_id" SET NOT NULL, ALTER COLUMN "tour_id" DROP DEFAULT;" with params "[]"
+2014-02-20 01:28:54,128 [DEBUG] django.db.backends: (0.061) ALTER TABLE "tour_config_tourconfig" ALTER COLUMN "tour_id" TYPE varchar(256), ALTER COLUMN "tour_id" SET NOT NULL, ALTER COLUMN "tour_id" DROP DEFAULT;; args=[]
+2014-02-20 01:28:54,128 [DEBUG] south: execute "CREATE INDEX "tour_config_tourconfig_tour_id" ON "tour_config_tourconfig" ("tour_id");" with params "[]"
+2014-02-20 01:28:54,133 [DEBUG] django.db.backends: (0.005) CREATE INDEX "tour_config_tourconfig_tour_id" ON "tour_config_tourconfig" ("tour_id");; args=[]
+2014-02-20 01:30:00,094 [DEBUG] django.db.backends: (0.001) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE "south_migrationhistory"."applied" IS NOT NULL ORDER BY "south_migrationhistory"."applied" ASC; args=()
+2014-02-20 01:30:18,950 [DEBUG] django.db.backends: (0.001) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE "south_migrationhistory"."applied" IS NOT NULL ORDER BY "south_migrationhistory"."applied" ASC; args=()
+2014-02-20 01:31:29,710 [DEBUG] django.db.backends: (0.001) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE "south_migrationhistory"."applied" IS NOT NULL ORDER BY "south_migrationhistory"."applied" ASC; args=()
+2014-02-20 01:31:29,718 [DEBUG] django.db.backends: (0.001) CREATE TABLE DDL_TRANSACTION_TEST (X INT); args=()
+2014-02-20 01:31:29,719 [DEBUG] django.db.backends: (0.000) CREATE TABLE DDL_TRANSACTION_TEST (X INT); args=()
+2014-02-20 01:31:29,720 [DEBUG] django.db.backends: (0.000) DROP TABLE DDL_TRANSACTION_TEST; args=()
+2014-02-20 01:31:29,723 [DEBUG] south: execute "
+                SELECT kc.constraint_name, kc.column_name, c.constraint_type
+                FROM information_schema.constraint_column_usage AS kc
+                JOIN information_schema.table_constraints AS c ON
+                    kc.table_schema = c.table_schema AND
+                    kc.table_name = c.table_name AND
+                    kc.constraint_name = c.constraint_name
+                WHERE
+                    kc.table_schema = %s AND
+                    kc.table_name = %s
+            " with params "['public', 'tour_config_tourconfig']"
+2014-02-20 01:31:29,730 [DEBUG] django.db.backends: (0.007) 
+                SELECT kc.constraint_name, kc.column_name, c.constraint_type
+                FROM information_schema.constraint_column_usage AS kc
+                JOIN information_schema.table_constraints AS c ON
+                    kc.table_schema = c.table_schema AND
+                    kc.table_name = c.table_name AND
+                    kc.constraint_name = c.constraint_name
+                WHERE
+                    kc.table_schema = 'public' AND
+                    kc.table_name = 'tour_config_tourconfig'
+            ; args=['public', 'tour_config_tourconfig']
+2014-02-20 01:31:29,730 [DEBUG] south: execute "
+                SELECT kc.constraint_name, kc.column_name, c.constraint_type
+                FROM information_schema.key_column_usage AS kc
+                JOIN information_schema.table_constraints AS c ON
+                    kc.table_schema = c.table_schema AND
+                    kc.table_name = c.table_name AND
+                    kc.constraint_name = c.constraint_name
+                WHERE
+                    kc.table_schema = %s AND
+                    kc.table_name = %s
+            " with params "['public', 'tour_config_tourconfig']"
+2014-02-20 01:31:29,735 [DEBUG] django.db.backends: (0.004) 
+                SELECT kc.constraint_name, kc.column_name, c.constraint_type
+                FROM information_schema.key_column_usage AS kc
+                JOIN information_schema.table_constraints AS c ON
+                    kc.table_schema = c.table_schema AND
+                    kc.table_name = c.table_name AND
+                    kc.constraint_name = c.constraint_name
+                WHERE
+                    kc.table_schema = 'public' AND
+                    kc.table_name = 'tour_config_tourconfig'
+            ; args=['public', 'tour_config_tourconfig']
+2014-02-20 01:31:29,735 [DEBUG] south: execute "
+                SELECT kc.constraint_name, kc.column_name, c.constraint_type
+                FROM information_schema.constraint_column_usage AS kc
+                JOIN information_schema.table_constraints AS c ON
+                    kc.table_schema = c.table_schema AND
+                    kc.table_name = c.table_name AND
+                    kc.constraint_name = c.constraint_name
+                WHERE
+                    kc.table_schema = %s AND
+                    kc.table_name = %s
+            " with params "['public', 'tour_config_tourconfig']"
+2014-02-20 01:31:29,739 [DEBUG] django.db.backends: (0.004) 
+                SELECT kc.constraint_name, kc.column_name, c.constraint_type
+                FROM information_schema.constraint_column_usage AS kc
+                JOIN information_schema.table_constraints AS c ON
+                    kc.table_schema = c.table_schema AND
+                    kc.table_name = c.table_name AND
+                    kc.constraint_name = c.constraint_name
+                WHERE
+                    kc.table_schema = 'public' AND
+                    kc.table_name = 'tour_config_tourconfig'
+            ; args=['public', 'tour_config_tourconfig']
+2014-02-20 01:31:29,739 [DEBUG] south: execute "
+                SELECT kc.constraint_name, kc.column_name, c.constraint_type
+                FROM information_schema.key_column_usage AS kc
+                JOIN information_schema.table_constraints AS c ON
+                    kc.table_schema = c.table_schema AND
+                    kc.table_name = c.table_name AND
+                    kc.constraint_name = c.constraint_name
+                WHERE
+                    kc.table_schema = %s AND
+                    kc.table_name = %s
+            " with params "['public', 'tour_config_tourconfig']"
+2014-02-20 01:31:29,743 [DEBUG] django.db.backends: (0.003) 
+                SELECT kc.constraint_name, kc.column_name, c.constraint_type
+                FROM information_schema.key_column_usage AS kc
+                JOIN information_schema.table_constraints AS c ON
+                    kc.table_schema = c.table_schema AND
+                    kc.table_name = c.table_name AND
+                    kc.constraint_name = c.constraint_name
+                WHERE
+                    kc.table_schema = 'public' AND
+                    kc.table_name = 'tour_config_tourconfig'
+            ; args=['public', 'tour_config_tourconfig']
+2014-02-20 01:31:29,743 [DEBUG] south: execute "ALTER TABLE "tour_config_tourconfig" ALTER COLUMN "tour_id" TYPE varchar(256), ALTER COLUMN "tour_id" SET NOT NULL, ALTER COLUMN "tour_id" DROP DEFAULT;" with params "[]"
+2014-02-20 01:31:29,790 [DEBUG] django.db.backends: (0.047) ALTER TABLE "tour_config_tourconfig" ALTER COLUMN "tour_id" TYPE varchar(256), ALTER COLUMN "tour_id" SET NOT NULL, ALTER COLUMN "tour_id" DROP DEFAULT;; args=[]
+2014-02-20 01:31:29,790 [DEBUG] south: execute "CREATE INDEX "tour_config_tourconfig_tour_id" ON "tour_config_tourconfig" ("tour_id");" with params "[]"
+2014-02-20 01:31:29,795 [DEBUG] django.db.backends: (0.005) CREATE INDEX "tour_config_tourconfig_tour_id" ON "tour_config_tourconfig" ("tour_id");; args=[]
+2014-02-20 01:32:09,930 [DEBUG] django.db.backends: (0.003) 
+            SELECT c.relname
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('r', 'v', '')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid); args=()
+2014-02-20 01:32:09,934 [DEBUG] django.db.backends: (0.001) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'permission'  AND "django_content_type"."app_label" = 'auth' ); args=('permission', u'auth')
+2014-02-20 01:32:09,935 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'group'  AND "django_content_type"."app_label" = 'auth' ); args=('group', u'auth')
+2014-02-20 01:32:09,936 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'user'  AND "django_content_type"."app_label" = 'auth' ); args=('user', u'auth')
+2014-02-20 01:32:09,938 [DEBUG] django.db.backends: (0.001) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (1, 2, 3) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(1, 2, 3)
+2014-02-20 01:32:09,939 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'auth'  ORDER BY "django_content_type"."name" ASC; args=(u'auth',)
+2014-02-20 01:32:09,941 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'contenttype'  AND "django_content_type"."app_label" = 'contenttypes' ); args=('contenttype', u'contenttypes')
+2014-02-20 01:32:09,942 [DEBUG] django.db.backends: (0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (4) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(4,)
+2014-02-20 01:32:09,943 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'contenttypes'  ORDER BY "django_content_type"."name" ASC; args=(u'contenttypes',)
+2014-02-20 01:32:09,944 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'session'  AND "django_content_type"."app_label" = 'sessions' ); args=('session', u'sessions')
+2014-02-20 01:32:09,945 [DEBUG] django.db.backends: (0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (5) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(5,)
+2014-02-20 01:32:09,946 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'sessions'  ORDER BY "django_content_type"."name" ASC; args=(u'sessions',)
+2014-02-20 01:32:09,947 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'site'  AND "django_content_type"."app_label" = 'sites' ); args=('site', u'sites')
+2014-02-20 01:32:09,948 [DEBUG] django.db.backends: (0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (6) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(6,)
+2014-02-20 01:32:09,949 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'sites'  ORDER BY "django_content_type"."name" ASC; args=(u'sites',)
+2014-02-20 01:32:09,953 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'migrationhistory'  AND "django_content_type"."app_label" = 'south' ); args=('migrationhistory', u'south')
+2014-02-20 01:32:09,954 [DEBUG] django.db.backends: (0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (22) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(22,)
+2014-02-20 01:32:09,955 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'south'  ORDER BY "django_content_type"."name" ASC; args=(u'south',)
+2014-02-20 01:32:09,956 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'logentry'  AND "django_content_type"."app_label" = 'admin' ); args=('logentry', u'admin')
+2014-02-20 01:32:09,957 [DEBUG] django.db.backends: (0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (23) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(23,)
+2014-02-20 01:32:09,958 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'admin'  ORDER BY "django_content_type"."name" ASC; args=(u'admin',)
+2014-02-20 01:32:09,965 [DEBUG] django.db.backends: (0.000) SET CONSTRAINTS ALL IMMEDIATE; args=()
+2014-02-20 01:32:09,965 [DEBUG] django.db.backends: (0.000) SET CONSTRAINTS ALL DEFERRED; args=()
+2014-02-20 01:32:20,582 [DEBUG] django.db.backends: (0.003) 
+            SELECT c.relname
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('r', 'v', '')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid); args=()
+2014-02-20 01:32:20,586 [DEBUG] django.db.backends: (0.001) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'permission'  AND "django_content_type"."app_label" = 'auth' ); args=('permission', u'auth')
+2014-02-20 01:32:20,587 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'group'  AND "django_content_type"."app_label" = 'auth' ); args=('group', u'auth')
+2014-02-20 01:32:20,588 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'user'  AND "django_content_type"."app_label" = 'auth' ); args=('user', u'auth')
+2014-02-20 01:32:20,590 [DEBUG] django.db.backends: (0.001) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (1, 2, 3) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(1, 2, 3)
+2014-02-20 01:32:20,591 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'auth'  ORDER BY "django_content_type"."name" ASC; args=(u'auth',)
+2014-02-20 01:32:20,592 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'contenttype'  AND "django_content_type"."app_label" = 'contenttypes' ); args=('contenttype', u'contenttypes')
+2014-02-20 01:32:20,593 [DEBUG] django.db.backends: (0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (4) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(4,)
+2014-02-20 01:32:20,594 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'contenttypes'  ORDER BY "django_content_type"."name" ASC; args=(u'contenttypes',)
+2014-02-20 01:32:20,595 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'session'  AND "django_content_type"."app_label" = 'sessions' ); args=('session', u'sessions')
+2014-02-20 01:32:20,596 [DEBUG] django.db.backends: (0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (5) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(5,)
+2014-02-20 01:32:20,597 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'sessions'  ORDER BY "django_content_type"."name" ASC; args=(u'sessions',)
+2014-02-20 01:32:20,598 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'site'  AND "django_content_type"."app_label" = 'sites' ); args=('site', u'sites')
+2014-02-20 01:32:20,599 [DEBUG] django.db.backends: (0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (6) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(6,)
+2014-02-20 01:32:20,600 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'sites'  ORDER BY "django_content_type"."name" ASC; args=(u'sites',)
+2014-02-20 01:32:20,603 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'rider'  AND "django_content_type"."app_label" = 'rider' ); args=('rider', u'rider')
+2014-02-20 01:32:20,604 [DEBUG] django.db.backends: (0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (7) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(7,)
+2014-02-20 01:32:20,605 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'rider'  ORDER BY "django_content_type"."name" ASC; args=(u'rider',)
+2014-02-20 01:32:20,606 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'location'  AND "django_content_type"."app_label" = 'location_update' ); args=('location', u'location_update')
+2014-02-20 01:32:20,607 [DEBUG] django.db.backends: (0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (8) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(8,)
+2014-02-20 01:32:20,608 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'location_update'  ORDER BY "django_content_type"."name" ASC; args=(u'location_update',)
+2014-02-20 01:32:20,609 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'tourconfig'  AND "django_content_type"."app_label" = 'tour_config' ); args=('tourconfig', u'tour_config')
+2014-02-20 01:32:20,610 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'tourroute'  AND "django_content_type"."app_label" = 'tour_config' ); args=('tourroute', u'tour_config')
+2014-02-20 01:32:20,611 [DEBUG] django.db.backends: (0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (9, 10) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(9, 10)
+2014-02-20 01:32:20,612 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'tour_config'  ORDER BY "django_content_type"."name" ASC; args=(u'tour_config',)
+2014-02-20 01:32:20,614 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'migrationhistory'  AND "django_content_type"."app_label" = 'south' ); args=('migrationhistory', u'south')
+2014-02-20 01:32:20,615 [DEBUG] django.db.backends: (0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (22) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(22,)
+2014-02-20 01:32:20,616 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'south'  ORDER BY "django_content_type"."name" ASC; args=(u'south',)
+2014-02-20 01:32:20,617 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'taskmeta'  AND "django_content_type"."app_label" = 'djcelery' ); args=('taskmeta', u'djcelery')
+2014-02-20 01:32:20,618 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'tasksetmeta'  AND "django_content_type"."app_label" = 'djcelery' ); args=('tasksetmeta', u'djcelery')
+2014-02-20 01:32:20,619 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'intervalschedule'  AND "django_content_type"."app_label" = 'djcelery' ); args=('intervalschedule', u'djcelery')
+2014-02-20 01:32:20,620 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'crontabschedule'  AND "django_content_type"."app_label" = 'djcelery' ); args=('crontabschedule', u'djcelery')
+2014-02-20 01:32:20,621 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'periodictasks'  AND "django_content_type"."app_label" = 'djcelery' ); args=('periodictasks', u'djcelery')
+2014-02-20 01:32:20,622 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'periodictask'  AND "django_content_type"."app_label" = 'djcelery' ); args=('periodictask', u'djcelery')
+2014-02-20 01:32:20,623 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'workerstate'  AND "django_content_type"."app_label" = 'djcelery' ); args=('workerstate', u'djcelery')
+2014-02-20 01:32:20,624 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'taskstate'  AND "django_content_type"."app_label" = 'djcelery' ); args=('taskstate', u'djcelery')
+2014-02-20 01:32:20,626 [DEBUG] django.db.backends: (0.001) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (11, 12, 13, 14, 15, 16, 17, 18) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(11, 12, 13, 14, 15, 16, 17, 18)
+2014-02-20 01:32:20,627 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'djcelery'  ORDER BY "django_content_type"."name" ASC; args=(u'djcelery',)
+2014-02-20 01:32:20,628 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'logentry'  AND "django_content_type"."app_label" = 'admin' ); args=('logentry', u'admin')
+2014-02-20 01:32:20,629 [DEBUG] django.db.backends: (0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (23) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(23,)
+2014-02-20 01:32:20,630 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."name", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'admin'  ORDER BY "django_content_type"."name" ASC; args=(u'admin',)
+2014-02-20 01:32:20,639 [DEBUG] django.db.backends: (0.000) SET CONSTRAINTS ALL IMMEDIATE; args=()
+2014-02-20 01:32:20,639 [DEBUG] django.db.backends: (0.000) SET CONSTRAINTS ALL DEFERRED; args=()
+2014-02-20 01:32:31,444 [DEBUG] django.db.backends: (0.001) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE "south_migrationhistory"."app_name" IN ('rider', 'location_update', 'tour_config', 'djcelery'); args=('rider', 'location_update', 'tour_config', 'djcelery')
+2014-02-20 01:33:37,998 [DEBUG] django.db.backends: (0.001) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE "south_migrationhistory"."applied" IS NOT NULL ORDER BY "south_migrationhistory"."applied" ASC; args=()
+2014-02-20 01:33:38,005 [DEBUG] django.db.backends: (0.001) CREATE TABLE DDL_TRANSACTION_TEST (X INT); args=()
+2014-02-20 01:33:38,006 [DEBUG] django.db.backends: (0.001) CREATE TABLE DDL_TRANSACTION_TEST (X INT); args=()
+2014-02-20 01:33:38,007 [DEBUG] django.db.backends: (0.000) DROP TABLE DDL_TRANSACTION_TEST; args=()
+2014-02-20 01:33:38,009 [DEBUG] south: execute "
+                SELECT kc.constraint_name, kc.column_name, c.constraint_type
+                FROM information_schema.constraint_column_usage AS kc
+                JOIN information_schema.table_constraints AS c ON
+                    kc.table_schema = c.table_schema AND
+                    kc.table_name = c.table_name AND
+                    kc.constraint_name = c.constraint_name
+                WHERE
+                    kc.table_schema = %s AND
+                    kc.table_name = %s
+            " with params "['public', 'tour_config_tourconfig']"
+2014-02-20 01:33:38,017 [DEBUG] django.db.backends: (0.007) 
+                SELECT kc.constraint_name, kc.column_name, c.constraint_type
+                FROM information_schema.constraint_column_usage AS kc
+                JOIN information_schema.table_constraints AS c ON
+                    kc.table_schema = c.table_schema AND
+                    kc.table_name = c.table_name AND
+                    kc.constraint_name = c.constraint_name
+                WHERE
+                    kc.table_schema = 'public' AND
+                    kc.table_name = 'tour_config_tourconfig'
+            ; args=['public', 'tour_config_tourconfig']
+2014-02-20 01:33:38,017 [DEBUG] south: execute "
+                SELECT kc.constraint_name, kc.column_name, c.constraint_type
+                FROM information_schema.key_column_usage AS kc
+                JOIN information_schema.table_constraints AS c ON
+                    kc.table_schema = c.table_schema AND
+                    kc.table_name = c.table_name AND
+                    kc.constraint_name = c.constraint_name
+                WHERE
+                    kc.table_schema = %s AND
+                    kc.table_name = %s
+            " with params "['public', 'tour_config_tourconfig']"
+2014-02-20 01:33:38,021 [DEBUG] django.db.backends: (0.004) 
+                SELECT kc.constraint_name, kc.column_name, c.constraint_type
+                FROM information_schema.key_column_usage AS kc
+                JOIN information_schema.table_constraints AS c ON
+                    kc.table_schema = c.table_schema AND
+                    kc.table_name = c.table_name AND
+                    kc.constraint_name = c.constraint_name
+                WHERE
+                    kc.table_schema = 'public' AND
+                    kc.table_name = 'tour_config_tourconfig'
+            ; args=['public', 'tour_config_tourconfig']
+2014-02-20 01:33:38,021 [DEBUG] south: execute "
+                SELECT kc.constraint_name, kc.column_name, c.constraint_type
+                FROM information_schema.constraint_column_usage AS kc
+                JOIN information_schema.table_constraints AS c ON
+                    kc.table_schema = c.table_schema AND
+                    kc.table_name = c.table_name AND
+                    kc.constraint_name = c.constraint_name
+                WHERE
+                    kc.table_schema = %s AND
+                    kc.table_name = %s
+            " with params "['public', 'tour_config_tourconfig']"
+2014-02-20 01:33:38,026 [DEBUG] django.db.backends: (0.004) 
+                SELECT kc.constraint_name, kc.column_name, c.constraint_type
+                FROM information_schema.constraint_column_usage AS kc
+                JOIN information_schema.table_constraints AS c ON
+                    kc.table_schema = c.table_schema AND
+                    kc.table_name = c.table_name AND
+                    kc.constraint_name = c.constraint_name
+                WHERE
+                    kc.table_schema = 'public' AND
+                    kc.table_name = 'tour_config_tourconfig'
+            ; args=['public', 'tour_config_tourconfig']
+2014-02-20 01:33:38,026 [DEBUG] south: execute "
+                SELECT kc.constraint_name, kc.column_name, c.constraint_type
+                FROM information_schema.key_column_usage AS kc
+                JOIN information_schema.table_constraints AS c ON
+                    kc.table_schema = c.table_schema AND
+                    kc.table_name = c.table_name AND
+                    kc.constraint_name = c.constraint_name
+                WHERE
+                    kc.table_schema = %s AND
+                    kc.table_name = %s
+            " with params "['public', 'tour_config_tourconfig']"
+2014-02-20 01:33:38,029 [DEBUG] django.db.backends: (0.003) 
+                SELECT kc.constraint_name, kc.column_name, c.constraint_type
+                FROM information_schema.key_column_usage AS kc
+                JOIN information_schema.table_constraints AS c ON
+                    kc.table_schema = c.table_schema AND
+                    kc.table_name = c.table_name AND
+                    kc.constraint_name = c.constraint_name
+                WHERE
+                    kc.table_schema = 'public' AND
+                    kc.table_name = 'tour_config_tourconfig'
+            ; args=['public', 'tour_config_tourconfig']
+2014-02-20 01:33:38,030 [DEBUG] south: execute "ALTER TABLE "tour_config_tourconfig" ALTER COLUMN "tour_id" TYPE varchar(256), ALTER COLUMN "tour_id" SET NOT NULL, ALTER COLUMN "tour_id" DROP DEFAULT;" with params "[]"
+2014-02-20 01:33:38,071 [DEBUG] django.db.backends: (0.041) ALTER TABLE "tour_config_tourconfig" ALTER COLUMN "tour_id" TYPE varchar(256), ALTER COLUMN "tour_id" SET NOT NULL, ALTER COLUMN "tour_id" DROP DEFAULT;; args=[]
+2014-02-20 01:33:38,071 [DEBUG] south: execute "CREATE INDEX "tour_config_tourconfig_tour_id" ON "tour_config_tourconfig" ("tour_id");" with params "[]"
+2014-02-20 01:33:38,076 [DEBUG] django.db.backends: (0.005) CREATE INDEX "tour_config_tourconfig_tour_id" ON "tour_config_tourconfig" ("tour_id");; args=[]
+2014-02-20 01:35:25,549 [DEBUG] django.db.backends: (0.001) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE "south_migrationhistory"."applied" IS NOT NULL ORDER BY "south_migrationhistory"."applied" ASC; args=()
+2014-02-20 01:35:25,554 [DEBUG] django.db.backends: (0.001) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE ("south_migrationhistory"."app_name" = 'tour_config'  AND "south_migrationhistory"."migration" = '0002_TourConfig' ); args=('tour_config', '0002_TourConfig')
+2014-02-20 01:35:25,555 [DEBUG] django.db.backends: (0.000) INSERT INTO "south_migrationhistory" ("app_name", "migration", "applied") VALUES ('tour_config', '0002_TourConfig', '2014-02-20 06:35:25.554710+00:00') RETURNING "south_migrationhistory"."id"; args=('tour_config', '0002_TourConfig', u'2014-02-20 06:35:25.554710+00:00')
+2014-02-20 01:35:25,557 [DEBUG] django.db.backends: (0.000) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE ("south_migrationhistory"."app_name" = 'tour_config'  AND "south_migrationhistory"."migration" = '0003_TourConfig' ); args=('tour_config', '0003_TourConfig')
+2014-02-20 01:35:25,558 [DEBUG] django.db.backends: (0.000) INSERT INTO "south_migrationhistory" ("app_name", "migration", "applied") VALUES ('tour_config', '0003_TourConfig', '2014-02-20 06:35:25.557637+00:00') RETURNING "south_migrationhistory"."id"; args=('tour_config', '0003_TourConfig', u'2014-02-20 06:35:25.557637+00:00')
+2014-02-20 01:35:25,560 [DEBUG] django.db.backends: (0.000) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE ("south_migrationhistory"."app_name" = 'tour_config'  AND "south_migrationhistory"."migration" = '0004_TourConfig' ); args=('tour_config', '0004_TourConfig')
+2014-02-20 01:35:25,561 [DEBUG] django.db.backends: (0.000) INSERT INTO "south_migrationhistory" ("app_name", "migration", "applied") VALUES ('tour_config', '0004_TourConfig', '2014-02-20 06:35:25.560763+00:00') RETURNING "south_migrationhistory"."id"; args=('tour_config', '0004_TourConfig', u'2014-02-20 06:35:25.560763+00:00')
+2014-02-20 01:35:25,563 [DEBUG] django.db.backends: (0.000) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE ("south_migrationhistory"."app_name" = 'tour_config'  AND "south_migrationhistory"."migration" = '0005_TourConfig' ); args=('tour_config', '0005_TourConfig')
+2014-02-20 01:35:25,563 [DEBUG] django.db.backends: (0.000) INSERT INTO "south_migrationhistory" ("app_name", "migration", "applied") VALUES ('tour_config', '0005_TourConfig', '2014-02-20 06:35:25.563251+00:00') RETURNING "south_migrationhistory"."id"; args=('tour_config', '0005_TourConfig', u'2014-02-20 06:35:25.563251+00:00')
+2014-02-20 01:35:25,565 [DEBUG] django.db.backends: (0.000) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE ("south_migrationhistory"."app_name" = 'tour_config'  AND "south_migrationhistory"."migration" = '0006_TourConfig' ); args=('tour_config', '0006_TourConfig')
+2014-02-20 01:35:25,566 [DEBUG] django.db.backends: (0.000) INSERT INTO "south_migrationhistory" ("app_name", "migration", "applied") VALUES ('tour_config', '0006_TourConfig', '2014-02-20 06:35:25.565658+00:00') RETURNING "south_migrationhistory"."id"; args=('tour_config', '0006_TourConfig', u'2014-02-20 06:35:25.565658+00:00')
+2014-02-20 01:35:25,567 [DEBUG] django.db.backends: (0.000) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE ("south_migrationhistory"."app_name" = 'tour_config'  AND "south_migrationhistory"."migration" = '0007_initial' ); args=('tour_config', '0007_initial')
+2014-02-20 01:35:25,568 [DEBUG] django.db.backends: (0.000) INSERT INTO "south_migrationhistory" ("app_name", "migration", "applied") VALUES ('tour_config', '0007_initial', '2014-02-20 06:35:25.568051+00:00') RETURNING "south_migrationhistory"."id"; args=('tour_config', '0007_initial', u'2014-02-20 06:35:25.568051+00:00')
+2014-02-20 01:35:25,570 [DEBUG] django.db.backends: (0.000) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE ("south_migrationhistory"."app_name" = 'tour_config'  AND "south_migrationhistory"."migration" = '0008_initial' ); args=('tour_config', '0008_initial')
+2014-02-20 01:35:25,570 [DEBUG] django.db.backends: (0.000) INSERT INTO "south_migrationhistory" ("app_name", "migration", "applied") VALUES ('tour_config', '0008_initial', '2014-02-20 06:35:25.570533+00:00') RETURNING "south_migrationhistory"."id"; args=('tour_config', '0008_initial', u'2014-02-20 06:35:25.570533+00:00')
+2014-02-20 01:35:25,572 [DEBUG] django.db.backends: (0.000) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE ("south_migrationhistory"."app_name" = 'tour_config'  AND "south_migrationhistory"."migration" = '0009_initial' ); args=('tour_config', '0009_initial')
+2014-02-20 01:35:25,573 [DEBUG] django.db.backends: (0.000) INSERT INTO "south_migrationhistory" ("app_name", "migration", "applied") VALUES ('tour_config', '0009_initial', '2014-02-20 06:35:25.573024+00:00') RETURNING "south_migrationhistory"."id"; args=('tour_config', '0009_initial', u'2014-02-20 06:35:25.573024+00:00')
+2014-02-20 01:35:25,575 [DEBUG] django.db.backends: (0.000) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE ("south_migrationhistory"."app_name" = 'tour_config'  AND "south_migrationhistory"."migration" = '0010_initial' ); args=('tour_config', '0010_initial')
+2014-02-20 01:35:25,575 [DEBUG] django.db.backends: (0.000) INSERT INTO "south_migrationhistory" ("app_name", "migration", "applied") VALUES ('tour_config', '0010_initial', '2014-02-20 06:35:25.575399+00:00') RETURNING "south_migrationhistory"."id"; args=('tour_config', '0010_initial', u'2014-02-20 06:35:25.575399+00:00')
+2014-02-20 01:35:25,577 [DEBUG] django.db.backends: (0.000) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE ("south_migrationhistory"."app_name" = 'tour_config'  AND "south_migrationhistory"."migration" = '0011_auto__add_field_tourconfig_polling_rate' ); args=('tour_config', '0011_auto__add_field_tourconfig_polling_rate')
+2014-02-20 01:35:25,578 [DEBUG] django.db.backends: (0.000) INSERT INTO "south_migrationhistory" ("app_name", "migration", "applied") VALUES ('tour_config', '0011_auto__add_field_tourconfig_polling_rate', '2014-02-20 06:35:25.577736+00:00') RETURNING "south_migrationhistory"."id"; args=('tour_config', '0011_auto__add_field_tourconfig_polling_rate', u'2014-02-20 06:35:25.577736+00:00')
+2014-02-20 01:35:25,580 [DEBUG] django.db.backends: (0.000) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE ("south_migrationhistory"."app_name" = 'tour_config'  AND "south_migrationhistory"."migration" = '0012_auto__del_field_tourconfig_polling_rate__add_field_tourconfig_poll_rat' ); args=('tour_config', '0012_auto__del_field_tourconfig_polling_rate__add_field_tourconfig_poll_rat')
+2014-02-20 01:35:25,580 [DEBUG] django.db.backends: (0.000) INSERT INTO "south_migrationhistory" ("app_name", "migration", "applied") VALUES ('tour_config', '0012_auto__del_field_tourconfig_polling_rate__add_field_tourconfig_poll_rat', '2014-02-20 06:35:25.580296+00:00') RETURNING "south_migrationhistory"."id"; args=('tour_config', '0012_auto__del_field_tourconfig_polling_rate__add_field_tourconfig_poll_rat', u'2014-02-20 06:35:25.580296+00:00')
+2014-02-20 01:35:25,582 [DEBUG] django.db.backends: (0.000) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE ("south_migrationhistory"."app_name" = 'tour_config'  AND "south_migrationhistory"."migration" = '0013_initial' ); args=('tour_config', '0013_initial')
+2014-02-20 01:35:25,582 [DEBUG] django.db.backends: (0.000) INSERT INTO "south_migrationhistory" ("app_name", "migration", "applied") VALUES ('tour_config', '0013_initial', '2014-02-20 06:35:25.582645+00:00') RETURNING "south_migrationhistory"."id"; args=('tour_config', '0013_initial', u'2014-02-20 06:35:25.582645+00:00')
+2014-02-20 01:35:25,584 [DEBUG] django.db.backends: (0.000) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE ("south_migrationhistory"."app_name" = 'tour_config'  AND "south_migrationhistory"."migration" = '0014_initial' ); args=('tour_config', '0014_initial')
+2014-02-20 01:35:25,585 [DEBUG] django.db.backends: (0.000) INSERT INTO "south_migrationhistory" ("app_name", "migration", "applied") VALUES ('tour_config', '0014_initial', '2014-02-20 06:35:25.584933+00:00') RETURNING "south_migrationhistory"."id"; args=('tour_config', '0014_initial', u'2014-02-20 06:35:25.584933+00:00')
+2014-02-20 01:35:25,587 [DEBUG] django.db.backends: (0.000) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE ("south_migrationhistory"."app_name" = 'tour_config'  AND "south_migrationhistory"."migration" = '0015_initial' ); args=('tour_config', '0015_initial')
+2014-02-20 01:35:25,587 [DEBUG] django.db.backends: (0.000) INSERT INTO "south_migrationhistory" ("app_name", "migration", "applied") VALUES ('tour_config', '0015_initial', '2014-02-20 06:35:25.587284+00:00') RETURNING "south_migrationhistory"."id"; args=('tour_config', '0015_initial', u'2014-02-20 06:35:25.587284+00:00')
+2014-02-20 01:35:25,589 [DEBUG] django.db.backends: (0.000) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE ("south_migrationhistory"."app_name" = 'tour_config'  AND "south_migrationhistory"."migration" = '0016_auto__del_field_tourconfig_poll_rate__add_field_tourconfig_polling_rat' ); args=('tour_config', '0016_auto__del_field_tourconfig_poll_rate__add_field_tourconfig_polling_rat')
+2014-02-20 01:35:25,590 [DEBUG] django.db.backends: (0.000) INSERT INTO "south_migrationhistory" ("app_name", "migration", "applied") VALUES ('tour_config', '0016_auto__del_field_tourconfig_poll_rate__add_field_tourconfig_polling_rat', '2014-02-20 06:35:25.589716+00:00') RETURNING "south_migrationhistory"."id"; args=('tour_config', '0016_auto__del_field_tourconfig_poll_rate__add_field_tourconfig_polling_rat', u'2014-02-20 06:35:25.589716+00:00')
+2014-02-20 01:35:25,591 [DEBUG] django.db.backends: (0.000) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE ("south_migrationhistory"."app_name" = 'tour_config'  AND "south_migrationhistory"."migration" = '0017_initial' ); args=('tour_config', '0017_initial')
+2014-02-20 01:35:25,592 [DEBUG] django.db.backends: (0.000) INSERT INTO "south_migrationhistory" ("app_name", "migration", "applied") VALUES ('tour_config', '0017_initial', '2014-02-20 06:35:25.592029+00:00') RETURNING "south_migrationhistory"."id"; args=('tour_config', '0017_initial', u'2014-02-20 06:35:25.592029+00:00')
+2014-02-20 01:35:37,933 [DEBUG] django.db.backends: (0.001) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE "south_migrationhistory"."applied" IS NOT NULL ORDER BY "south_migrationhistory"."applied" ASC; args=()
+2014-02-20 01:35:37,936 [DEBUG] django.db.backends: (0.001) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE ("south_migrationhistory"."app_name" = 'rider'  AND "south_migrationhistory"."migration" = '0002_initial' ); args=('rider', '0002_initial')
+2014-02-20 01:35:37,937 [DEBUG] django.db.backends: (0.000) INSERT INTO "south_migrationhistory" ("app_name", "migration", "applied") VALUES ('rider', '0002_initial', '2014-02-20 06:35:37.937041+00:00') RETURNING "south_migrationhistory"."id"; args=('rider', '0002_initial', u'2014-02-20 06:35:37.937041+00:00')
+2014-02-20 01:35:48,611 [DEBUG] django.db.backends: (0.001) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE "south_migrationhistory"."applied" IS NOT NULL ORDER BY "south_migrationhistory"."applied" ASC; args=()
+2014-02-20 01:35:48,614 [DEBUG] django.db.backends: (0.001) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE ("south_migrationhistory"."app_name" = 'location_update'  AND "south_migrationhistory"."migration" = '0002_auto__add_field_location_tour_id' ); args=('location_update', '0002_auto__add_field_location_tour_id')
+2014-02-20 01:35:48,615 [DEBUG] django.db.backends: (0.000) INSERT INTO "south_migrationhistory" ("app_name", "migration", "applied") VALUES ('location_update', '0002_auto__add_field_location_tour_id', '2014-02-20 06:35:48.615136+00:00') RETURNING "south_migrationhistory"."id"; args=('location_update', '0002_auto__add_field_location_tour_id', u'2014-02-20 06:35:48.615136+00:00')
+2014-02-20 01:35:48,617 [DEBUG] django.db.backends: (0.000) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE ("south_migrationhistory"."app_name" = 'location_update'  AND "south_migrationhistory"."migration" = '0003_initial' ); args=('location_update', '0003_initial')
+2014-02-20 01:35:48,618 [DEBUG] django.db.backends: (0.000) INSERT INTO "south_migrationhistory" ("app_name", "migration", "applied") VALUES ('location_update', '0003_initial', '2014-02-20 06:35:48.617794+00:00') RETURNING "south_migrationhistory"."id"; args=('location_update', '0003_initial', u'2014-02-20 06:35:48.617794+00:00')
+2014-02-20 01:36:19,708 [DEBUG] django.db.backends: (0.001) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE "south_migrationhistory"."applied" IS NOT NULL ORDER BY "south_migrationhistory"."applied" ASC; args=()
+2014-02-20 01:36:19,715 [DEBUG] django.db.backends: (0.000) SET CONSTRAINTS ALL IMMEDIATE; args=()
+2014-02-20 01:36:19,716 [DEBUG] django.db.backends: (0.000) SET CONSTRAINTS ALL DEFERRED; args=()
+2014-02-20 01:36:19,742 [DEBUG] django.db.backends: (0.001) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE "south_migrationhistory"."applied" IS NOT NULL ORDER BY "south_migrationhistory"."applied" ASC; args=()
+2014-02-20 01:36:19,746 [DEBUG] django.db.backends: (0.000) SET CONSTRAINTS ALL IMMEDIATE; args=()
+2014-02-20 01:36:19,746 [DEBUG] django.db.backends: (0.000) SET CONSTRAINTS ALL DEFERRED; args=()
+2014-02-20 01:36:19,772 [DEBUG] django.db.backends: (0.001) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE "south_migrationhistory"."applied" IS NOT NULL ORDER BY "south_migrationhistory"."applied" ASC; args=()
+2014-02-20 01:36:19,779 [DEBUG] django.db.backends: (0.000) SET CONSTRAINTS ALL IMMEDIATE; args=()
+2014-02-20 01:36:19,779 [DEBUG] django.db.backends: (0.000) SET CONSTRAINTS ALL DEFERRED; args=()
+2014-02-20 01:36:19,805 [DEBUG] django.db.backends: (0.001) SELECT "south_migrationhistory"."id", "south_migrationhistory"."app_name", "south_migrationhistory"."migration", "south_migrationhistory"."applied" FROM "south_migrationhistory" WHERE "south_migrationhistory"."applied" IS NOT NULL ORDER BY "south_migrationhistory"."applied" ASC; args=()
+2014-02-20 01:36:19,830 [DEBUG] django.db.backends: (0.001) CREATE TABLE DDL_TRANSACTION_TEST (X INT); args=()
+2014-02-20 01:36:19,831 [DEBUG] django.db.backends: (0.001) CREATE TABLE DDL_TRANSACTION_TEST (X INT); args=()
+2014-02-20 01:36:19,832 [DEBUG] django.db.backends: (0.000) DROP TABLE DDL_TRANSACTION_TEST; args=()
+2014-02-20 01:36:19,836 [DEBUG] south: execute "CREATE TABLE "celery_taskmeta" ("id" serial NOT NULL PRIMARY KEY, "task_id" varchar(255) NOT NULL UNIQUE, "status" varchar(50) NOT NULL, "result" text NULL, "date_done" timestamp with time zone NOT NULL, "traceback" text NULL)" with params "[]"
+2014-02-20 01:36:19,837 [DEBUG] django.db.backends: (0.001) CREATE TABLE "celery_taskmeta" ("id" serial NOT NULL PRIMARY KEY, "task_id" varchar(255) NOT NULL UNIQUE, "status" varchar(50) NOT NULL, "result" text NULL, "date_done" timestamp with time zone NOT NULL, "traceback" text NULL); args=[]
