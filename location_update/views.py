@@ -74,15 +74,14 @@ class LocationAPI(APIView):
 
             # Get the polling rate from cache 
             # polling rate is set in cache in the TourConfigAdd form methods
-            polling_rate = cache.get(settings.JSON_KEYS['POLLING_RATE'])
+            #polling_rate = cache.get(settings.JSON_KEYS['POLLING_RATE'])
 
             # Get polling rate from db
-	        #polling_rate = TourConfig.objects.get(tour_id=tour_id).polling_rate
+	        polling_rate = TourConfig.objects.get(tour_id=tour_id).polling_rate
 	       
 
             return Response( 
                 {
-                settings.JSON_KEYS['RIDER_CNT']: rider_count,
                 settings.JSON_KEYS['POLLING_RATE']: polling_rate
                 },
                 status=status.HTTP_201_CREATED
