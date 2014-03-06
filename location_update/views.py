@@ -68,10 +68,7 @@ class LocationAPI(APIView):
             # if there was not any errors send back a 201
             # other wise send 400 and a response
             Location.objects.bulk_create(loc_list)
-            rider_count = cache.get(settings.JSON_KEYS['RIDER_CNT'])
-            if not rider_count:
-                rider_count = 1
-
+            
             # Get the polling rate from cache 
             # polling rate is set in cache in the TourConfigAdd form methods
             #polling_rate = cache.get(settings.JSON_KEYS['POLLING_RATE'])
