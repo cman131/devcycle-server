@@ -77,15 +77,16 @@ def logout_view(request):
 def home_view(request):
     data = {}
     try:
-        current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url').latest('pk') 
+        current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url', 'polling_rate').latest('pk') 
     except TourConfig.DoesNotExist:
         current_tour = False
 
     if current_tour:
         current_stats = {}
         current_stats['riders'] = Rider.objects.count()
-	#current_time = datetime.datetime.utcnow()
-	#current_time = current_time.replace(tzinfo=UTC())
+
+	   #current_time = datetime.datetime.utcnow()
+	   #current_time = current_time.replace(tzinfo=UTC())
         if time.time() > current_tour['start_time']:
             pass
             #current_stats['total_updates'] = Location.objects.filter(tour_id=current_tour['tour_id']).count()
@@ -99,9 +100,10 @@ def home_view(request):
     
 @requires_csrf_token
 @login_required(login_url='/login/')
-def polling_rate(request):
+def poll_rate_update_view(request):
     data = {}
-    return render_to_response()
+    data["hello"] = "world"
+    return render_to_response('polling_rate.html', data, context_instance=RequestContext(request))
 
 @requires_csrf_token
 @login_required(login_url='/login/')
