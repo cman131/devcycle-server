@@ -41,7 +41,6 @@ class TourConfigPollRateUpdateForm(forms.ModelForm):
         model = TourConfig
         #exclude all but the poll rate
         fields = ('polling_rate',)
-       # exclude = ( 'tour_name', 'tour_logo', 'tour_id', 'tour_organization', 'start_time', 'max_tour_time', 'tour_route', 'is_cancelled', 'tour_id', 'gcm_sender_id', 'dcs_url')
 
 
     def clean(self):
