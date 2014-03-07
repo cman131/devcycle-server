@@ -40,14 +40,14 @@ class TourConfigPollRateUpdateForm(forms.ModelForm):
     class Meta:
         model = TourConfig
         #exclude all but the poll rate
-        fields = ('polling_rate',)
+        fields = ('server_polling_rate',)
 
 
     def clean(self):
         cleaned_data = super(TourConfigPollRateUpdateForm, self).clean()
-        polling_rate = cleaned_data.get('polling_rate')
+        server_polling_rate = cleaned_data.get('server_polling_rate')
 
         # Ensure that the polling rate is 30 seconds or greater
-        if polling_rate <= 30:
+        if server_polling_rate <= 30:
             raise forms.ValidationError("Polling Rate must be 30 seconds or greater")
         return cleaned_data

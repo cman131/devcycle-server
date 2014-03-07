@@ -74,7 +74,7 @@ class LocationAPI(APIView):
             #polling_rate = cache.get(settings.JSON_KEYS['POLLING_RATE'])
 
             # Get polling rate from db
-	        polling_rate = TourConfig.objects.get(tour_id=tour_id).polling_rate
+	        server_polling_rate = TourConfig.objects.get(tour_id=tour_id).server_polling_rate
 	       
 
             return Response( 
