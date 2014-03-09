@@ -16,7 +16,7 @@ from django import forms
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from tour_config.models import TourConfig
-from tour_config.utils import set_polling_rate
+from tour_config.utils import set_server_polling_rate
 
 
 import logging
@@ -101,7 +101,7 @@ class TourConfigUpdate(UpdateView):
         self.object = form.save()
         messages.success(self.request, 'Tour updated successfully.')
 
-        set_polling_rate()
+        set_server_polling_rate()
 
         return HttpResponseRedirect(self.get_success_url())
 
@@ -127,7 +127,7 @@ class TourConfigAdd(CreateView):
         response = super(TourConfigAdd, self).form_valid(form)
         messages.success(self.request, 'Tour created successfully.')
 
-        set_polling_rate()
+        set_server_polling_rate()
 
         return response
 
@@ -141,7 +141,7 @@ class TourConfigPollRateUpdate(UpdateView):
         Return to same page on success. This view should be named
         'tour_config-update' in the urls of the admin site.
         """
-        return reverse('polling-rate-update')
+        return reverse('server-polling-rate-update')
 
     def get_object(self, queryset=None):
         """
@@ -158,6 +158,6 @@ class TourConfigPollRateUpdate(UpdateView):
         response = super(TourConfigPollRateUpdate, self).form_valid(form)
         messages.success(self.request, 'Poll Rate Updated Successfully.')
 
-        set_polling_rate()
+        set_server_polling_rate()
 
         return response

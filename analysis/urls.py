@@ -21,7 +21,7 @@ urlpatterns = patterns('',
                             login_required(
                               TourConfigPollRateUpdate.as_view()
                             ),
-                           name='polling-rate-update'
+                           name='server-polling-rate-update'
                            ),
                        url(r'^graphs/$',
                            views.graph_view_os,
