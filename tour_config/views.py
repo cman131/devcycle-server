@@ -4,7 +4,7 @@ from rest_framework import status
 from tour_config.models import TourConfig
 from django.views.generic.edit import UpdateView, CreateView
 from django.views.generic.list import ListView
-from tour_config.forms import TourConfigAddForm, TourConfigUpdateForm, TourConfigServerPollRateUpdateForm
+from tour_config.forms import TourConfigAddForm, TourConfigUpdateForm, ServerPollRateUpdateForm
 from django.core.urlresolvers import reverse_lazy, reverse
 from urllib2 import urlopen, Request, URLError, HTTPError
 from django.conf import settings
