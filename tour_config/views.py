@@ -4,7 +4,7 @@ from rest_framework import status
 from tour_config.models import TourConfig
 from django.views.generic.edit import UpdateView, CreateView
 from django.views.generic.list import ListView
-from tour_config.forms import TourConfigAddForm, TourConfigUpdateForm, ServerPollRateUpdateForm
+from tour_config.forms import TourConfigAddForm, TourConfigUpdateForm, ServerPollRateUpdateForm, LocationPollRateUpdateForm
 from django.core.urlresolvers import reverse_lazy, reverse
 from urllib2 import urlopen, Request, URLError, HTTPError
 from django.conf import settings
@@ -159,5 +159,35 @@ class ServerPollRateUpdate(UpdateView):
         messages.success(self.request, 'Server Poll Rate Updated Successfully.')
 
         set_server_polling_rate()
+
+        return response
+class LocationPollRateUpdate(UpdateView):
+    model = TourConfig
+    template_name = 'location_pollrate_update_form.html'
+    form_class = LocationPollRateUpdateForm
+
+    def get_success_url(self):
+        """
+        Return to same page on success. This view should be named
+        'tour_config-update' in the urls of the admin site.
+        """
+        return reverse('location-polling-rate-update')
+
+    def get_object(self, queryset=None):
+        """
+        Always grab the most recent TourConfig from the database, since for the
+        initial release, we will only be working with a single tour at a time.
+        """
+        config = TourConfig.objects.latest('pk')
+        return config if ( config is not None ) else None
+
+    def form_valid(self, form):
+        """
+        Display a message upon successful tour creation.
+        """
+        response = super(LocationPollRateUpdate, self).form_valid(form)
+        messages.success(self.request, 'Location Poll Rate Updated Successfully.')
+
+        #set_server_polling_rate()
 
         return response
