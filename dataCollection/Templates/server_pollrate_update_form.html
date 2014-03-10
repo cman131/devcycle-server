@@ -3,9 +3,9 @@
 {% load static %}
 
 {% block page_help %}
-  <div><b>Updating Polling Rate</b></div>
+  <div><b>Updating Server Polling Rate</b></div>
   <p>
-    This page allows you to update the polling rate,
+    This page allows you to update the server polling rate,
     for the current tour
   </p>
 {% endblock %}
@@ -14,7 +14,7 @@
 	<div class="row-fluid">
 		{# mapping #}
 		<div class="span9">
-		<h2>Update Polling Rate</h2>
+		<h2>Update Server Polling Rate</h2>
 		{% if messages %}
 			{% for message in messages %}
 			 	<div style="width:30%" class="alert alert-success"><a class="close" data-dismiss="alert">&times;</a>{{ message }}</div>

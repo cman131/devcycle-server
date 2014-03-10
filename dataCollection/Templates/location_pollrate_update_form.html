@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load url from future %}
+{% load static %}
+
+{% block page_help %}
+  <div><b>Updating Location Polling Rate</b></div>
+  <p>
+    This page allows you to update the location polling rate,
+    for the current tour
+  </p>
+{% endblock %}
+
+{% block content %}
+  <div class="row-fluid">
+    {# mapping #}
+    <div class="span9">
+    <h2>Update Location Polling Rate</h2>
+    {% if messages %}
+      {% for message in messages %}
+         <div style="width:30%" class="alert alert-success"><a class="close" data-dismiss="alert">&times;</a>{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    <form action="{% url 'location-polling-rate-update' %}" method="post">
+      {%csrf_token %}
+      {% if form.non_field_errors%}
+        <span class="text-error">
+          {{ form.non_field_errors }}
+        </span>
+      {% endif %}
+      {% for field in form %}
+        {{ field }}
+      {% endfor %}<br />
+      <button type="Submit" class="btn">Update</button>
+    </form>
+  </div>
+{% endblock %}

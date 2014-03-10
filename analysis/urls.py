@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url, include
 from django.contrib.auth.decorators import login_required
-from tour_config.views import TourConfigUpdate, TourConfigAdd, ServerPollRateUpdate
+from tour_config.views import TourConfigUpdate, TourConfigAdd, ServerPollRateUpdate, LocationPollRateUpdate
 from analysis import views
 from sites import tt_admin
 from django.views.generic import ListView
@@ -22,6 +22,12 @@ urlpatterns = patterns('',
                               ServerPollRateUpdate.as_view()
                             ),
                            name='server-polling-rate-update'
+                           ),
+                       url(r'^location/pollingrate/update/$',
+                            login_required(
+                              LocationPollRateUpdate.as_view()
+                            ),
+                           name='location-polling-rate-update'
                            ),
                        url(r'^graphs/$',
                            views.graph_view_os,
