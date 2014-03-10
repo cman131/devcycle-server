@@ -77,7 +77,7 @@ def logout_view(request):
 def home_view(request):
     data = {}
     try:
-        current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url', 'polling_rate').latest('pk') 
+        current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url', 'server_polling_rate').latest('pk') 
     except TourConfig.DoesNotExist:
         current_tour = False
 
@@ -103,7 +103,7 @@ def home_view(request):
 def poll_rate_update_view(request):
     data = {}
     data["hello"] = "world"
-    return render_to_response('polling_rate.html', data, context_instance=RequestContext(request))
+    return render_to_response('server_polling_rate.html', data, context_instance=RequestContext(request))
 
 @requires_csrf_token
 @login_required(login_url='/login/')

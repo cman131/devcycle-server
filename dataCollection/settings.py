@@ -256,9 +256,9 @@ JSON_KEYS = {
         'TIME': u'time'
     },
     'BAD_REQ': u'bad_request',
-    'RIDER_CNT': u'rider_count',
     'TOUR_CONFIG': u'config',
-    'POLLING_RATE' : u'poll_rate', 
+    'SERVER_POLLING_RATE' : u'server_polling_rate',
+    'LOCATION_POLLING_RATE' : u'location_polling_rate', 
 }
 
 #celery
