@@ -68,18 +68,24 @@ class LocationAPI(APIView):
             # if there was not any errors send back a 201
             # other wise send 400 and a response
             Location.objects.bulk_create(loc_list)
+            
+            # Get the server polling rate from cache 
+            # server polling rate is set in cache in the TourConfigAdd form methods
+            #server_polling_rate = cache.get(settings.JSON_KEYS['SERVER_POLLING_RATE'])
+<<<<<<< HEAD
+=======
 
-            # Get the polling rate from cache 
-            # polling rate is set in cache in the TourConfigAdd form methods
-            #polling_rate = cache.get(settings.JSON_KEYS['POLLING_RATE'])
-
-            # Get polling rate from db
-	    polling_rate = TourConfig.objects.get(tour_id=tour_id).polling_rate
+            # Get server polling rate from db
+	    server_polling_rate = TourConfig.objects.get(tour_id=tour_id).server_polling_rate
 	       
+>>>>>>> naming_bugs
 
+            # Get server polling rate from db
+	    server_polling_rate = TourConfig.objects.get(tour_id=tour_id).server_polling_rate
+            
             return Response( 
                 {
-                settings.JSON_KEYS['POLLING_RATE']: polling_rate
+                settings.JSON_KEYS['SERVER_POLLING_RATE']: server_polling_rate
                 },
                 status=status.HTTP_201_CREATED
                 )

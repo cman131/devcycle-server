@@ -11,12 +11,13 @@ class TourConfig(models.Model):
     max_tour_time = models.PositiveIntegerField()
     is_cancelled = models.BooleanField(default=False, verbose_name='Cancel the tour?')
     tour_route = models.ForeignKey('TourRoute', on_delete=models.PROTECT, blank=True, null=True)
-    polling_rate = models.PositiveIntegerField(verbose_name='Polling Rate (sec)', default=600) #Default time is 10 minutes in seconds
+    server_polling_rate = models.PositiveIntegerField(verbose_name='Server Polling Rate (sec)', default=600) #Default time is 10 minutes in seconds
+    location_polling_rate = models.PositiveIntegerField(verbose_name='Device Location Polling Rate (sec)', default=45) #Default time is 45 sec in seconds
     class Meta:
         verbose_name = 'tour'
 
     def __unicode__(self):
-        return unicode(self.tour_name)
+        return unicode(self.tour_name) 
 
 class TourRoute(models.Model):
     name = models.CharField(max_length=64)

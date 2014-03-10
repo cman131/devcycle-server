@@ -41,15 +41,15 @@
           <a class="btn btn-large btn btn-primary" href="{% url 'graphs-registered' %}">More Stats</a>
         </div>
       </div>
-      <!-- Polling Rate Div -->
+      <!-- Server Polling Rate Div -->
       <div class="span4 well">
-        <h3>Polling Rate</h3>
+        <h3>Server Polling Rate</h3>
         <dl class="dl-horizontal">
-          <dt>Current Polling Rate</dt>
-          <dd>{{current_tour.polling_rate}} sec</dd>
+          <dt>Current Server Poll Rate</dt>
+          <dd>{{current_tour.server_polling_rate}} sec</dd>
         </dl>
         <div style="text-align:center">
-          <a class="btn btn-large btn btn-primary" href="{% url 'polling-rate-update' %}">Update Rate</a> <!-- URL Here -->
+          <a class="btn btn-large btn btn-primary" href="{% url 'server-polling-rate-update' %}">Update Rate</a> <!-- URL Here -->
         </div>
       </div>
       {% else %}
