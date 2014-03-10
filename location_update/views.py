@@ -62,28 +62,21 @@ class LocationAPI(APIView):
                                   settings.JSON_KEYS['LOC']['PROVIDER']),
                         time=(time/1000)
                     )
-                
+
                 loc_list.append(location)
 
             # if there was not any errors send back a 201
             # other wise send 400 and a response
             Location.objects.bulk_create(loc_list)
-            
-            # Get the server polling rate from cache 
+
+            # Get the server polling rate from cache
             # server polling rate is set in cache in the TourConfigAdd form methods
             #server_polling_rate = cache.get(settings.JSON_KEYS['SERVER_POLLING_RATE'])
-<<<<<<< HEAD
-=======
 
             # Get server polling rate from db
-	    server_polling_rate = TourConfig.objects.get(tour_id=tour_id).server_polling_rate
-	       
->>>>>>> naming_bugs
+            server_polling_rate = TourConfig.objects.get(tour_id=tour_id).server_polling_rate
 
-            # Get server polling rate from db
-	    server_polling_rate = TourConfig.objects.get(tour_id=tour_id).server_polling_rate
-            
-            return Response( 
+            return Response(
                 {
                 settings.JSON_KEYS['SERVER_POLLING_RATE']: server_polling_rate
                 },
@@ -104,7 +97,7 @@ class LocationAPI(APIView):
         df = DateFormat(datetime.now())
         mins_ago = long(df.U()) - 500 #10 mins
         riders = {}
-        
+
         cursor = connection.cursor()
         cursor.execute(
             """SELECT rider_id, speed, ST_X(coords), ST_Y(coords)
@@ -128,39 +121,39 @@ class RouteAPI(APIView):
         config = TourConfig.objects.latest('pk')
 
         if config.tour_route is not None:
-            return Response( {'route': config.tour_route.route}, 
+            return Response( {'route': config.tour_route.route},
                              status=status.HTTP_200_OK )
         else:
-            return Response( {'route': []}, 
+            return Response( {'route': []},
                              status=status.HTTP_200_OK )
 
 class PlaybackAPI(APIView):
     def get(self, request, format=None):
         playback_interval = 300
         block_size = 3
-        
+
         block = int(request.GET['block'])
         frames = []
         cursor = connection.cursor()
         config = TourConfig.objects.latest('pk')
-        
+
         start_time = config.start_time
         end_time = config.max_tour_time
         max_time = min(time.time(), end_time)
-        
+
         if max_time <= start_time:
             return Response({'frames': [], 'total': 0}, status=status.HTTP_200_OK)
-        
+
         total_time = max_time - start_time;
         total = int(math.ceil(total_time / playback_interval)) # 10 mins
-        
+
         for cur_interval in range(block, block+block_size):
             if not block < total:
                 break
-            
+
             start_interval = start_time + (playback_interval * cur_interval)
             end_interval = start_interval + playback_interval
-            
+
             cursor.execute(
                 """SELECT rider_id, speed, ST_X(coords), ST_Y(coords)
                        FROM location_update_location
