@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url, include
 from django.contrib.auth.decorators import login_required
-from tour_config.views import TourConfigUpdate, TourConfigAdd, TourConfigPollRateUpdate
+from tour_config.views import TourConfigUpdate, TourConfigAdd, ServerPollRateUpdate
 from analysis import views
 from sites import tt_admin
 from django.views.generic import ListView
@@ -8,7 +8,7 @@ from tour_config.models import TourRoute
 from tour_config.admin import TourRouteAdmin
 
 urlpatterns = patterns('',
-                       url(r'^login/$', 
+                       url(r'^login/$',
                            'django.contrib.auth.views.login',
                            {'template_name': 'login.html'},
                            name='login'),
@@ -17,9 +17,9 @@ urlpatterns = patterns('',
                        url(r'^home/$',
                            views.home_view,
                            name='home'),
-                       url(r'^pollingrate/update/$',
+                       url(r'^server/pollingrate/update/$',
                             login_required(
-                              TourConfigPollRateUpdate.as_view()
+                              ServerPollRateUpdate.as_view()
                             ),
                            name='server-polling-rate-update'
                            ),
@@ -55,13 +55,12 @@ urlpatterns = patterns('',
                                              context_object_name='tourroute_list',
                                              template_name='tourroute_list.html'
                                              )),
-                       url(r'^tourconfig/add/$', 
+                       url(r'^tourconfig/add/$',
                            login_required(TourConfigAdd.as_view()),
                            name='tourconfig-add'),
                        url(r'^logout/$',
                            views.logout_view,
                            name='logout'),
-                       (r'^admin/', 
+                       (r'^admin/',
                            include(tt_admin.urls)),
                        )
-

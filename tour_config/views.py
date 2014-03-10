@@ -4,7 +4,7 @@ from rest_framework import status
 from tour_config.models import TourConfig
 from django.views.generic.edit import UpdateView, CreateView
 from django.views.generic.list import ListView
-from tour_config.forms import TourConfigAddForm, TourConfigUpdateForm, TourConfigPollRateUpdateForm
+from tour_config.forms import TourConfigAddForm, TourConfigUpdateForm, TourConfigServerPollRateUpdateForm
 from django.core.urlresolvers import reverse_lazy, reverse
 from urllib2 import urlopen, Request, URLError, HTTPError
 from django.conf import settings
@@ -24,10 +24,10 @@ import logging
 logger = logging.getLogger(__name__)
 
 class GetTourConfig(generics.RetrieveAPIView):
-    model = TourConfig 
+    model = TourConfig
     slug_field = 'tour_id'
     slug_url_kwarg = 'tour_id'
-    
+
     def get_serializer(self, instance=None, data=None,
                        files=None, partial=False):
         """
@@ -131,10 +131,10 @@ class TourConfigAdd(CreateView):
 
         return response
 
-class TourConfigPollRateUpdate(UpdateView):
+class ServerPollRateUpdate(UpdateView):
     model = TourConfig
-    template_name = 'tourconfig_pollrate_update_form.html'
-    form_class = TourConfigPollRateUpdateForm 
+    template_name = 'pollrate_update_form.html'
+    form_class = ServerPollRateUpdateForm
 
     def get_success_url(self):
         """
@@ -149,14 +149,14 @@ class TourConfigPollRateUpdate(UpdateView):
         initial release, we will only be working with a single tour at a time.
         """
         config = TourConfig.objects.latest('pk')
-        return config if ( config is not None ) else None    
+        return config if ( config is not None ) else None
 
     def form_valid(self, form):
         """
         Display a message upon successful tour creation.
         """
-        response = super(TourConfigPollRateUpdate, self).form_valid(form)
-        messages.success(self.request, 'Poll Rate Updated Successfully.')
+        response = super(ServerPollRateUpdate, self).form_valid(form)
+        messages.success(self.request, 'Server Poll Rate Updated Successfully.')
 
         set_server_polling_rate()
 
