@@ -133,7 +133,7 @@ class TourConfigAdd(CreateView):
 
 class ServerPollRateUpdate(UpdateView):
     model = TourConfig
-    template_name = 'pollrate_update_form.html'
+    template_name = 'server_pollrate_update_form.html'
     form_class = ServerPollRateUpdateForm
 
     def get_success_url(self):

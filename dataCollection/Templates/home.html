@@ -45,7 +45,7 @@
       <div class="span3 well">
         <h3>Server Polling Rate</h3>
         <dl class="dl-horizontal">
-          <dt>Current Server Poll Rate</dt>
+          <dt>Server Poll Rate</dt>
           <dd>{{current_tour.server_polling_rate}} sec</dd>
         </dl>
         <div style="text-align:center">
@@ -56,11 +56,11 @@
       <div class="span3 well">
         <h3>Location Polling Rate</h3>
         <dl class="dl-horizontal">
-          <dt>Current Location Poll Rate</dt>
+          <dt>Location Poll Rate</dt>
           <dd>{{current_tour.location_polling_rate}} sec</dd>
         </dl>
         <div style="text-align:center">
-          <a class="btn btn-large btn btn-primary" href="{% url '' %}">Update Rate</a> <!-- URL Here -->
+          <a class="btn btn-large btn btn-primary" href="{% url 'location-polling-rate-update' %}">Update Rate</a> <!-- URL Here -->
         </div>
       </div>
       {% else %}
