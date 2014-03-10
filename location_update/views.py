@@ -73,12 +73,19 @@ class LocationAPI(APIView):
             # server polling rate is set in cache in the TourConfigAdd form methods
             #server_polling_rate = cache.get(settings.JSON_KEYS['SERVER_POLLING_RATE'])
 
+            # Get Current Tour
+            curr_tour = TourConfig.objects.get(tour_id=tour_id)
+
             # Get server polling rate from db
-            server_polling_rate = TourConfig.objects.get(tour_id=tour_id).server_polling_rate
+            server_polling_rate = curr_tour.server_polling_rate
+
+            # Get location polling rate from db
+            location_polling_rate = curr_tour.location_polling_rate
 
             return Response(
                 {
-                settings.JSON_KEYS['SERVER_POLLING_RATE']: server_polling_rate
+                settings.JSON_KEYS['SERVER_POLLING_RATE']: server_polling_rate,
+                settings.JSON_KEYS['LOCATION_POLLING_RATE']: location_polling_rate
                 },
                 status=status.HTTP_201_CREATED
                 )

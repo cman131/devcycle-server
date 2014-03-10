@@ -20,7 +20,7 @@
          <div style="width:30%" class="alert alert-success"><a class="close" data-dismiss="alert">&times;</a>{{ message }}</div>
             {% endfor %}
         {% endif %}
-    <form action="{% url 'server-polling-rate-update' %}" method="post">
+    <form action="{% url 'location-polling-rate-update' %}" method="post">
       {%csrf_token %}
       {% if form.non_field_errors%}
         <span class="text-error">
