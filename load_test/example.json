@@ -1,25 +1,34 @@
 {
-    "rider_id": "TcH4FR09ROSA4b42WJX6i+SFbTpuzcr06gszd9lHA4c=",
-    "tour_id": "sussex",
-    "locations": [
+  "tour_id" : "sussex",
+  "rider_id" : "TcH4FR09ROSA4b42WJX6i+SFbTpuzcr06gszd9lHA4c=",
+  "battery" : -1,
+  "locations" : [
     {
-	"latitude": 43.083958,
-	"longitude": -77.679734,
-	"accuracy": 1,
-	"speed": 0,
-	"bearing": 37.444657,
-	"time": 1359488523,
-	"provider": "GPS"
+      "provider" : "GPS",
+      "speed" : 1.94,
+      "time" : 1394573283288,
+      "latitude" : 37.33519572,
+      "longitude" : -122.0325498,
+      "accuracy" : 5,
+      "bearing" : 0
     },
     {
-	"latitude": 43.82953,
-	"longitude": -77.680099,
-	"accuracy": 11,
-	"speed": 0,
-	"bearing": 0,
-	"time": 1359488553,
-	"provider": "GPS"
+      "provider" : "GPS",
+      "speed" : 7.74,
+      "time" : 1394575880261,
+      "latitude" : 37.33500926,
+      "longitude" : -122.03272188,
+      "accuracy" : 5,
+      "bearing" : 0
+    },
+    {
+      "provider" : "GPS",
+      "speed" : 7.74,
+      "time" : 1394575885261,
+      "latitude" : 37.33500926,
+      "longitude" : -122.03272188,
+      "accuracy" : 5,
+      "bearing" : 0
     }
-    ],
-	"battery": 0.5
+  ]
 }
