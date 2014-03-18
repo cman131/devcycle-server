@@ -40,11 +40,12 @@ class ServerPollRateUpdateForm(forms.ModelForm):
     class Meta:
         model = TourConfig
         #exclude all but the server poll rate
-        fields = ('server_polling_rate',)
+        fields = ('server_polling_rate','location_polling_range',)
 
 
     def clean(self):
         cleaned_data = super(ServerPollRateUpdateForm, self).clean()
+
         server_polling_rate = cleaned_data.get('server_polling_rate')
         #The range for pushing to the server
         server_polling_range = cleaned_data.get('server_polling_range')
@@ -63,7 +64,7 @@ class LocationPollRateUpdateForm(forms.ModelForm):
     class Meta:
         model = TourConfig
         #exclude all but the location poll rate
-        fields = ('location_polling_rate', 'location_polling_range',)
+        fields = ('location_polling_rate',)
 
 
     def clean(self):
