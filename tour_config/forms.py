@@ -42,12 +42,12 @@ class ServerPollRateUpdateForm(forms.ModelForm):
         #exclude all but the server poll rate
         fields = ('server_polling_rate','server_polling_range',)
         labels = {
-            'server_polling_rate': _('Server Polling Rate'),
-            'server_polling_range': _('Server Polling Range'),
+            'server_polling_rate' : _('Server Polling Rate'),
+            'server_polling_range' : _('Server Polling Range'),
         }
         help_texts = {
-            'server_polling_rate': _('Server Polling Rate (sec)'),
-            'server_polling_range': _('Server Polling Range (sec)'),
+            'server_polling_rate' : _('Server Polling Rate (sec)'),
+            'server_polling_range' : _('Server Polling Range (sec)'),
         }
 
 
