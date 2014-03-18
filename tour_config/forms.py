@@ -40,7 +40,7 @@ class ServerPollRateUpdateForm(forms.ModelForm):
     class Meta:
         model = TourConfig
         #exclude all but the server poll rate
-        fields = ('server_polling_rate','location_polling_range',)
+        fields = ('server_polling_rate','server_polling_range',)
 
 
     def clean(self):
