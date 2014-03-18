@@ -13,7 +13,7 @@ class TourConfig(models.Model):
     tour_route = models.ForeignKey('TourRoute', on_delete=models.PROTECT, blank=True, null=True)
     server_polling_rate = models.PositiveIntegerField(verbose_name='Server Polling Rate (sec)', default=600) #Default time is 10 minutes in seconds
     location_polling_rate = models.PositiveIntegerField(verbose_name='Device Location Polling Rate (sec)', default=45) #Default time is 45 sec in seconds
-    server_poll_range = models.PositiveIntegerField(verbose_name='Server Polling Range (sec)', default=5)
+    server_polling_range = models.PositiveIntegerField(verbose_name='Server Polling Range (sec)', default=5)
     class Meta:
         verbose_name = 'tour'
 
