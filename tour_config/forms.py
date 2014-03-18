@@ -6,6 +6,7 @@ from django.utils.dateparse import parse_datetime
 from django.utils.timezone import get_default_timezone
 from datetime import datetime
 from django.core.urlresolvers import reverse
+from django.utils.translation import gettext as _
 import logging
 
 logger = logging.getLogger(__name__)
