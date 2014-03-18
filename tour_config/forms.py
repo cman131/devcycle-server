@@ -46,6 +46,13 @@ class ServerPollRateUpdateForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super(ServerPollRateUpdateForm, self).clean()
         server_polling_rate = cleaned_data.get('server_polling_rate')
+        #The range for pushing to the server
+        server_polling_range = cleaned_data.get('server_polling_range')
+
+        #Ensure that polling range greater than 0
+        if server_polling_range < 0:
+          raise forms.ValidationError("Location Polling Rnage must be greater than 0 seconds")
+        return cleaned_data
 
         # Ensure that the polling rate is 30 seconds or greater
         if server_polling_rate <= 30:
@@ -63,14 +70,8 @@ class LocationPollRateUpdateForm(forms.ModelForm):
         cleaned_data = super(LocationPollRateUpdateForm, self).clean()
         #The location polling rate, the device polling the location manager
         location_polling_rate = cleaned_data.get('location_polling_rate')
-        #The range for pushing to the server
-        server_polling_range = cleaned_data.get('server_polling_range')
 
         # Ensure that the polling rate is 30 seconds or greater
         if location_polling_rate <= 5:
             raise forms.ValidationError("Location Polling Rate must be 5 seconds or greater")
-        return cleaned_data
-
-        if server_polling_range < 0:
-          raise forms.ValidationError("Location Polling Rnage must be greater than 0 seconds")
         return cleaned_data
