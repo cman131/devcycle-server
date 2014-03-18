@@ -56,14 +56,19 @@ class LocationPollRateUpdateForm(forms.ModelForm):
     class Meta:
         model = TourConfig
         #exclude all but the location poll rate
-        fields = ('location_polling_rate',)
+        fields = ('location_polling_rate', 'location_polling_range',)
 
 
     def clean(self):
         cleaned_data = super(LocationPollRateUpdateForm, self).clean()
         location_polling_rate = cleaned_data.get('location_polling_rate')
+        location_polling_range = cleaned_data.get('location_polling_range')
 
         # Ensure that the polling rate is 30 seconds or greater
         if location_polling_rate <= 5:
             raise forms.ValidationError("Location Polling Rate must be 5 seconds or greater")
+        return cleaned_data
+
+        if location_polling_range < 0:
+          raise forms.ValidationError("Location Polling Rnage must be greater than 0 seconds")
         return cleaned_data
