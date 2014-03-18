@@ -41,8 +41,8 @@ class ServerPollRateUpdateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ServerPollRateUpdateForm, self).__init__(*args,**kwargs)
-        self.fields['server_polling_rate'].label = "Server Polling Rate"
-        self.fields['server_polling_range'].label = "Server Polling Range"
+        self.fields['server_polling_rate'].label = "Server Polling Rate (sec)"
+        self.fields['server_polling_range'].label = "Server Polling Range (sec)"
 
     class Meta:
         model = TourConfig
@@ -71,6 +71,11 @@ class ServerPollRateUpdateForm(forms.ModelForm):
         return cleaned_data
 
 class LocationPollRateUpdateForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(LocationPollRateUpdateForm, self).__init__(*args,**kwargs)
+        self.fields['location_polling_rate'].label = "Location Polling Rate (sec)"
+
     class Meta:
         model = TourConfig
         #exclude all but the location poll rate

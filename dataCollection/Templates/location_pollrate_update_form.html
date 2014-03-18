@@ -27,9 +27,12 @@
           {{ form.non_field_errors }}
         </span>
       {% endif %}
-      {% for field in form %}
-        {{ field }}
-      {% endfor %}<br />
+    <dl class="dl-vertical">
+    {% for field in form %}
+      <dt>{{field.label}}</dt>
+      <dd>{{field}}</dd>
+    {% endfor %}
+    </dl><br />
       <button type="Submit" class="btn">Update</button>
     </form>
   </div>
