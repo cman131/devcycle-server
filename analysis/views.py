@@ -77,7 +77,7 @@ def logout_view(request):
 def home_view(request):
     data = {}
     try:
-        current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url', 'server_polling_rate', 'location_polling_rate').latest('pk')
+        current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url', 'server_polling_rate', 'location_polling_rate', 'server_polling_range').latest('pk')
     except TourConfig.DoesNotExist:
         current_tour = False
 
