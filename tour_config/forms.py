@@ -38,18 +38,17 @@ class TourConfigUpdateForm(TourConfigAddForm):
 
 
 class ServerPollRateUpdateForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(ServerPollRateUpdateForm, self).__init__(*args,**kwargs)
+        self.fields['server_polling_rate'].label = "Server Polling Rate"
+        self.fields['server_polling_range'].label = "Server Polling Range"
+
     class Meta:
         model = TourConfig
         #exclude all but the server poll rate
         fields = ('server_polling_rate','server_polling_range',)
-        labels = {
-            'server_polling_rate' : _('Server Polling Rate'),
-            'server_polling_range' : _('Server Polling Range'),
-        }
-        help_texts = {
-            'server_polling_rate' : _('Server Polling Rate (sec)'),
-            'server_polling_range' : _('Server Polling Range (sec)'),
-        }
+
 
 
 
