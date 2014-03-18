@@ -156,7 +156,7 @@ class ServerPollRateUpdate(UpdateView):
         Display a message upon successful tour creation.
         """
         response = super(ServerPollRateUpdate, self).form_valid(form)
-        messages.success(self.request, 'Server Poll Rate Updated Successfully.')
+        messages.success(self.request, 'Server Poll Rate and Range Updated Successfully.')
 
         set_server_polling_rate()
 
