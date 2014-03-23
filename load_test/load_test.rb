@@ -1,29 +1,98 @@
 #!/usr/bin/ruby
 
-require 'typhoeus'
-require 'benchmark'
+require 'faraday' #http client lib
+
+require 'typhoeus' #parallel http requests WAITING FOR V 0.6.7 for patch current 0.6.6 is buggy this won't work
+
+require 'typhoeus/adapters/faraday' #typhoeus adapter
+
+require 'benchmark' #measurements/stats
+
 require 'json'
 
-hydra = Typhoeus::Hydra.hydra
 
-Typhoeus::Hydra.new(max_concurrency: 200)
-done = 0
+@configs
+@url
+@manager
 
-example_params = JSON.parse(IO.read('example.json'))
+class Load_Test
 
-Benchmark.bm(25) do |x|
-  x.report do
-    for i in 1..32000
-      req = Typhoeus::Request.new("http://devcycle.se.rit.edu/location_update/", params: example_params)
+    def initialize(configs)
+      @configs = configs
+    end#initialize
 
-      req.on_complete do |response|
-        done = done+1
-        puts "Done! #{done}"
-      end
-      hydra.queue req
-    end
 
-    puts "Here we gooooooooo...."
-    hydra.run
-  end
-end
+    def start
+      @configs.each do |config|
+
+        url = config[0]
+        count = config[1]
+        json = config[2]
+
+        @url = url
+
+        @manager = Typhoeus::Hydra.new(max_concurrency: 200) #200 is max limit
+
+        connection = Faraday.new(url: url) do |builder|
+          builder.adapter :typhoeus
+        end#connection loop
+
+        json = JSON.parse(IO.read(json))
+
+        #Execute parallel requests
+        parallel_posts(connection, count, json)
+
+
+      end#config loop
+
+    end#start
+
+
+
+    private
+
+    # Performs the parallel post requests
+    #
+    #
+    #
+    # @param - connection manager
+    # @param - iteration count
+    # @param - json file
+    def parallel_posts(conn, count, json)
+
+      conn.in_parallel(@manager) do
+
+        for i in 1..count
+
+          post(conn,json)
+
+        end#loop
+
+      end#connection
+
+    end#parallel_posts
+
+
+    # Performs the actual post requests
+    #
+    #
+    #
+    # @param - connection manager
+    # @param - json file
+    def post(conn,json)
+
+      conn.post do |request|
+
+        request.url @url
+
+        request.headers['Content-Type'] = 'application/json'
+
+        request.body = json
+
+      end#conn.post
+
+
+    end#post
+
+
+end#class
