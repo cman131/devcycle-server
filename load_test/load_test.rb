@@ -10,6 +10,8 @@ require 'benchmark' #measurements/stats
 
 require 'json'
 
+require_relative 'response_handler'
+
 
 @configs
 @url
@@ -34,10 +36,14 @@ class Load_Test
         @manager = Typhoeus::Hydra.new(max_concurrency: 200) #200 is max limit
 
         connection = Faraday.new(url: url) do |builder|
+          builder.use LoadTestHandler
           builder.adapter :typhoeus
         end#connection loop
 
         json = JSON.parse(IO.read(json))
+
+        #Testing the body of this
+        #json = {a:1}
 
         #Execute parallel requests
         parallel_posts(connection, count, json)
@@ -87,7 +93,7 @@ class Load_Test
 
         request.headers['Content-Type'] = 'application/json'
 
-        request.body = json
+        request.body = json.to_json
 
       end#conn.post
 
