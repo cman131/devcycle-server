@@ -19,7 +19,7 @@ class LoadTestHandler < Faraday::Response::Middleware
 	        response_body: env[:response].body
 	      }
 
-	      p "Response #{@@response_count}: #{response}"
+	      p "Response: #{response}"
 
 	    end#on_complete
 
