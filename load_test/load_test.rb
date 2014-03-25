@@ -97,8 +97,22 @@ class Load_Test
 
       end#conn.post
 
+<<<<<<< HEAD
+Benchmark.bm(25) do |x|
+  x.report do
+    for i in 1..32000
+      req = Typhoeus::Request.new("http://devcycle.se.rit.edu/location_update/", params: example_params)
+=======
+>>>>>>> polling-range
 
     end#post
 
+<<<<<<< HEAD
+    puts "Here we gooooooooo...."
+    hydra.run
+  end
+end
+=======
 
 end#class
+>>>>>>> polling-range
