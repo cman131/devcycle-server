@@ -1,14 +1,15 @@
 require 'typhoeus/adapters/faraday'
 
+require 'benchmark'
+
 # Handles the response returned by the Post 
 # Request to the Server. Prints it out
 #
 class LoadTestHandler < Faraday::Response::Middleware
-
-	#@@count = 0
+	@@response_count = 0
 
 	def call(env)
-		#@@count+=1
+		@@response_count+=1
 		 # "env" contains the request
 	    @app.call(env).on_complete do
 	      # "env" contains the request AND response
@@ -18,7 +19,7 @@ class LoadTestHandler < Faraday::Response::Middleware
 	        response_body: env[:response].body
 	      }
 
-	      p "Response: #{response}"
+	      p "Response #{@@response_count}: #{response}"
 
 	    end#on_complete
 

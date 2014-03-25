@@ -60,9 +60,6 @@ class Load_Test
         #This parses the json file into a hash
         json = JSON.parse(IO.read(json))
 
-        #Testing the body of this
-        #json = {a:1}
-
         #Execute parallel requests
         parallel_posts(connection, count, json)
 

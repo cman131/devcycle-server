@@ -1,4 +1,5 @@
-#File Format
+#Lines that begin with # and empty lines are ignored
+###File Format###
 
 #<URL>
 #<Number of parallel requests>
@@ -6,6 +7,6 @@
 # <-> Dash indicates new configuration
 
 http://devcycle.se.rit.edu/location_update/
-1
+100
 location_update.json
 
