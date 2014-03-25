@@ -6,6 +6,7 @@ from django.utils.dateparse import parse_datetime
 from django.utils.timezone import get_default_timezone
 from datetime import datetime
 from django.core.urlresolvers import reverse
+from django.utils.translation import gettext as _
 import logging
 
 logger = logging.getLogger(__name__)
@@ -37,15 +38,32 @@ class TourConfigUpdateForm(TourConfigAddForm):
 
 
 class ServerPollRateUpdateForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(ServerPollRateUpdateForm, self).__init__(*args,**kwargs)
+        self.fields['server_polling_rate'].label = "Server Polling Rate (sec)"
+        self.fields['server_polling_range'].label = "Server Polling Range (sec)"
+
     class Meta:
         model = TourConfig
         #exclude all but the server poll rate
-        fields = ('server_polling_rate',)
+        fields = ('server_polling_rate','server_polling_range',)
+
+
+
 
 
     def clean(self):
         cleaned_data = super(ServerPollRateUpdateForm, self).clean()
+
         server_polling_rate = cleaned_data.get('server_polling_rate')
+        #The range for pushing to the server
+        server_polling_range = cleaned_data.get('server_polling_range')
+
+        #Ensure that polling range greater than 0
+        if server_polling_range < 0:
+          raise forms.ValidationError("Location Polling Rnage must be greater than 0 seconds")
+        return cleaned_data
 
         # Ensure that the polling rate is 30 seconds or greater
         if server_polling_rate <= 30:
@@ -53,6 +71,11 @@ class ServerPollRateUpdateForm(forms.ModelForm):
         return cleaned_data
 
 class LocationPollRateUpdateForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(LocationPollRateUpdateForm, self).__init__(*args,**kwargs)
+        self.fields['location_polling_rate'].label = "Location Polling Rate (sec)"
+
     class Meta:
         model = TourConfig
         #exclude all but the location poll rate
@@ -61,6 +84,7 @@ class LocationPollRateUpdateForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super(LocationPollRateUpdateForm, self).clean()
+        #The location polling rate, the device polling the location manager
         location_polling_rate = cleaned_data.get('location_polling_rate')
 
         # Ensure that the polling rate is 30 seconds or greater

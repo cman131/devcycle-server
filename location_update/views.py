@@ -5,6 +5,8 @@ from location_update.serializers import locationSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 from rider.rider_id_tools import decrypt_uuid
 from django.conf import settings
 from django.core.cache import cache
@@ -79,12 +81,17 @@ class LocationAPI(APIView):
             # Get server polling rate from db
             server_polling_rate = curr_tour.server_polling_rate
 
+            #Get server polling range from db
+            server_polling_range = curr_tour.server_polling_range
+
             # Get location polling rate from db
             location_polling_rate = curr_tour.location_polling_rate
+
 
             return Response(
                 {
                 settings.JSON_KEYS['SERVER_POLLING_RATE']: server_polling_rate,
+                settings.JSON_KEYS['SERVER_POLLING_RANGE']: server_polling_range,
                 settings.JSON_KEYS['LOCATION_POLLING_RATE']: location_polling_rate
                 },
                 status=status.HTTP_201_CREATED
