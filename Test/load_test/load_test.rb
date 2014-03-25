@@ -12,15 +12,32 @@ require 'json'
 
 require_relative 'response_handler'
 
-
+#
+# Test Configurations
+#
 @configs
+
+#
+# Server URL
+#
 @url
+
+#
+# Typhoeus Hydra Manager for concurrency
+#
 @manager
+
+#
+# Random Number Generator
+#
+@prng 
+
 
 class Load_Test
 
     def initialize(configs)
       @configs = configs
+      @prng  = Random.new
     end#initialize
 
 
@@ -40,10 +57,8 @@ class Load_Test
           builder.adapter :typhoeus
         end#connection loop
 
+        #This parses the json file into a hash
         json = JSON.parse(IO.read(json))
-
-        #Testing the body of this
-        #json = {a:1}
 
         #Execute parallel requests
         parallel_posts(connection, count, json)
@@ -87,7 +102,9 @@ class Load_Test
     # @param - json file
     def post(conn,json)
 
-      conn.post do |request|
+      json = randomizeLatLong(json)
+
+     conn.post do |request|
 
         request.url @url
 
@@ -97,22 +114,43 @@ class Load_Test
 
       end#conn.post
 
-<<<<<<< HEAD
-Benchmark.bm(25) do |x|
-  x.report do
-    for i in 1..32000
-      req = Typhoeus::Request.new("http://devcycle.se.rit.edu/location_update/", params: example_params)
-=======
->>>>>>> polling-range
-
     end#post
 
-<<<<<<< HEAD
-    puts "Here we gooooooooo...."
-    hydra.run
-  end
-end
-=======
+    #
+    # Simulate a moving biker
+    # by randomizing movement
+    # by altering the latitude
+    # and longitude. Algorithm
+    # actually randomly moves
+    # biker
+    #
+    # @param - json hash
+    # @return - new json hash
+    def randomizeLatLong(json)
+
+      #Get the locations array
+      loc_arr = json["locations"]
+      
+      #iterate through each loc
+      loc_arr.each do |loc|
+
+        #randomize +/- of random number
+        lat_sign = @prng.rand(0...2)
+        long_sign = @prng.rand(0...2)
+
+        #randomize the value to lat & long
+        lat_val = @prng.rand(0.0...10.0)
+        long_val = @prng.rand(0.0...10.0)
+
+        #change position here
+        if lat_sign == 0 then loc["latitude"] -= lat_val else loc["latitude"] += lat_val end
+        if long_sign == 0 then loc["longitude"] -= long_val else loc["longitude"] += long_val end
+
+      end#loop
+
+      return json
+
+    end#randomizeLatLong
+
 
 end#class
->>>>>>> polling-range

@@ -77,7 +77,7 @@ def logout_view(request):
 def home_view(request):
     data = {}
     try:
-        current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url', 'polling_rate').latest('pk') 
+        current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url', 'server_polling_rate', 'location_polling_rate', 'server_polling_range').latest('pk')
     except TourConfig.DoesNotExist:
         current_tour = False
 
@@ -94,16 +94,9 @@ def home_view(request):
         data['current_stats'] = current_stats
         current_tour['start_time'] = datetime.datetime.fromtimestamp(current_tour['start_time'])
         current_tour['max_tour_time'] =datetime.datetime.fromtimestamp(current_tour['max_tour_time'])
-        current_tour['config_link'] = "tourtrak://?" + urllib.urlencode({'tour_id': current_tour['tour_id'], 'dcs_url': current_tour['dcs_url'], 'tour_name': current_tour['tour_name']}) 
+        current_tour['config_link'] = "tourtrak://?" + urllib.urlencode({'tour_id': current_tour['tour_id'], 'dcs_url': current_tour['dcs_url'], 'tour_name': current_tour['tour_name']})
         data['current_tour'] = current_tour
     return render_to_response('home.html',data, context_instance=RequestContext(request))
-    
-@requires_csrf_token
-@login_required(login_url='/login/')
-def poll_rate_update_view(request):
-    data = {}
-    data["hello"] = "world"
-    return render_to_response('polling_rate.html', data, context_instance=RequestContext(request))
 
 @requires_csrf_token
 @login_required(login_url='/login/')
@@ -179,13 +172,13 @@ def playback_view(request):
 def send_message_view(request):
     if(request.method == "POST"):
         form = SendMessageForm(request.POST)
-        
+
         if(form.is_valid()):
             push_ids = []
             for rider in Rider.objects.iterator():
                 if rider.push_id is not None and len(rider.push_id) > 0:
                     push_ids.append(rider.push_id)
-            
+
             if len(push_ids) > 0:
                 headers = {}
                 headers[settings.GCM_API_KEY_HEADER] = 'key='+settings.GCM_API_KEY
@@ -203,7 +196,7 @@ def send_message_view(request):
                 messages.info(request, 'No riders to message.')
     else:
         form = SendMessageForm()
-        
+
     return render(request, 'send_message.html', {'form': form})
 
 #GCM

@@ -9,7 +9,7 @@
 {% block content %}
   <div class="row-fluid">
     {%if current_tour %}
-      <div class="span4 well">
+      <div class="span3 well">
         <h3>Current Tour</h3>
         <dl class="dl-horizontal">
         <dt>Tour Name</dt>
@@ -31,7 +31,7 @@
           <a class="btn btn-large btn btn-primary" href="{% url 'gcm' %}">Update Tour</a>
         </div>
       </div>
-      <div class="span4 well">
+      <div class="span3 well">
         <h3>Tour Statistics</h3>
         <dl class="dl-horizontal">
         <dt>Registered Riders</dt>
@@ -41,15 +41,28 @@
           <a class="btn btn-large btn btn-primary" href="{% url 'graphs-registered' %}">More Stats</a>
         </div>
       </div>
-      <!-- Polling Rate Div -->
-      <div class="span4 well">
-        <h3>Polling Rate</h3>
+      <!-- Server Polling Rate Div -->
+      <div class="span3 well">
+        <h3>Server Polling</h3>
         <dl class="dl-horizontal">
-          <dt>Current Polling Rate</dt>
-          <dd>{{current_tour.polling_rate}} sec</dd>
+          <dt>Server Poll Rate</dt>
+          <dd>{{current_tour.server_polling_rate}} sec</dd>
+          <dt>Server Poll Range</dt>
+          <dd>{{current_tour.server_polling_range}} sec</dd>
         </dl>
         <div style="text-align:center">
-          <a class="btn btn-large btn btn-primary" href="{% url 'polling-rate-update' %}">Update Rate</a> <!-- URL Here -->
+          <a class="btn btn-large btn btn-primary" href="{% url 'server-polling-rate-update' %}">Update</a> <!-- URL Here -->
+        </div>
+      </div>
+      <!-- Location Polling Rate Div -->
+      <div class="span3 well">
+        <h3>Location Polling Rate</h3>
+        <dl class="dl-horizontal">
+          <dt>Location Poll Rate</dt>
+          <dd>{{current_tour.location_polling_rate}} sec</dd>
+        </dl>
+        <div style="text-align:center">
+          <a class="btn btn-large btn btn-primary" href="{% url 'location-polling-rate-update' %}">Update Rate</a> <!-- URL Here -->
         </div>
       </div>
       {% else %}

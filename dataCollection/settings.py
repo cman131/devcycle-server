@@ -256,9 +256,10 @@ JSON_KEYS = {
         'TIME': u'time'
     },
     'BAD_REQ': u'bad_request',
-    'RIDER_CNT': u'rider_count',
     'TOUR_CONFIG': u'config',
-    'POLLING_RATE' : u'poll_rate', 
+    'SERVER_POLLING_RATE' : u'server_polling_rate',
+    'SERVER_POLLING_RANGE' : u'server_polling_range',
+    'LOCATION_POLLING_RATE' : u'location_polling_rate',
 }
 
 #celery
@@ -290,4 +291,3 @@ DEFAULT_MAP_LAT = 43.0844
 DEFAULT_MAP_LON = 77.6749
 #MAP_TILE_SERVER = 'http://cycl-ops.se.rit.edu'
 MAP_TILE_SERVER = 'http://otile1.mqcdn.com/tiles/1.0.0'
-
