@@ -1,0 +1,14 @@
+#This configuration is used to test the Memory Load of the server and its responsiveness
+#As you can see there are 100 parallel requests made but the size of the 
+#json is approx 652KB in size and 3,163 locations. So it is essentially
+# 100*652KB = 652,000 = ~636MB
+
+#<URL>
+#<Number of parallel requests>
+#<JSON File>
+# <-> Dash indicates new configuration
+
+http://devcycle.se.rit.edu/location_update/
+100
+mem_load.json
+
