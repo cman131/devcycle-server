@@ -57,3 +57,21 @@ in the jsons/ directory for all json files.
 `./Main.rb config_sample.txt`
 
 
+## Recording and Analyzing
+
+To look at the Server performance in real time the linux command `top` is used. When running
+the load tests it is important to record the performance of the server. When you run the
+load test make sure you run top on the server simultaneously in order to record the
+performance of the server at the time of the tests. By using this command and
+pipping the results this is achievable to analyze the data. Then after recording, 
+grep the text in order to get the parameters you want then simply graph the numbers. 
+
+The command below pipes the top command every 1 second into a text file called example.
+`top -b -d 1 > example.txt`
+
+The command below then greps for only the CPU performance numbers
+`cat example.txt | grep Mem | cut -c 8-53 | nl -i 3`
+
+The command below then greps for only the Mem performance numbers
+`cat example.txt | grep Cpu | cut -c 35-39 | nl -i 3`
+
