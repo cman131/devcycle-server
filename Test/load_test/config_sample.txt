@@ -7,6 +7,6 @@
 # <-> Dash indicates new configuration
 
 http://devcycle.se.rit.edu/location_update/
-100
+200
 location_update.json
 
