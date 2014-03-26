@@ -85,12 +85,9 @@ def home_view(request):
         current_stats = {}
         current_stats['riders'] = Rider.objects.count()
 
-	   #current_time = datetime.datetime.utcnow()
-	   #current_time = current_time.replace(tzinfo=UTC())
         if time.time() > current_tour['start_time']:
             pass
-            #current_stats['total_updates'] = Location.objects.filter(tour_id=current_tour['tour_id']).count()
-            #current_stats['active_riders'] = Rider.objects.annotate(location_count=Count('location_update')).filter(location_count__gt=1).count()
+            
         data['current_stats'] = current_stats
         current_tour['start_time'] = datetime.datetime.fromtimestamp(current_tour['start_time'])
         current_tour['max_tour_time'] =datetime.datetime.fromtimestamp(current_tour['max_tour_time'])

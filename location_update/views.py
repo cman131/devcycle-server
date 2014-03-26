@@ -9,7 +9,6 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from rider.rider_id_tools import decrypt_uuid
 from django.conf import settings
-from django.core.cache import cache
 from django.contrib.gis.geos import Point
 from rider.models import Rider
 from datetime import datetime
@@ -70,10 +69,6 @@ class LocationAPI(APIView):
             # if there was not any errors send back a 201
             # other wise send 400 and a response
             Location.objects.bulk_create(loc_list)
-
-            # Get the server polling rate from cache
-            # server polling rate is set in cache in the TourConfigAdd form methods
-            #server_polling_rate = cache.get(settings.JSON_KEYS['SERVER_POLLING_RATE'])
 
             # Get Current Tour
             curr_tour = TourConfig.objects.get(tour_id=tour_id)
