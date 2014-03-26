@@ -1,5 +1,5 @@
 #!/usr/bin/ruby
-require_relative 'load_test.rb'
+require_relative 'framework/load.rb'
 
 
 class Main
@@ -15,22 +15,23 @@ def self.start(config_file)
       if not ARGV[0] == nil or not ARGV[0].empty?
 
         config_file = ARGV[0]
+        config_path = "configs/#{config_file}"
 
         #check if file specified exist
-        if not File.exist?(config_file) and not File.file?(config_file)
+        if not File.exist?(config_path) and not File.file?(config_path)
 
           puts "ERROR: #{config_file} not a file."
 
         else
 
-          if not check_format?(config_file)
+          if not check_format?(config_path)
 
             puts "Error: #{config_file} incorrect File Format."
 
           else
 
             #Create the Load Test here
-            test = Load_Test.new(@configs)
+            test = Load.new(@configs)
 
             #Start Test
             test.start
@@ -39,6 +40,8 @@ def self.start(config_file)
 
         end#file exists
 
+      else
+        puts "ERROR: No Config file provided"
       end#nil
 
   end#Main
@@ -71,8 +74,10 @@ def self.start(config_file)
             config.push(line.strip.to_i)
 
           elsif count == 3 #json file
-            if not File.exist?(line.strip) and not File.file?(line.strip) then return false end
-            config.push(line.strip)
+            json = line.strip
+            json_path = "jsons/#{json}"
+            if not File.exist?(json_path) and not File.file?(json_path) then return false end
+            config.push(json)
             @configs.push(config) #push configuration
             config = Array.new
 

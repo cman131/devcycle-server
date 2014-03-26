@@ -1,0 +1,14 @@
+#This configuration tests the CPU of the server. 
+#Maximizing the number of parallel requests the test framework can make for an individual user.
+#Run on multiple machines simulataneously to increase the effective of the test
+
+###File Format###
+#<URL>
+#<Number of parallel requests>
+#<JSON File>
+# <-> Dash indicates new configuration
+
+http://devcycle.se.rit.edu/location_update/
+200
+cpu_load.json
+
