@@ -22,14 +22,7 @@ class RiderAPI(APIView):
                 serializer.save()
                 rider_uuid = create_uuid(serializer.object.pk)
 
-                #increase the number of rider in the cache
-                try:
-                    cache.incr(settings.JSON_KEYS['RIDER_CNT'])
-                except ValueError:
-                    logger.info('catch not found, increment may be off')
-
                 return Response(
-                    {settings.JSON_KEYS['RIDER_ID']: rider_uuid},
                     status=status.HTTP_201_CREATED
                 )
 

@@ -17,6 +17,7 @@ simultaneously on multiple machines.
 ##  SET-UP
 1. Framework works for ruby version 1.9.3 have not tested for other versions of ruby.
 2. gem install typhoeus
+3. gem install faraday
 
 ##  Files
 /Main.rb - the main file to run the system
