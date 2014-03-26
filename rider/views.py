@@ -23,6 +23,7 @@ class RiderAPI(APIView):
                 rider_uuid = create_uuid(serializer.object.pk)
 
                 return Response(
+                    {settings.JSON_KEYS['RIDER_ID']: rider_uuid},
                     status=status.HTTP_201_CREATED
                 )
 
