@@ -34,12 +34,27 @@ class LocationAPI(APIView):
             data = request.DATA
             ###
 
+            # Get the Locations from Data
             loc_data = data.get(settings.JSON_KEYS['LOCATIONS'])
+
+            # Get the Tour_Id name from Data
             tour_id = data.get('tour_id')
-            # get and decrypt the UUID
+
+            # Get and decrypt the UUID
             rider = decrypt_uuid(data[settings.JSON_KEYS['RIDER_ID']])
 
-            # go through the points and store it into the database
+            # Check if the parameters passed in 
+            # exist in the database before saving
+            # Get Current Tour
+            curr_tour = TourConfig.objects.get(tour_id=tour_id)
+
+            if curr_tour is None: 
+                raise Exception("Tour '%s' Does Not Exist" % (data.get('tour_id')) )
+
+            if rider is None:
+                raise Exception("Rider Id Does Not Exist")
+
+            # Go through the points and store it into the database
             loc_list = []
             for point in loc_data:
                 time = long(point.get(settings.JSON_KEYS['LOC']['TIME']))
@@ -68,15 +83,14 @@ class LocationAPI(APIView):
 
             # if there was not any errors send back a 201
             # other wise send 400 and a response
+            # This is where the locations are 
+            # being saved the database
             Location.objects.bulk_create(loc_list)
-
-            # Get Current Tour
-            curr_tour = TourConfig.objects.get(tour_id=tour_id)
 
             # Get server polling rate from db
             server_polling_rate = curr_tour.server_polling_rate
 
-            #Get server polling range from db
+            # Get server polling range from db
             server_polling_range = curr_tour.server_polling_range
 
             # Get location polling rate from db
