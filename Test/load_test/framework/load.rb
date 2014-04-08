@@ -10,6 +10,8 @@ require 'benchmark' #measurements/stats
 
 require 'json'
 
+require_relative 'constants.rb'
+
 require_relative 'response_handler'
 
 #
@@ -33,13 +35,19 @@ require_relative 'response_handler'
 @prng 
 
 #
+# Type of Request, Location_update or
+# rider registration
+@request_type
+
+#
 # Loads the config file and parses it.
 # After parsing the config file a request
 # is then sent to the server. 
 #
 class Load
 
-    def initialize(configs)
+    def initialize(request_type,configs)
+      @request_type = request_type
       @configs = configs
       @prng  = Random.new
     end#initialize
@@ -106,9 +114,9 @@ class Load
     # @param - json file
     def post(conn,json)
 
-      json = randomizeLatLong(json)
+      if @request_type == FrameworkConstants::LOCATION_UPDATE_REQUEST then json = randomizeLatLong(json) end
 
-     conn.post do |request|
+      conn.post do |request|
 
         request.url @url
 

@@ -1,6 +1,8 @@
 #!/usr/bin/ruby
 require_relative 'framework/load.rb'
 
+require_relative 'framework/constants.rb'
+
 
 class Main
 
@@ -8,6 +10,11 @@ class Main
 #specified in config file
 #Arrays of Arrays
 @configs = Array.new
+
+#The Type of Request is it a
+#Registration Request or
+#Location_update request
+@type_of_request = 0
 
 def self.start(config_file)
 
@@ -31,7 +38,7 @@ def self.start(config_file)
           else
 
             #Create the Load Test here
-            test = Load.new(@configs)
+            test = Load.new(@type_of_request,@configs)
 
             #Start Test
             test.start
@@ -67,6 +74,8 @@ def self.start(config_file)
 
           elsif count == 1 #url
             if not line.is_a?(String) then return false end #check if url
+            if line.strip.match(/register/) != nil then type_of_request = FrameworkConstants::RIDER_REQUEST end
+            if line.strip.match(/location_update/) != nil then type_of_request = FrameworkConstants::LOCATION_UPDATE_REQUEST end
             config.push(line.strip)
 
           elsif count == 2 #parallel count

@@ -70,8 +70,8 @@ The command below pipes the top command every 1 second into a text file called e
 `top -b -d 1 > example.txt`
 
 The command below then greps for only the CPU performance numbers
-`cat example.txt | grep Mem | cut -c 8-53 | nl -i 3`
+`cat example.txt | grep Mem | cut -c 8-53 | nl -i 1`
 
 The command below then greps for only the Mem performance numbers
-`cat example.txt | grep Cpu | cut -c 35-39 | nl -i 3`
+`cat example.txt | grep Cpu | cut -c 35-39 | nl -i 1`
 

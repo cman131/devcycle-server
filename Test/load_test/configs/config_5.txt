@@ -1,6 +1,6 @@
 #This configuration is used to test Registering Riders. We are
 #testing the case where if many riders try to register at once
-#what happens. This is a lower bound case. We want to see
+#what happens. This is a higher bound case. We want to see
 #how the server responds to many rider registrations
 
 #<URL>
@@ -9,6 +9,6 @@
 # <-> Dash indicates new configuration
 
 http://devcycle.se.rit.edu/register/
-100
+200
 register_load.json
 
