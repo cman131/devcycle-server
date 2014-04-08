@@ -17,7 +17,7 @@ class TourConfigAddForm(forms.ModelForm):
     label_suffix = ":"
     class Meta:
         model = TourConfig
-        exclude = ( 'is_cancelled' )
+        exclude = ( 'is_cancelled', )
 
     def clean(self):
         cleaned_data = super(TourConfigAddForm, self).clean()
