@@ -2,10 +2,6 @@
 # setup.sh for configuring Ubuntu 12.04 LTS EC2 instance with the 
 # devcycle django server installed. easy and quick way to install
 # all the required dependencies.
-#
-# note: this does not install postgresql and the subsequent database
-# necessary. this was setup used '13/'14 using an EC2 instance with Amazon RDS
-# running postgresql with the postgis extentions.
 
 # Install necessary dependencies
 sudo apt-get install python-pip python-dev build-essential 
