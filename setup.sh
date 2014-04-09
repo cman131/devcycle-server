@@ -11,11 +11,14 @@
 sudo apt-get install python-pip python-dev build-essential 
 sudo pip install --upgrade pip 
 sudo apt-get install python-django
-apt-get install binutils
-apt-get install gdal-bin
-apt-get install libproj-dev
-apt-get install memcached
-apt-get install rabbitmq-server
+sudo apt-get install binutils
+sudo apt-get install gdal-bin
+sudo apt-get install libproj-dev
+sudo apt-get install memcached
+sudo apt-get install rabbitmq-server
+sudo apt-get update
+sudo apt-get install postgresql-9.1
+sudo apt-get install postgresql-server-dev-9.1
 
 # Install the Apache server
 sudo aptitude install apache2 apache2.2-common apache2-mpm-prefork apache2-utils libexpat1 ssl-cert
