@@ -159,7 +159,7 @@ class RecentLocationAPI(APIView):
         tour = TourConfig.objects.latest('pk') # Get the latest tour
 
         df = DateFormat(datetime.now())
-        end_interval = long(df.U())
+        end_interval = tour.start_time#long(df.U())
         poll_rate = tour.server_polling_rate
         poll_range = tour.server_polling_range
 
@@ -173,7 +173,8 @@ class RecentLocationAPI(APIView):
         cursor.execute(
             """SELECT rider_id, speed, ST_X(coords), ST_Y(coords)
                    FROM location_update_location
-                WHERE time BETWEEN %s AND %s""", [start_interval, end_interval])
+                WHERE time BETWEEN %s AND %s LIMIT %s""",
+                [start_interval, end_interval, rider_count])
         for row in cursor.fetchall():
             (rider_id, speed, lon, lat)=row
             if not riders.has_key(rider_id):
@@ -189,17 +190,6 @@ class RecentLocationAPI(APIView):
                 'poll_range': poll_range,
                 'rider_count': rider_count }, status=status.HTTP_200_OK)
 '''
-'''
-        cursor.execute(
-            """SELECT rider_id, speed, ST_X(coords), ST_Y(coords)
-                FROM (
-                    SELECT rider_id, speed, coords,
-                    RANK() OVER (PARTITION BY rider_id ORDER BY time DESC) as rank
-                        FROM location_update_location
-                    WHERE speed != 0)dt
-                WHERE dt.rank <= 10""")
-'''
-
 
 
 class RouteAPI(APIView):
