@@ -56,7 +56,7 @@
     
     var getRiderPoints = function() {
          $.ajax({
-          url: '/location_update/',
+          url: '/location_update/recent/',
           type: 'GET'
         }).done(function (data) {
           drawRiderPoints(data);   
