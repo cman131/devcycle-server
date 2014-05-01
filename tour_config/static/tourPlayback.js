@@ -5,7 +5,7 @@
     
     var UPDATE_DELAY = 1000;
     var RESUME_DELAY = 3000;
-    var BLOCK_SIZE = 3;
+    var BLOCK_SIZE = 1; //The number of frames to fetch per request
     
     var projection = new OpenLayers.Projection("EPSG:4326")
     var queuedFrames = [];
@@ -92,7 +92,8 @@
          var request = $.ajax({
           url: '/playback/frames/',
           data: {
-            block: frameBlock
+            block: frameBlock,
+            block_size: BLOCK_SIZE
           },
           type: 'GET'
         }).done(function (data) {

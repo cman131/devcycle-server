@@ -206,7 +206,7 @@ class RouteAPI(APIView):
 class PlaybackAPI(APIView):
     def get(self, request, format=None):
         playback_interval = 300
-        block_size = 3
+        block_size = int(request.GET['block_size'])
 
         block = int(request.GET['block'])
         frames = []
@@ -231,7 +231,7 @@ class PlaybackAPI(APIView):
             end_interval = start_interval + playback_interval
 
             cursor.execute(
-                """SELECT rider_id, speed, ST_X(coords), ST_Y(coords)
+                """SELECT DISTINCT ON(rider_id)  rider_id, speed, ST_X(coords), ST_Y(coords)
                        FROM location_update_location
                     WHERE time BETWEEN %s AND %s
                 """, [start_interval, end_interval])
