@@ -171,7 +171,7 @@ class RecentLocationAPI(APIView):
 
         cursor = connection.cursor()
         cursor.execute(
-            """SELECT rider_id, speed, ST_X(coords), ST_Y(coords)
+            """SELECT DISTINCT ON(rider_id) rider_id, speed, ST_X(coords), ST_Y(coords)
                    FROM location_update_location
                 WHERE time BETWEEN %s AND %s LIMIT %s""",
                 [start_interval, end_interval, rider_count])
@@ -233,7 +233,7 @@ class PlaybackAPI(APIView):
             cursor.execute(
                 """SELECT rider_id, speed, ST_X(coords), ST_Y(coords)
                        FROM location_update_location
-                    WHERE speed != 0 AND time BETWEEN %s AND %s
+                    WHERE time BETWEEN %s AND %s
                 """, [start_interval, end_interval])
 
             frame = []
