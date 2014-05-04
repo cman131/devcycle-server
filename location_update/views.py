@@ -7,7 +7,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from rider.models import Rider
 from rider.rider_id_tools import decrypt_uuid
+from rider.utils import get_registration_data, get_num_registered
 from django.conf import settings
 from django.contrib.gis.geos import Point
 from rider.models import Rider
@@ -42,6 +44,8 @@ class LocationAPI(APIView):
 
             # Get and decrypt the UUID
             rider = decrypt_uuid(data[settings.JSON_KEYS['RIDER_ID']])
+
+	    logger.error("RIDER TO PRINT HERE: ", rider)
 
             # Check if the parameters passed in 
             # exist in the database before saving
@@ -139,6 +143,55 @@ class LocationAPI(APIView):
         riders = riders.values()
         return Response(
                     {'locations': riders}, status=status.HTTP_200_OK)
+
+'''
+Used for displaying the last known position of every rider in the DB
+'''
+class RecentLocationAPI(APIView):
+
+    def post(self, request, format=None):
+        return Response(
+                {settings.JSON_KEYS['BAD_REQ']: ex.args},
+                status=status.HTTP_400_BAD_REQUEST)
+
+    def get(self, request, format=None):
+        #Latest tour used for the total number of riders
+        tour = TourConfig.objects.latest('pk') # Get the latest tour
+
+        df = DateFormat(datetime.now())
+        end_interval = tour.start_time#long(df.U())
+        poll_rate = tour.server_polling_rate
+        poll_range = tour.server_polling_range
+
+        #Sever's poling range+polling interval ago.
+        start_interval = end_interval - poll_rate -poll_range
+
+        rider_count = Rider.objects.count()
+        riders = {}
+
+        cursor = connection.cursor()
+        cursor.execute(
+            """SELECT DISTINCT ON(rider_id) rider_id, speed, ST_X(coords), ST_Y(coords)
+                   FROM location_update_location
+                WHERE time BETWEEN %s AND %s LIMIT %s""",
+                [start_interval, end_interval, rider_count])
+        for row in cursor.fetchall():
+            (rider_id, speed, lon, lat)=row
+            if not riders.has_key(rider_id):
+                riders[rider_id] = []
+            riders[rider_id].append((int(speed), lon, lat))
+        riders = riders.values()
+        return Response(
+                {'locations': riders}, status=status.HTTP_200_OK)
+'''
+                {'mins_ago': start_interval,
+                'time': end_interval,
+                'poll_rate': poll_rate,
+                'poll_range': poll_range,
+                'rider_count': rider_count }, status=status.HTTP_200_OK)
+'''
+
+
 class RouteAPI(APIView):
     def get(self, request, format=None):
         config = TourConfig.objects.latest('pk')
@@ -153,7 +206,7 @@ class RouteAPI(APIView):
 class PlaybackAPI(APIView):
     def get(self, request, format=None):
         playback_interval = 300
-        block_size = 3
+        block_size = int(request.GET['block_size'])
 
         block = int(request.GET['block'])
         frames = []
@@ -178,9 +231,9 @@ class PlaybackAPI(APIView):
             end_interval = start_interval + playback_interval
 
             cursor.execute(
-                """SELECT rider_id, speed, ST_X(coords), ST_Y(coords)
+                """SELECT DISTINCT ON(rider_id)  rider_id, speed, ST_X(coords), ST_Y(coords)
                        FROM location_update_location
-                    WHERE speed != 0 AND time BETWEEN %s AND %s
+                    WHERE time BETWEEN %s AND %s
                 """, [start_interval, end_interval])
 
             frame = []

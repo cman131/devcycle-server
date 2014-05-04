@@ -4,6 +4,8 @@ from location_update import views
 urlpatterns = patterns('',
                        url(r'^location_update/$',
                            views.LocationAPI.as_view()),
+                       url(r'^location_update/recent/$',
+                           views.RecentLocationAPI.as_view()),
                        url(r'^route/$',
                            views.RouteAPI.as_view()),
                         url(r'^playback/frames/$',
