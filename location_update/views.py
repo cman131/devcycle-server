@@ -159,7 +159,7 @@ class RecentLocationAPI(APIView):
         tour = TourConfig.objects.latest('pk') # Get the latest tour
 
         df = DateFormat(datetime.now())
-        end_interval = tour.start_time#long(df.U())
+        end_interval = long(df.U())
         poll_rate = tour.server_polling_rate
         poll_range = tour.server_polling_range
 
