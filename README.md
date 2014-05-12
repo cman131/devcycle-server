@@ -39,7 +39,7 @@ The server component to the TourTrak system built using Django.
 ##Installation
 
 * Clone this repository into /usr/local/
-* Inside the root directory of our application, install all project dependencies by runnning our setup script `bash setup.sh`
+* Inside the root directory of your application, install all project dependencies by runnning our setup script `bash setup.sh`
 * Create a virtual host & WSGI file for the Apache server to display the Django application. Open the httpd.conf file 'nano /etc/apache2/httpd.conf'. Copy and paste the following, you may edit 
 these values if desired (such as where to collect static files).
 
@@ -96,9 +96,15 @@ Restart the apache server to put all changes into effect.
 /etc/init.d/apache2 reload
 ```
 
-* Migrate the database scheme using South
+###Migrate the database scheme using South
+[South](http://south.aeracode.org/) is a schema and data migration tool for Django. It is used for easily
+migrating the database schema from database to database if needed. It is also used in the case of making updates
+to models then wanting those changes reflected in the database schema. South is already installed if you ran the `bash setup.sh` command.
 
-TODO.
+
+
+
+
 
 Restart server again.
 
