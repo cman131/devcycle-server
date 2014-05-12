@@ -96,10 +96,30 @@ Restart the apache server to put all changes into effect.
 /etc/init.d/apache2 reload
 ```
 
-###Migrate the database scheme using South
+###Migrate the Database Schema using South
 [South](http://south.aeracode.org/) is a schema and data migration tool for Django. It is used for easily
 migrating the database schema from database to database if needed. It is also used in the case of making updates
-to models then wanting those changes reflected in the database schema. South is already installed if you ran the `bash setup.sh` command.
+to models then wanting those changes reflected in the database schema. South is already installed if you ran the `bash setup.sh` command. Recommend looking at the docs for more information [docs](http://south.readthedocs.org/en/latest/index.html)
+
+At this point the database schema for the Server does not exist yet. We will use South to add it. South will look at the current models to set-up the schema that the Server requires. 
+
+*Note all commands below need to be ran within the root directory of the Django Project*
+
+1. Need to load the South table into the database, this is where all the migration instructions are kept. *--all* make sures South is tracking all tables already set. 
+`./manage.py syncdb --all`
+
+2. The models already exist and are initialized by South already, we need to track it. They are stored in the migrations folder of each model.
+*`./manage.py migrate rider 0001 --fake` 
+*`./manage.py migrate location_update 0001 --fake` 
+*`./manage.py migrate tour_config 0001 --fake` 
+
+This should add the current models to the database. 
+
+1.After making changes to models and wanting to reflect changes in db. Check if changes were made to the model:
+`./manage.py schemamigration <model_name> --auto`
+
+2. Execute the changes:
+`./manage.py migrate <model_name>`
 
 
 
