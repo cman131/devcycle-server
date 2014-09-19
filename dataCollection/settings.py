@@ -3,7 +3,7 @@
 import os
 PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -19,8 +19,8 @@ DATABASES = {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'DCS',
 #        'NAME':'dev_test1',
-        'USER': 'dev',
-        'PASSWORD': 'password',
+        'USER': 'admin',
+        'PASSWORD': 'pedalRIT',
         'HOST': 'localhost',
 #        'HOST':'cycl-ops.se.rit.edu',
         'PORT': '',
@@ -147,6 +147,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.gis',
     'rider',
+    'group',
     'location_update',
     'tour_config',
     'rest_framework',

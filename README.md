@@ -1,4 +1,4 @@
-TourTrak Data Collection Server
+﻿TourTrak Data Collection Server
 ===============
 The server component to the TourTrak system built using Django.
 
@@ -105,40 +105,17 @@ At this point the database schema for the Server does not exist yet. We will use
 
 *Note all commands below need to be ran within the root directory of the Django Project*
 
-1. Need to load the South table into the database, this is where all the migration instructions are kept. *--all* make sures South is tracking all tables already set. 
+This command will create the migrations:
 
-`./manage.py syncdb --all`
+`./manage.py makemigrations`
 
-2. The models already exist and are initialized by South already, we need to track it. They are stored in the migrations folder of each model.
+These commands will then apply the newly created migrations to the database:
 
-* `./manage.py migrate rider 0001 --fake` 
+`./manage.py migrate rider 0001
 
-* `./manage.py migrate location_update 0001 --fake` 
+./manage.py migrate location_update 0001
 
-* `./manage.py migrate tour_config 0001 --fake` 
-
-This should add the current models to the database. 
-
-After making changes to models and wanting to reflect changes in db. 
-
-Check if changes were made to the model:
-
-`./manage.py schemamigration <model_name> --auto`
-
-2. Execute the changes:
-
-`./manage.py migrate <model_name>`
-
-When adding models
-
-`./manage.py schemamigration <model_name> --initial`
-
-
-
-
-
-
-
+./manage.py migrate tour_config 0001`
 
 Restart server again.
 
