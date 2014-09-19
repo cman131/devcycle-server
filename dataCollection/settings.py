@@ -147,7 +147,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.gis',
     'rider',
-    'group',
     'location_update',
     'tour_config',
     'rest_framework',
