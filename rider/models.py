@@ -19,8 +19,8 @@ class Rider(models.Model):
     start_time = models.BigIntegerField(null=True, blank=True)
     push_id = models.CharField(max_length=512, null=True, blank=True)
     registered_at = models.DateTimeField(auto_now_add=True,editable=False)
-    affinity_group = models.ManyToManyField(AffinityGroup, through='RiderAffinityGroupRelationship')
+    affinity_group = models.ManyToManyField(Affinity_Group, through='RiderAffinityGroupRelationship')
 
 class RiderAffinityGroupRelationship(models.Model):
 	rider = models.ForeignKey(Rider)
-	affinitygroup = models.ForeignKey(AffinityGroup)
+	affinitygroup = models.ForeignKey(Affinity_Group)
