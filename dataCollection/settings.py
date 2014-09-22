@@ -150,7 +150,7 @@ INSTALLED_APPS = (
     'location_update',
     'tour_config',
     'rest_framework',
-    'south',
+    #'south',
     'djcelery',
     'analysis',
     #'bootstrap_toolkit',
