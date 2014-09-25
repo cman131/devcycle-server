@@ -17,9 +17,9 @@ class Rider(models.Model):
     affinity_group = models.ManyToManyField(Group, through='Affinity_Group_Mapping')
 
 class Affinity_Group_Mapping(models.Model):
-	rider = models.ForeignKey(Rider)
-	affinity_group = models.ForeignKey(Group)
+   rider = models.ForeignKey(Rider)
+   affinity_group = models.ForeignKey(Group)
 
-    # Ensure the combination of the rider and affinity_group are unique (Meta must TAB)
-    class Meta:
-        unique_together = ('rider', 'affinity_group')
+#Ensure uniquness of the rider and affinity_group together so no duplicates.
+class Meta:
+    unique_together = ('rider', 'affinity_group')

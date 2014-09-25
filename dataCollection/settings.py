@@ -139,6 +139,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 INSTALLED_APPS = (
+    'affinity',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
