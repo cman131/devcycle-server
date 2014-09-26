@@ -21,5 +21,5 @@ class Affinity_Group_Mapping(models.Model):
    affinity_group = models.ForeignKey(Group)
 
 #Ensure uniquness of the rider and affinity_group together so no duplicates.
-class Meta:
-    unique_together = ('rider', 'affinity_group')
+	class Meta:
+    	unique_together = ('rider', 'affinity_group')
