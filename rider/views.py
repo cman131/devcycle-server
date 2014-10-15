@@ -10,6 +10,19 @@ from django.core.cache import cache
 
 logger = logging.getLogger(__name__)
 
+def list_group_view(request, r_id):
+	affinity_group_return_data = []
+	aff_data = Affinity_Group_Mapping.objects.filter(rider=r_id)
+	for r in aff_data:
+	    aff_id = r['affinity_group']
+		group_data = Group.objects.get(id=aff_id)
+		affinity_group_return_data.append(group_data)
+	return Response(affinity_group_return_data)
+def create_group_view(request, aff_id, r_id):
+    
+def join_group_view(request, aff_id, r_id):
+
+def leave_group_view(request, aff_id, r_id):
 
 class RiderAPI(APIView):
 
