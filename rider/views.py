@@ -1,5 +1,6 @@
 import logging
-from rider.models import Rider
+from rider.models import Rider, Affinity_Group_Mapping
+from affinity.models import Group
 from rider.serializer import riderSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -18,6 +19,7 @@ def list_group_view(request, r_id):
 	    aff_id = r['affinity_group']
 		group_data = Group.objects.get(id=aff_id)
 		response.write("<name>"+group_data.name+"</name>")
+		response.write("<id>"+aff_id+"</id>")
 	return response
 def create_group_view(request, name, aff_id, r_id):
     
