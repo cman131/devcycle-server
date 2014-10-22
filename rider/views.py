@@ -7,18 +7,19 @@ from rest_framework import status
 from rider.rider_id_tools import create_uuid, decrypt_uuid
 from django.conf import settings
 from django.core.cache import cache
+from django.http import HttpResponse
 
 logger = logging.getLogger(__name__)
 
 def list_group_view(request, r_id):
-	affinity_group_return_data = []
+	response = HttpResponse()
 	aff_data = Affinity_Group_Mapping.objects.filter(rider=r_id)
 	for r in aff_data:
 	    aff_id = r['affinity_group']
 		group_data = Group.objects.get(id=aff_id)
-		affinity_group_return_data.append(group_data)
-	return Response(affinity_group_return_data)
-def create_group_view(request, aff_id, r_id):
+		response.write("<name>"+group_data.name+"</name>")
+	return response
+def create_group_view(request, name, aff_id, r_id):
     
 def join_group_view(request, aff_id, r_id):
 
