@@ -22,7 +22,11 @@ def list_group_view(request, r_id):
 		json_data.add({'name':group_data.name,'id':aff_id})
 	return JsonResponse(json.dumps(json_data))
 def create_group_view(request, name, aff_id, r_id):
-    
+    group = Group(name=name,code=aff_id)
+	agm = Affinity_Group_Mapping(rider=r_id,affinity_group=aff_id)
+	group.save()
+	agm.save()
+	return HttpResponse(status=status.HTTP_201_CREATED)
 def join_group_view(request, aff_id, r_id):
 	agm = Affinity_Group_Mapping(rider=r_id,affinity_group=aff_id)
 	agm.save()
