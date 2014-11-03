@@ -9,6 +9,7 @@ from rest_framework import status
 from rider.rider_id_tools import create_uuid, decrypt_uuid
 from django.conf import settings
 from django.core.cache import cache
+from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, HttpResponseNotAllowed
 from django.utils import simplejson
 
@@ -45,6 +46,7 @@ def list_group_view(request, r_id):
 		return HttpResponse(return_string, content_type="application/json")
 	return HttpResponse(json.dumps(json_data), content_type="application/json")
 
+@csrf_exempt
 def create_group_view(request):
 	#make sure the request is a POST request and that form data has been provided
 	if request.method == "POST" and request.POST:
@@ -68,7 +70,7 @@ def create_group_view(request):
 
 		#Get the PK of the new group and create a mapping to a rider
 		group_id = Group.objects.get(code=aff_code).id
-		agm = Affinity_Group_Mapping(rider=rider_id, affinity_group=group_id)
+		agm = Affinity_Group_Mapping(rider_id=rider_id, affinity_group_id=group_id)
 		agm.save()
 	
 		#return a success code
@@ -102,7 +104,12 @@ def join_group_view(request, aff_id, r_id):
 	agm = Affinity_Group_Mapping(rider_id=r_id,affinity_group_id=group_id)
 	agm.save()
 
-	#return a success response
+	#return a success response - need to include callback key for JSONP requests
+	if 'callback' in request.REQUEST:
+		return_string = "%s()" % (request.REQUEST['callback'])
+		response = HttpResponse(return_string)
+		response.status_code = 200
+		return response
 	response = HttpResponse("Success")
 	response.status_code = 200
 	return response
@@ -128,7 +135,12 @@ def leave_group_view(request, aff_id, r_id):
 	agm = Affinity_Group_Mapping.objects.filter(rider_id=r_id).filter(affinity_group_id=group_id)
 	agm.delete()
 	
-	#return a success response
+	#return a success response - need to include the callback key for JSONP requests
+	if 'callback' in request.REQUEST:
+		return_string = "%s()" % (request.REQUEST['callback'])
+		response = HttpResponse(return_string)
+		response.status_code = 200
+		return response
 	response = HttpResponse("Success")
 	response.status_code = 200
 	return response
