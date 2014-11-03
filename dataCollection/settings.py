@@ -1,12 +1,14 @@
-# Django settings for dataCollection project.
+#django settings for dataCollection project.
 
 import os
 PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 
-DEBUG = False
-TEMPLATE_DEBUG = DEBUG
+DEBUG = True
+DEBUG_PROPAGATE_EXCEPTIONS = True
+#TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
+    ('Tom Moore', 'tjm3772@rit.edu'),
     # ('Your Name', 'your_email@example.com'),
 )
 
@@ -33,6 +35,8 @@ CACHES = {
         'LOCATION': '127.0.0.1:11211',
     }
 }
+
+#ALLOWED_HOSTS = ['*.se.rit.edu']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -80,7 +84,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    '/usr/local/devcycle-server/tour_config/static/',
+    '/usr/local/devcycle/tour_config/static/',
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -151,7 +155,7 @@ INSTALLED_APPS = (
     'location_update',
     'tour_config',
     'rest_framework',
-    #'south',
+    'south',
     'djcelery',
     'analysis',
     #'bootstrap_toolkit',
@@ -167,6 +171,7 @@ INSTALLED_APPS = (
 # more details on how to customize your logging configuration.
 LOGGING = {
     'version': 1,
+    # 'disable_existing_loggers': False,
     'disable_existing_loggers': True,
     'formatters': {
         'standard': {
@@ -190,6 +195,10 @@ LOGGING = {
             'backupCount': 5,
             'formatter': 'standard',
         },
+        #'logfile': {
+        #    'class': 'logging.handlers.WatchedFileHandler',
+        #    'filename': '/var/log/django/myapp.log'
+        #}
     },
     'loggers': {
 
@@ -200,9 +209,16 @@ LOGGING = {
         },
         'django.request': {
             'handlers': ['request_handler'],
-            'level': 'DEBUG',
-            'propagate': False
+            #'level': 'ERROR',
+             'level': 'DEBUG',
+            #'propagate': True
+             'propagate': False
         },
+        #'django': {
+        #    'handlers': ['logfile'],
+        #    'level': 'ERROR',
+        #    'propagate': False,
+        #}
     }
 }
 #LOGGING = {

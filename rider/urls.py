@@ -12,7 +12,7 @@ urlpatterns = patterns('',
 					   url(r'^list_group/(?P<r_id>\d+)/$', 
 					       views.list_group_view),
 				       # create an affinity group
-					   url(r'^create_group/(?P<name>\w+)/(?P<aff_id>\w{3,7})/(?P<r_id>\d+)/$',
+					   url(r'^create_group/$',
 					       views.create_group_view),
 					   # join an affinity group
 					   url(r'^join_group/(?P<aff_id>\w{3,7})/(?P<r_id>\d+)/$',
