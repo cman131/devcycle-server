@@ -10,8 +10,7 @@ from rider.rider_id_tools import create_uuid, decrypt_uuid
 from django.conf import settings
 from django.core.cache import cache
 from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponse, HttpResponseNotAllowed
-from django.utils import simplejson
+from django.http import HttpResponse, HttpResponseNotAllowed, Http404
 
 
 logger = logging.getLogger(__name__)
@@ -78,9 +77,10 @@ def create_group_view(request):
 		response.status_code = 200
 		return response
 	#return an error - tells client that only POST is allowed
-	response = HttpResponseNotAllowed(['POST'])
-	response.write("ERROR: Only POST requests allowed")
-	return response
+	#response = HttpResponseNotAllowed(['POST'])
+	#response.write("ERROR: Only POST requests allowed")
+	#return response
+	raise Http404
 
 def join_group_view(request, aff_id, r_id):
 	#Check if the group exists
@@ -143,6 +143,20 @@ def leave_group_view(request, aff_id, r_id):
 		return response
 	response = HttpResponse("Success")
 	response.status_code = 200
+	return response
+
+def check_code_view(request, aff_id):
+	response = HttpResponse()
+	
+	#check if the code is in use
+	#if group_test doesn't come back empty return a 400 error code
+	group_test = Group.objects.filter(code=aff_id)
+	if group_test:
+		response.status_code = 400
+		response.write("Code exists")
+		return response
+	response.status_code = 200
+	response.write("Code does not exist")
 	return response
 
 class RiderAPI(APIView):
