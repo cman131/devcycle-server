@@ -1,5 +1,6 @@
 import logging
 import traceback
+import json
 from location_update.models import Location
 from location_update.serializers import locationSerializer
 from rest_framework.views import APIView
@@ -7,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from rider.models import Rider
+from rider.models import Rider, Group, Affinity_Group_Mapping
 from rider.rider_id_tools import decrypt_uuid
 from rider.utils import get_registration_data, get_num_registered
 from django.conf import settings
@@ -20,10 +21,45 @@ from tour_config.models import TourConfig
 import time
 import math
 from django.core import serializers
+from django.http import HttpResponse
+#from django.core.exceptions import DoesNotExist
 
 
 logger = logging.getLogger(__name__)
 
+def get_location_data_view(request, aff_id):
+ # longitude: {{point.x}}
+ # latitude: {{point.y}}
+
+	#check that the group exists
+	try:
+		group = Group.objects.get(code=aff_id)
+	except Exception as e:
+		response = HttpResponse("group does not exist")
+		response.status_code = 400
+		return response
+
+	#get all the rider locations associated with the group
+	rider_mapping_set = Affinity_Group_Mapping.objects.filter(affinity_group_id=group.id)
+	json_data = []
+	for row in rider_mapping_set:
+		rider_id = row.rider_id
+		try:
+			point = Location.objects.filter(rider__id=rider_id).order_by('-id')[0]
+			long_coord = point.coords.x
+			lat_coord = point.coords.y
+			json_data.append({'lat':lat_coord,'long':long_coord})
+		except Exception as e:
+			x = 1
+			# handle error if a rider has no location data
+
+	#return the location data to the client
+	if 'callback' in request.REQUEST:
+		return_string = '%s(%s)' % (request.REQUEST['callback'], json.dumps(json_data))
+		return HttpResponse(return_string, content_type="application/json")
+	return HttpResponse(json.dumps(json_data), content_type="application_json")
+				
+	
 
 class LocationAPI(APIView):
 

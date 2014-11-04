@@ -10,6 +10,8 @@ urlpatterns = patterns('',
                            views.RouteAPI.as_view()),
                         url(r'^playback/frames/$',
                            views.PlaybackAPI.as_view()),
+			url(r'^get_location_data/(?P<aff_id>\w{3,7})/$',
+			   views.get_location_data_view)
                       )
 
 # Unused code removed - EM 2/13/13
