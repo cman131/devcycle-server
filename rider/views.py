@@ -40,10 +40,7 @@ def list_group_view(request, r_id):
 			json_data.append({'name':group_data.name,'code':group_data.code})
 	#return the group data as a JSON response and set the response type appropriately
 	#return HttpResponse('callback('+json.dumps(json_data)+');', content_type="application/json")
-	if 'callback' in request.REQUEST:
-		return_string = '%s(%s);' % (request.REQUEST['callback'], json.dumps(json_data))
-		return HttpResponse(return_string, content_type="application/json")
-	return HttpResponse(json.dumps(json_data), content_type="application/json")
+	return write_response(request, 200, json.dumps(json_data), 1)	
 
 @csrf_exempt
 def create_group_view(request):
@@ -80,23 +77,21 @@ def create_group_view(request):
 	#response = HttpResponseNotAllowed(['POST'])
 	#response.write("ERROR: Only POST requests allowed")
 	#return response
+
+	#returning a 404 so that the link looks invalid from the outside
 	raise Http404
 
 def join_group_view(request, aff_id, r_id):
 	#Check if the group exists
 	group_exists_test = Group.objects.filter(code=aff_id)
 	if not group_exists_test:
-		response = HttpResponse("ERROR: Group does not exist")
-		response.status_code = 400
-		return response
+		return write_response(request, 400, "ERROR: Group does not exist")
 
 	#Check if the rider is already in the group
 	rider_in_group_test = Group.objects.filter(rider__id=r_id).filter(code=aff_id)
 	#if group_test isn't empty, return an error code
 	if rider_in_group_test:
-		response = HttpResponse("ERROR: already in group")
-		response.status_code = 400
-		return response
+		return write_response(request, 400, "ERROR: already in group")
 
 	#Get the numerical ID that matches the group's affinity code
 	#Then create a mapping from the rider to the group
@@ -104,30 +99,20 @@ def join_group_view(request, aff_id, r_id):
 	agm = Affinity_Group_Mapping(rider_id=r_id,affinity_group_id=group_id)
 	agm.save()
 
-	#return a success response - need to include callback key for JSONP requests
-	if 'callback' in request.REQUEST:
-		return_string = "%s()" % (request.REQUEST['callback'])
-		response = HttpResponse(return_string)
-		response.status_code = 200
-		return response
-	response = HttpResponse("Success")
-	response.status_code = 200
-	return response
+	#return a success response
+	group_name = [{'name' : group_exists_test[0].name}]
+	return write_response(request, 200, json.dumps(group_name), 1)
 
 def leave_group_view(request, aff_id, r_id):
 	#Check that the group exists
 	group_exists_test = Group.objects.filter(code=aff_id)
 	if not group_exists_test:
-		response = HttpResponse("ERROR: Group does not exist")
-		response.status_code = 400
-		return response
+		return write_response(request, 400, "ERROR: Group does not exist")
 
 	#Check that the rider is in the group
 	rider_in_group_test = Group.objects.filter(rider__id=r_id).filter(code=aff_id)
 	if not rider_in_group_test:
-		response = HttpResponse("ERROR: Not in group")
-		response.status_code = 400
-		return response
+		return write_response(request, 400, "ERROR: Not in group")
 
 	#Get the numerical ID that matches the group's affinity code
 	#Then find the mapping entry in the Affinity Group Mapping table and delete it
@@ -136,27 +121,27 @@ def leave_group_view(request, aff_id, r_id):
 	agm.delete()
 	
 	#return a success response - need to include the callback key for JSONP requests
-	if 'callback' in request.REQUEST:
-		return_string = "%s()" % (request.REQUEST['callback'])
-		response = HttpResponse(return_string)
-		response.status_code = 200
-		return response
-	response = HttpResponse("Success")
-	response.status_code = 200
-	return response
+	return write_response(request, 200, "Success")
 
-def check_code_view(request, aff_id):
-	response = HttpResponse()
-	
+def check_code_view(request, aff_id):	
 	#check if the code is in use
 	#if group_test doesn't come back empty return a 400 error code
 	group_test = Group.objects.filter(code=aff_id)
 	if group_test:
-		response.status_code = 400
-		response.write("Code exists")
+		return write_response(request, 400, "Code exists")
+	return write_response(request, 200, "Code does not exist")
+
+def write_response(request, status_code, data="", json=0):
+	response = HttpResponse()
+	response.status_code = status_code
+	if json > 0:
+		response.content_type="application/json"
+
+	if 'callback' in request.REQUEST:
+		return_string = '%s(%s)' % (request.REQUEST['callback'], data)
+		response.write(return_string)
 		return response
-	response.status_code = 200
-	response.write("Code does not exist")
+	response.write(data)
 	return response
 
 class RiderAPI(APIView):
