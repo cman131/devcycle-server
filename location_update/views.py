@@ -48,7 +48,7 @@ def get_location_data_view(request, aff_id):
 			point = Location.objects.filter(rider__id=rider_id).order_by('-id')[0]
 			long_coord = point.coords.x
 			lat_coord = point.coords.y
-			json_data.append({'lat':lat_coord,'long':long_coord})
+			json_data.append({'riderId': rider_id, 'latitude':lat_coord,'longitude':long_coord})
 		except Exception as e:
 			x = 1
 			# handle error if a rider has no location data
