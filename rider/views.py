@@ -25,7 +25,8 @@ def list_group_view(request, r_id):
 
 	#response object placeholder
 	json_data = []
-	
+	json_data.append({"success": "true", "message": "success"}) #can assume success since if we fail this never gets returned
+
 	#get the list of groups the rider is associated with
 	rider_data = Group.objects.filter(rider__id=r_id)
 	#check that they're in a group
@@ -40,7 +41,7 @@ def list_group_view(request, r_id):
 			json_data.append({'name':group_data.name,'code':group_data.code})
 	#return the group data as a JSON response and set the response type appropriately
 	#return HttpResponse('callback('+json.dumps(json_data)+');', content_type="application/json")
-	return write_response(request, 200, json.dumps(json_data), 1)	
+	return write_response(request, json.dumps(json_data))	
 
 @csrf_exempt
 def create_group_view(request):
@@ -56,9 +57,7 @@ def create_group_view(request):
 		#if group test doesn't come back empty, return a bad request error
 		group_test = Group.objects.filter(code=aff_code)
 		if group_test:
-			response = HttpResponse("ERROR: Group code in use")
-			response.status_code = 400;
-			return response
+			return write_response(request, json.dumps({"success":"false", "message":"ERROR: Group code in use"}))
 
 		#Create a new group with the requested name and affinity code
 		group = Group(name=group_name, code=aff_code)
@@ -70,9 +69,7 @@ def create_group_view(request):
 		agm.save()
 	
 		#return a success code
-		response = HttpResponse("Success")
-		response.status_code = 200
-		return response
+		return write_response(request, json.dumps({"success":"true", "message":"Sucess"}))
 	#return an error - tells client that only POST is allowed
 	#response = HttpResponseNotAllowed(['POST'])
 	#response.write("ERROR: Only POST requests allowed")
@@ -85,13 +82,13 @@ def join_group_view(request, aff_id, r_id):
 	#Check if the group exists
 	group_exists_test = Group.objects.filter(code=aff_id)
 	if not group_exists_test:
-		return write_response(request, 400, "ERROR: Group does not exist")
+		return write_response(request, json.dumps({"success": "false", "message": "ERROR: Group does not exist"}))
 
 	#Check if the rider is already in the group
 	rider_in_group_test = Group.objects.filter(rider__id=r_id).filter(code=aff_id)
 	#if group_test isn't empty, return an error code
 	if rider_in_group_test:
-		return write_response(request, 400, "ERROR: already in group")
+		return write_response(request, json.dumps({"success": "false", "message": "ERROR: already in group"}))
 
 	#Get the numerical ID that matches the group's affinity code
 	#Then create a mapping from the rider to the group
@@ -100,19 +97,19 @@ def join_group_view(request, aff_id, r_id):
 	agm.save()
 
 	#return a success response
-	group_name = [{'name' : group_exists_test[0].name}]
-	return write_response(request, 200, json.dumps(group_name), 1)
+	group_name = [{'success': 'true', 'message': 'success'}, {'name' : group_exists_test[0].name}]
+	return write_response(request, json.dumps(group_name))
 
 def leave_group_view(request, aff_id, r_id):
 	#Check that the group exists
 	group_exists_test = Group.objects.filter(code=aff_id)
 	if not group_exists_test:
-		return write_response(request, 400, "ERROR: Group does not exist")
+		return write_response(request, json.dumps({"success": "false", "message": "ERROR: Group does not exist"}))
 
 	#Check that the rider is in the group
 	rider_in_group_test = Group.objects.filter(rider__id=r_id).filter(code=aff_id)
 	if not rider_in_group_test:
-		return write_response(request, 400, "ERROR: Not in group")
+		return write_response(request, json.dumps({"success": "false", "message": "ERROR: Not in group"}))
 
 	#Get the numerical ID that matches the group's affinity code
 	#Then find the mapping entry in the Affinity Group Mapping table and delete it
@@ -121,21 +118,19 @@ def leave_group_view(request, aff_id, r_id):
 	agm.delete()
 	
 	#return a success response - need to include the callback key for JSONP requests
-	return write_response(request, 200, "Success")
+	return write_response(request, {"success": "true", "message": "Success"})
 
 def check_code_view(request, aff_id):	
 	#check if the code is in use
 	#if group_test doesn't come back empty return a 400 error code
 	group_test = Group.objects.filter(code=aff_id)
 	if group_test:
-		return write_response(request, 400, "Code exists")
-	return write_response(request, 200, "Code does not exist")
+		return write_response(request, json.dumps({"success": "false", "message": "Code exists"}))
+	return write_response(request, json.dumps({"success": "true", "message": "Code does not exist"}))
 
-def write_response(request, status_code, data="", json=0):
+def write_response(request, data):
 	response = HttpResponse()
-	response.status_code = status_code
-	if json > 0:
-		response.content_type="application/json"
+	response.content_type="application/json"
 
 	if 'callback' in request.REQUEST:
 		return_string = '%s(%s)' % (request.REQUEST['callback'], data)
