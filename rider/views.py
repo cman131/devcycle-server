@@ -19,9 +19,7 @@ def list_group_view(request, r_id):
 	#Check that the rider exists
 	rider_exists_test = Rider.objects.filter(id=r_id)
 	if not rider_exists_test:
-		response = HttpResponse("ERROR: Rider does not exist")
-		response.status_code = 400
-		return response
+		write_response(request, json.dumps({"success":"false","message":"ERROR: Rider does not exist"}))
 
 	#response object placeholder
 	json_data = []
@@ -118,7 +116,7 @@ def leave_group_view(request, aff_id, r_id):
 	agm.delete()
 	
 	#return a success response - need to include the callback key for JSONP requests
-	return write_response(request, {"success": "true", "message": "Success"})
+	return write_response(request, json.dumps({"success": "true", "message": "Success"}))
 
 def check_code_view(request, aff_id):	
 	#check if the code is in use

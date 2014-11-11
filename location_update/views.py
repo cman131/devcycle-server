@@ -35,19 +35,23 @@ def get_location_data_view(request, aff_id):
 	try:
 		group = Group.objects.get(code=aff_id)
 	except Exception as e:
-		response = HttpResponse("group does not exist")
-		response.status_code = 400
-		return response
+		json_response = {"success":"false", "message":"ERROR: Group does not exist"}
+		if 'callback' in request.REQUEST:
+			return_string = "%s(%s)" % (request.REQUEST['callback'], json.dumps(json_response))
+			response = HttpResponse(return_string)
+			return response
+		return HttpResponse(json.dumps(json_response))
 
 	#get all the rider locations associated with the group
 	rider_mapping_set = Affinity_Group_Mapping.objects.filter(affinity_group_id=group.id)
 	json_data = []
+	json_data.append({"success":"true","message":"success"})
 	for row in rider_mapping_set:
 		rider_id = row.rider_id
 		try:
 			point = Location.objects.filter(rider__id=rider_id).order_by('-id')[0]
-			long_coord = point.coords.x
-			lat_coord = point.coords.y
+			long_coord = point.coords.y
+			lat_coord = point.coords.x
 			json_data.append({'riderId': rider_id, 'latitude':lat_coord,'longitude':long_coord})
 		except Exception as e:
 			x = 1
@@ -57,7 +61,7 @@ def get_location_data_view(request, aff_id):
 	if 'callback' in request.REQUEST:
 		return_string = '%s(%s)' % (request.REQUEST['callback'], json.dumps(json_data))
 		return HttpResponse(return_string, content_type="application/json")
-	return HttpResponse(json.dumps(json_data), content_type="application_json")
+	return HttpResponse(json.dumps(json_data), content_type="application/json")
 				
 	
 
