@@ -19,7 +19,7 @@ def list_group_view(request, r_id):
 	#Check that the rider exists
 	rider_exists_test = Rider.objects.filter(id=r_id)
 	if not rider_exists_test:
-		write_response(request, json.dumps({"success":"false","message":"ERROR: Rider does not exist"}))
+		write_response(request, json.dumps([{"success":"false","message":"ERROR: Rider does not exist"}]))
 
 	#response object placeholder
 	json_data = []
@@ -55,7 +55,7 @@ def create_group_view(request):
 		#if group test doesn't come back empty, return a bad request error
 		group_test = Group.objects.filter(code=aff_code)
 		if group_test:
-			return write_response(request, json.dumps({"success":"false", "message":"ERROR: Group code in use"}))
+			return write_response(request, json.dumps([{"success":"false", "message":"ERROR: Group code in use"}]))
 
 		#Create a new group with the requested name and affinity code
 		group = Group(name=group_name, code=aff_code)
@@ -67,7 +67,7 @@ def create_group_view(request):
 		agm.save()
 	
 		#return a success code
-		return write_response(request, json.dumps({"success":"true", "message":"Sucess"}))
+		return write_response(request, json.dumps([{"success":"true", "message":"Sucess"}]))
 	#return an error - tells client that only POST is allowed
 	#response = HttpResponseNotAllowed(['POST'])
 	#response.write("ERROR: Only POST requests allowed")
@@ -80,13 +80,13 @@ def join_group_view(request, aff_id, r_id):
 	#Check if the group exists
 	group_exists_test = Group.objects.filter(code=aff_id)
 	if not group_exists_test:
-		return write_response(request, json.dumps({"success": "false", "message": "ERROR: Group does not exist"}))
+		return write_response(request, json.dumps([{"success": "false", "message": "ERROR: Group does not exist"}]))
 
 	#Check if the rider is already in the group
 	rider_in_group_test = Group.objects.filter(rider__id=r_id).filter(code=aff_id)
 	#if group_test isn't empty, return an error code
 	if rider_in_group_test:
-		return write_response(request, json.dumps({"success": "false", "message": "ERROR: already in group"}))
+		return write_response(request, json.dumps([{"success": "false", "message": "ERROR: already in group"}]))
 
 	#Get the numerical ID that matches the group's affinity code
 	#Then create a mapping from the rider to the group
@@ -102,12 +102,12 @@ def leave_group_view(request, aff_id, r_id):
 	#Check that the group exists
 	group_exists_test = Group.objects.filter(code=aff_id)
 	if not group_exists_test:
-		return write_response(request, json.dumps({"success": "false", "message": "ERROR: Group does not exist"}))
+		return write_response(request, json.dumps([{"success": "false", "message": "ERROR: Group does not exist"}]))
 
 	#Check that the rider is in the group
 	rider_in_group_test = Group.objects.filter(rider__id=r_id).filter(code=aff_id)
 	if not rider_in_group_test:
-		return write_response(request, json.dumps({"success": "false", "message": "ERROR: Not in group"}))
+		return write_response(request, json.dumps([{"success": "false", "message": "ERROR: Not in group"}]))
 
 	#Get the numerical ID that matches the group's affinity code
 	#Then find the mapping entry in the Affinity Group Mapping table and delete it
@@ -116,15 +116,15 @@ def leave_group_view(request, aff_id, r_id):
 	agm.delete()
 	
 	#return a success response - need to include the callback key for JSONP requests
-	return write_response(request, json.dumps({"success": "true", "message": "Success"}))
+	return write_response(request, json.dumps([{"success": "true", "message": "Success"}]))
 
 def check_code_view(request, aff_id):	
 	#check if the code is in use
 	#if group_test doesn't come back empty return a 400 error code
 	group_test = Group.objects.filter(code=aff_id)
 	if group_test:
-		return write_response(request, json.dumps({"success": "false", "message": "Code exists"}))
-	return write_response(request, json.dumps({"success": "true", "message": "Code does not exist"}))
+		return write_response(request, json.dumps([{"success": "false", "message": "Code exists"}]))
+	return write_response(request, json.dumps([{"success": "true", "message": "Code does not exist"}]))
 
 def write_response(request, data):
 	response = HttpResponse()

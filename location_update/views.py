@@ -35,12 +35,13 @@ def get_location_data_view(request, aff_id):
 	try:
 		group = Group.objects.get(code=aff_id)
 	except Exception as e:
-		json_response = {"success":"false", "message":"ERROR: Group does not exist"}
+		json_response = [{"success":"false", "message":"ERROR: Group does not exist"}]
 		if 'callback' in request.REQUEST:
 			return_string = "%s(%s)" % (request.REQUEST['callback'], json.dumps(json_response))
 			response = HttpResponse(return_string)
+			response.content_type = "application/json"
 			return response
-		return HttpResponse(json.dumps(json_response))
+		return HttpResponse(json.dumps(json_response), content_type="application/json")
 
 	#get all the rider locations associated with the group
 	rider_mapping_set = Affinity_Group_Mapping.objects.filter(affinity_group_id=group.id)
