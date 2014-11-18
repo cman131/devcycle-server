@@ -58,6 +58,7 @@ class Load
 
         url = config[0]
         count = config[1]
+        print(@request_type)
         if @request_type < FrameworkConstants::GET_MIN_REQUEST_TYPE then json_path = "jsons/#{config[2]}" end
 
         @url = url
@@ -71,7 +72,7 @@ class Load
 
         #This parses the json file into a hash
         if @request_type < FrameworkConstants::GET_MIN_REQUEST_TYPE then 
-			json = JSON.parse(IO.read(json_path))
+			     json = JSON.parse(IO.read(json_path))
         	#Execute parallel requests
         	parallel_posts(connection, count, json)
 		else
@@ -143,13 +144,22 @@ class Load
 
 
 	conn.get do |request|
-    @gc = randomGroupCode()
-    @r = randomRiderID()
+    @gc = randomGroupCode().to_s
+    @r = randomRiderID().to_s
     print(@gc)
     print(@r)
-    if @request_type == FrameworkConstants::GET_REQUEST_RGC then request.url @url.concat(@gc + "/" + @r + "/") end
-    if @request_type == FrameworkConstants::GET_REQUEST_R then request.url @url.concat(@r + "/") end
-    if @request_type == FrameworkConstants::GET_REQUEST_GC then request.url @url.concat(@gc + "/") end
+    @test = @url.dup
+    if @request_type == FrameworkConstants::GET_REQUEST_RGC then 
+      @test.concat(@gc + "/" + @r).slice("\\") 
+      request.url @test
+    end
+    if @request_type == FrameworkConstants::GET_REQUEST_R 
+      then request.url @test.concat(@r).slice("\\") 
+    end
+    if @request_type == FrameworkConstants::GET_REQUEST_GC 
+      then request.url @test.concat(@gc).slice("\\") 
+    end
+
 		#request.url @url
 	end
     end
