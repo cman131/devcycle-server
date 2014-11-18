@@ -76,6 +76,11 @@ def self.start(config_file)
             if not line.is_a?(String) then return false end #check if url
             if line.strip.match(/register/) != nil then type_of_request = FrameworkConstants::RIDER_REQUEST end
             if line.strip.match(/location_update/) != nil then type_of_request = FrameworkConstants::LOCATION_UPDATE_REQUEST end
+            if line.strip.match(/join_group/) != nil then type_of_request = FrameworkConstants::GET_REQUEST end
+            if line.strip.match(/leave_group/) != nil then type_of_request = FrameworkConstants::GET_REQUEST end
+            if line.strip.match(/list_group/) != nil then type_of_request = FrameworkConstants::GET_REQUEST end
+            if line.strip.match(/get_location_data/) != nil then type_of_request = FrameworkConstants::GET_REQUEST end
+            if line.strip.match(/check_code/) != nil then type_of_request = FrameworkConstants::GET_REQUEST end
             config.push(line.strip)
 
           elsif count == 2 #parallel count
