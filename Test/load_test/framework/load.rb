@@ -139,9 +139,17 @@ class Load
 
     end#post
 
-    def get(conn)	
+    def get(conn)
+
+
 	conn.get do |request|
-		request.url @url
+    @gc = randomGroupCode()
+    @r = randomRiderID()
+
+    if @request_type == FrameworkConstants::GET_REQUEST_RGC then request.url @url.concat(@gc + "/" + @r + "/") end
+    if @request_type == FrameworkConstants::GET_REQUEST_R then request.url @url.concat(@r + "/") end
+    if @request_type == FrameworkConstants::GET_REQUEST_GC then request.url @url.concat(@gc + "/") end
+		#request.url @url
 	end
     end
 
@@ -179,7 +187,17 @@ class Load
 
       return json
 
-    end#randomizeLatLong
+    end
+    # Random Group Code
+    def randomGroupCode()
+      @randNum = @prng.rand(1...100)
+      return "BIG".concat(@randNum.to_s)
+    end
+
+    # Random Rider ID
+    def randomRiderID()
+      return @prng.rand(1...129) 
+    end
 
 
 end#class
