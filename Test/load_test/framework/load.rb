@@ -145,7 +145,8 @@ class Load
 	conn.get do |request|
     @gc = randomGroupCode()
     @r = randomRiderID()
-
+    print(@gc)
+    print(@r)
     if @request_type == FrameworkConstants::GET_REQUEST_RGC then request.url @url.concat(@gc + "/" + @r + "/") end
     if @request_type == FrameworkConstants::GET_REQUEST_R then request.url @url.concat(@r + "/") end
     if @request_type == FrameworkConstants::GET_REQUEST_GC then request.url @url.concat(@gc + "/") end
