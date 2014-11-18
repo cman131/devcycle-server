@@ -58,7 +58,7 @@ class Load
 
         url = config[0]
         count = config[1]
-        if @request_type != FrameworkConstants::GET_REQUEST then json_path = "jsons/#{config[2]}" end
+        if @request_type < FrameworkConstants::GET_MIN_REQUEST_TYPE then json_path = "jsons/#{config[2]}" end
 
         @url = url
 
@@ -70,12 +70,12 @@ class Load
         end#connection loop
 
         #This parses the json file into a hash
-        if @request_type != FrameworkConstants::GET_REQUEST then 
-		json = JSON.parse(IO.read(json_path))
+        if @request_type < FrameworkConstants::GET_MIN_REQUEST_TYPE then 
+			json = JSON.parse(IO.read(json_path))
         	#Execute parallel requests
         	parallel_posts(connection, count, json)
-	else
-		parallel_gets(connection, count)
+		else
+			parallel_gets(connection, count)
 	end
 
 
