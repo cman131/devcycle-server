@@ -58,7 +58,7 @@ class Load
 
         url = config[0]
         count = config[1]
-        json_path = "jsons/#{config[2]}"
+        if @request_type != FrameworkConstants::GET_REQUEST then json_path = "jsons/#{config[2]}" end
 
         @url = url
 
@@ -70,10 +70,13 @@ class Load
         end#connection loop
 
         #This parses the json file into a hash
-        json = JSON.parse(IO.read(json_path))
-
-        #Execute parallel requests
-        parallel_posts(connection, count, json)
+        if @request_type != FrameworkConstants::GET_REQUEST then 
+		json = JSON.parse(IO.read(json_path))
+        	#Execute parallel requests
+        	parallel_posts(connection, count, json)
+	else
+		parallel_gets(connection, count)
+	end
 
 
       end#config loop
@@ -105,6 +108,14 @@ class Load
 
     end#parallel_posts
 
+    def parallel_gets(conn, count)
+	
+	conn.in_parallel(@manager) do
+		for i in 1..count
+			get(conn)
+		end
+	end
+    end
 
     # Performs the actual post requests
     #
@@ -127,6 +138,12 @@ class Load
       end#conn.post
 
     end#post
+
+    def get(conn)	
+	conn.get do |request|
+		request.url @url
+	end
+    end
 
     #
     # Simulate a moving biker
