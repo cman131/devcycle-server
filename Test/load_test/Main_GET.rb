@@ -1,10 +1,10 @@
 #!/usr/bin/ruby
-require_relative 'framework/load.rb'
+require_relative 'framework/load_GET.rb'
 
 require_relative 'framework/constants.rb'
 
 
-class Main
+class Main_GET
 
 #Different configurations
 #specified in config file
@@ -33,12 +33,12 @@ def self.start(config_file)
 
           if not check_format?(config_path)
 
-            puts "Error: #{config_file} incorrect File Format."
+			puts "Error: #{config_file} incorrect File Format."
 
           else
 
             #Create the Load Test here
-            test = Load.new(@type_of_request,@configs)
+            test = Load_GET.new(@type_of_request,@configs)
 
             #Start Test
             test.start
@@ -74,8 +74,11 @@ def self.start(config_file)
 
           elsif count == 1 #url
             if not line.is_a?(String) then return false end #check if url
-            if line.strip.match(/register/) != nil then type_of_request = FrameworkConstants::RIDER_REQUEST end
-            if line.strip.match(/location_update/) != nil then type_of_request = FrameworkConstants::LOCATION_UPDATE_REQUEST end
+            if line.strip.match(/join_group/) != nil then type_of_request = FrameworkConstants::JOIN_REQUEST end
+            if line.strip.match(/leave_group/) != nil then type_of_request = FrameworkConstants::LEAVE_REQUEST end
+			if line.strip.match(/get_location_data/) != nil then type_of_request = FrameworkConstants::GET_LOCATION_REQUEST end
+			if line.strip.match(/list_group/) != nil then type_of_request = FrameworkConstants::LIST_REQUEST end
+			if line.strip.match(/check_code/) != nil then type_of_request = FrameworkConstants::CHECK_REQUEST end
             config.push(line.strip)
 
           elsif count == 2 #parallel count
@@ -106,6 +109,5 @@ def self.start(config_file)
 
 end#class
 
-
 #Call Main
-Main.start(ARGV.first)
+Main_GET.start(ARGV.first)

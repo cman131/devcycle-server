@@ -44,7 +44,7 @@ require_relative 'response_handler'
 # After parsing the config file a request
 # is then sent to the server. 
 #
-class Load
+class Load_GET
 
     def initialize(request_type,configs)
       @request_type = request_type
@@ -73,7 +73,7 @@ class Load
         json = JSON.parse(IO.read(json_path))
 
         #Execute parallel requests
-        parallel_posts(connection, count, json)
+        parallel_gets(connection, count, json)
 
 
       end#config loop
@@ -91,13 +91,13 @@ class Load
     # @param - connection manager
     # @param - iteration count
     # @param - json file
-    def parallel_posts(conn, count, json)
+    def parallel_gets(conn, count, json)
 
       conn.in_parallel(@manager) do
 
         for i in 1..count
 
-          post(conn,json)
+          get(conn,json)
 
         end#loop
 
@@ -112,57 +112,33 @@ class Load
     #
     # @param - connection manager
     # @param - json file
-    def post(conn,json)
+    def get(conn,json)
 
-      if @request_type == FrameworkConstants::LOCATION_UPDATE_REQUEST then json = randomizeLatLong(json) end
+      #if @request_type == FrameworkConstants::LOCATION_UPDATE_REQUEST then json = randomizeLatLong(json) end
 
-      conn.post do |request|
+      conn.get do |request|
 
-        request.url @url
+        request.url make_url(@url, json)
 
-        request.headers['Content-Type'] = 'application/json'
+        #request.headers['Content-Type'] = 'application/json'
 
-        request.body = json.to_json
+        #request.body = json.to_json
 
       end#conn.post
 
     end#post
-
-    #
-    # Simulate a moving biker
-    # by randomizing movement
-    # by altering the latitude
-    # and longitude. Algorithm
-    # actually randomly moves
-    # biker
-    #
-    # @param - json hash
-    # @return - new json hash
-    def randomizeLatLong(json)
-
-      #Get the locations array
-      loc_arr = json["locations"]
-      
-      #iterate through each loc
-      loc_arr.each do |loc|
-
-        #randomize +/- of random number
-        lat_sign = @prng.rand(0...2)
-        long_sign = @prng.rand(0...2)
-
-        #randomize the value to lat & long
-        lat_val = @prng.rand(0.0...10.0)
-        long_val = @prng.rand(0.0...10.0)
-
-        #change position here
-        if lat_sign == 0 then loc["latitude"] -= lat_val else loc["latitude"] += lat_val end
-        if long_sign == 0 then loc["longitude"] -= long_val else loc["longitude"] += long_val end
-
-      end#loop
-
-      return json
-
-    end#randomizeLatLong
-
-
+	
+	def make_url(url, json)
+		retstr = url.dup
+		if retstr.strip.match(/<groupCode>/) != nil
+				code = json["groupCode"]
+				retstr.sub(/<groupCode>/,code)
+		end
+		if retstr.strip.match(/<riderId>/) != nil
+				id = json["riderId"]
+				retstr.sub(/<riderId>/,id)
+		end
+		return retstr
+	end#make_url
+	
 end#class
