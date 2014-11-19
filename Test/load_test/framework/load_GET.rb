@@ -130,13 +130,13 @@ class Load_GET
 	
 	def make_url(url, json)
 		retstr = url.dup
-		if retstr.strip.match(/<groupCode>/) != nil
+		if retstr.strip.match(/groupCode/) != nil
 				code = json["groupCode"]
-				retstr.sub(/<groupCode>/,code)
+				retstr.sub(/groupCode/,code)
 		end
-		if retstr.strip.match(/<riderId>/) != nil
+		if retstr.strip.match(/riderId/) != nil
 				id = json["riderId"]
-				retstr.sub(/<riderId>/,id)
+				retstr.sub(/riderId/,id)
 		end
 		return retstr
 	end#make_url
