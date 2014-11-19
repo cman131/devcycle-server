@@ -132,11 +132,11 @@ class Load_GET
 		retstr = url.dup
 		if retstr.strip.match(/groupCode/) != nil
 				code = json["groupCode"]
-				retstr.sub(/groupCode/,code)
+				retstr = retstr.sub(/groupCode/,code)
 		end
 		if retstr.strip.match(/riderId/) != nil
 				id = json["riderId"]
-				retstr.sub(/riderId/,id)
+				retstr = retstr.sub(/riderId/,id.to_s)
 		end
 		return retstr
 	end#make_url
