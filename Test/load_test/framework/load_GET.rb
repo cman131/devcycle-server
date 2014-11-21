@@ -131,14 +131,28 @@ class Load_GET
 	def make_url(url, json)
 		retstr = url.dup
 		if retstr.strip.match(/groupCode/) != nil
-				code = json["groupCode"]
+				code = get_group_code(json)
 				retstr = retstr.sub(/groupCode/,code)
 		end
 		if retstr.strip.match(/riderId/) != nil
-				id = json["riderId"]
+				id = get_rider_id(json)
 				retstr = retstr.sub(/riderId/,id.to_s)
 		end
 		return retstr
 	end#make_url
+	
+	def get_group_code(json)
+		if json["groupCode"].strip.match(/random/) == nil then return json["groupCode"] end
+		min = json["groupCodeMin"]
+		max = json["groupCodeMax"]
+		return (json["groupCodeBase"] + @prng.rand(min...max).to_s)
+	end
+	
+	def get_rider_id(json)
+		if json["riderId"].to_s.strip.match(/random/) == nil then return json["riderId"] end
+		min = json["riderIdMin"]
+		max = json["riderIdMax"]
+		return @prng.rand(min...max)
+	end
 	
 end#class

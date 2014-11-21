@@ -1,0 +1,10 @@
+{
+	"groupCode" : "random",
+	"groupCodeBase" : "BIG",
+	"groupCodeMin" : 1,
+	"groupCodeMax" : 50,
+	"riderId" : "random",
+	"riderIdMin" : 2,
+	"riderIdMax" : 100
+}
+	
