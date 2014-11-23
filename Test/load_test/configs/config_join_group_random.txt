@@ -1,0 +1,4 @@
+http://centri-pedal2.se.rit.edu/join_group/groupCode/riderId/
+200
+join_group_random.json
+-
