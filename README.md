@@ -9,7 +9,7 @@ The server component to the TourTrak system built using Django.
 
 * Python 2.7
 * Pip for Python
-* python-django version 1.5
+* python-django version 1.5.5
 * apache server
 * mod_wsgi
 * postgresQL
