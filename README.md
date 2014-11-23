@@ -1,13 +1,15 @@
-﻿TourTrak Data Collection Server
+TourTrak Data Collection Server
 ===============
 The server component to the TourTrak system built using Django.
 
 ![screenshot](https://raw.githubusercontent.com/tofferrosen/devcycle-server/master/preview.png)
 
-###Dependencies
+###Dependencies 
+<b><font color="red"/>Note:</font></b> These will be installed by a script in the Installation instructions below
+
 * Python 2.7
 * Pip for Python
-* python-django
+* python-django version 1.5
 * apache server
 * mod_wsgi
 * postgresQL
@@ -19,6 +21,7 @@ The server component to the TourTrak system built using Django.
 * libproj-dev
 * memcached
 * rabbitmq-server
+
 
 ## Install PostGIS
 
@@ -36,9 +39,22 @@ The server component to the TourTrak system built using Django.
   
 ```
 
+## Postgres Database Commands
+#####Connecting to the database after setup
+1. Type `su postgres`
+2. Type `psql`
+3. Type `\connect DCS`
+
+#####Some helpful commands include:
+1. `\dt` to list all tables
+2. `\q` to quit
+3. `psql -d DCS -f /path/to/script/script.sql` for running scripts without having to connect
+
+
 ##Installation
 
 * Clone this repository into /usr/local/
+* <b><font color="red">IMPORTANT:</font> Rename the directory from devcycle-server to devcycle. Django does not support hyphen names for it's applications.</b>
 * Inside the root directory of your application, install all project dependencies by runnning our setup script `bash setup.sh`
 * Create a virtual host & WSGI file for the Apache server to display the Django application. Open the httpd.conf file 'nano /etc/apache2/httpd.conf'. Copy and paste the following, you may edit 
 these values if desired (such as where to collect static files).

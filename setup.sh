@@ -26,7 +26,7 @@ sudo service apache2 restart
 # Install the required python eggs
 sudo pip install distribute
 sudo pip install Crypto
-sudo pip install Django
+sudo pip install Django==1.5.5
 sudo pip install Markdown
 sudo pip install PyYAML
 sudo pip install South
@@ -44,3 +44,4 @@ sudo pip install django-celery
 sudo pip install psycopg2
 sudo pip install django-admin-bootstrapped
 
+sudo chmod 777 /var/www/django-logs/default.log
