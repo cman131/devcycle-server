@@ -84,8 +84,8 @@ class LocationAPI(APIView):
             tour_id = data.get('tour_id')
 
             # Get and decrypt the UUID
-            rider = decrypt_uuid(data[settings.JSON_KEYS['RIDER_ID']])
-
+            #//rider = decrypt_uuid(data[settings.JSON_KEYS['RIDER_ID']])
+	    rider = data[settings.JSON_KEYS['RIDER_ID']]
 	    logger.error("RIDER TO PRINT HERE: ", rider)
 
             # Check if the parameters passed in 
