@@ -1,0 +1,4 @@
+http://centri-pedal2.se.rit.edu/get_location_data/groupCode/
+200
+loc_data_random.json
+-

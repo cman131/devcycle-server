@@ -1,0 +1,5 @@
+{
+	"riderId" : "random",
+	"riderIdMin" : 1,
+	"riderIdMax" : 100
+}
