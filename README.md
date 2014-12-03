@@ -1,4 +1,4 @@
-TourTrak Data Collection Server
+﻿TourTrak Data Collection Server
 ===============
 The server component to the TourTrak system built using Django.
 
@@ -224,7 +224,47 @@ or
 
 `./Main.rb config_sample.txt`
 
+### Configs and JSON files
 
+Configs are formatted as follows:
+```
+URL (the connection URL)
+#Requests (max 200)
+JSON (the name of the JSON object to pull data from)
+- (terminates the test definition)
+```
+
+Example config:
+```
+http://centri-pedal2.se.rit.edu/join_group/groupCode/riderId/
+200
+join_group.json
+-
+```
+Main_GET.rb allows for groupCode and riderId to be specified as hooks in the URL for data to be plugged into dynamically.
+
+A corresponding JSON object would then look like this:
+```
+{
+	"groupCode" : "BIG1",
+	"riderId" : 15
+}
+```
+
+You can also use random test data by specifying the groupCode or riderId to be "random". Here is an example JSON for a randomized test:
+```
+{
+	"groupCode" : "random",
+	"groupCodeBase" : "BIG",
+	"groupCodeMin" : 1,
+	"groupCodeMax" : 50,
+	"riderId" : "random",
+	"riderIdMin" : 2,
+	"riderIdMax" : 100
+}
+```
+
+ 
 ### Recording and Analyzing
 
 To look at the Server performance in real time the linux command `top` is used. When running
@@ -243,5 +283,20 @@ The command below then greps for only the CPU performance numbers
 The command below then greps for only the Mem performance numbers
 `cat example.txt | grep Cpu | cut -c 35-39 | nl -i 1`
 
+### Errors
+
+You may encounter an error about a missing libcurl.dll when you attempt to run the load testing framework. Follow these steps to resolve it:
+
+Go to this URL: http://rubyinstaller.org/downloads/
+
+Download DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe
+
+Follow these instructions to set the devkit up on your machine
+
+Go to this URL: http://www.paehl.com/open_source/?CURL_7.39.0&PHPSESSID=b155d4a69c7aa26b1fd67e7201d4fb3e
+
+Select "Download libcurl.dll (all versions) only"
+
+Extract the contents of the archive, copy libcurl.dll from the SSL folder, and paste it into your Ruby /bin folder (probably C:\Ruby193\bin if you're on Windows)
 
 
