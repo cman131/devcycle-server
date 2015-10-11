@@ -14,7 +14,7 @@ The server component to the TourTrak system built using Django.
 * mod_wsgi
 * postgresQL
 * PostGIS
-* postgresql-server-dev-9.1
+* postgresql-server-9.3
 * psycopg2
 * binutils
 * gdal-bin
@@ -25,7 +25,7 @@ The server component to the TourTrak system built using Django.
 
 ## Install PostGIS
 
-1. Install postgreSQL. Refer to official documentation. After, install postGIS, which is a postgreSQL extention for handling spatial data by doing `apt-get install postgresql-9.1-postgis`
+1. Install postgreSQL. Refer to official documentation. After, install postGIS, which is a postgreSQL extention for handling spatial data by doing `apt-get install postgresql-9.3-postgis-2.1`
 2. Setup the postgreSQL database:
 
 * switch to the default postgresql user by running `su postgres`
@@ -34,8 +34,10 @@ The server component to the TourTrak system built using Django.
 * Setup the postGIS functions:
 
 ```
-  psql -d DCS -f /usr/share/postgresql/9.1/contrib/postgis-1.5/postgis.sql
-  psql -d DCS -f /usr/share/postgresql/9.1/contrib/postgis-1.5/spatial_ref_sys.sql
+  psql DCS
+  CREATE EXTENSION postgis;
+  CREATE EXTENSION postgis-topology;
+  \q
   
 ```
 
