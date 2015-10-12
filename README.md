@@ -23,43 +23,14 @@ The server component to the TourTrak system built using Django.
 * rabbitmq-server
 
 
-## Install PostGIS
-
-1. Install postgreSQL. Refer to official documentation. After, install postGIS, which is a postgreSQL extention for handling spatial data by doing `apt-get install postgresql-9.3-postgis-2.1`
-2. Setup the postgreSQL database:
-
-* switch to the default postgresql user by running `su postgres`
-* create a user w/ read and write permissions: `createuser --pwprompt`
-* Create the DCS database used to collect rider information: `createdb DCS`
-* Setup the postGIS functions:
-
-```
-  psql DCS
-  CREATE EXTENSION postgis;
-  CREATE EXTENSION postgis-topology;
-  \q
-  
-```
-
-## Postgres Database Commands
-#####Connecting to the database after setup
-1. Type `su postgres`
-2. Type `psql`
-3. Type `\connect DCS`
-
-#####Some helpful commands include:
-1. `\dt` to list all tables
-2. `\q` to quit
-3. `psql -d DCS -f /path/to/script/script.sql` for running scripts without having to connect
-
-
 ##Installation
 
-* Clone this repository into /usr/local/
-* <b><font color="red">IMPORTANT:</font> Rename the directory from devcycle-server to devcycle. Django does not support hyphen names for it's applications.</b>
-* Inside the root directory of your application, install all project dependencies by runnning our setup script `bash setup.sh`
-* Create a virtual host & WSGI file for the Apache server to display the Django application. Open the httpd.conf file 'nano /etc/apache2/httpd.conf'. Copy and paste the following, you may edit 
-these values if desired (such as where to collect static files).
+1. Install git `sudo apt-get install git`
+2. Create a devcycle directory in /usr/local/ `sudo mkdir /usr/local/devcycle`
+3. Clone this repository into /usr/local/ `sudo git clone https://github.com/tourtrak/devcycle-server.git /usr/local/devcycle`
+4. <b><font color="red">IMPORTANT:</font> The directory must be named 'devcycle' and not 'devcycle-server'. Django does not support hyphen names for it's applications.</b>
+5. Inside the root directory of your application, install all project dependencies by running our setup script `sudo bash setup.sh`
+6. Create a virtual host & WSGI file for the Apache server to display the Django application. Open the httpd.conf file 'nano /etc/apache2/httpd.conf'. Copy and paste the following, you may edit these values if desired (such as where to collect static files).
 
 ```
 WSGIPythonPath usr/local/devcycle
@@ -92,7 +63,7 @@ WSGIPythonPath usr/local/devcycle
 * Change the application settings:
 
 ```
-nano /usr/local/devcycle/dataCollection/settings.py
+sudo vim /usr/local/devcycle/dataCollection/settings.py
 ```
 
 Set DEBUG to False
@@ -111,8 +82,41 @@ STATICFILES_DIRS = (
 Restart the apache server to put all changes into effect. 
 
 ```
-/etc/init.d/apache2 reload
+sudo /etc/init.d/apache2 reload
 ```
+
+
+## Install PostGIS
+
+<i>(Steps 1 and 2 were done by running `sudo bash setup.sh` above)</i>
+1. Install postgreSQL `sudo apt-get install postgresql`.
+2. After, install postGIS, which is a postgreSQL extention for handling spatial data `sudo apt-get install postgresql-9.3-postgis-2.1`
+3. Setup the postgreSQL database:
+
+* switch to the default postgresql user by running `su postgres`
+* create a user w/ read and write permissions: `createuser --pwprompt`
+* Create the DCS database used to collect rider information: `createdb DCS`
+* Setup the postGIS functions:
+
+```
+  psql DCS
+  CREATE EXTENSION postgis;
+  CREATE EXTENSION postgis-topology;
+  \q
+  
+```
+
+## Postgres Database Commands
+#####Connecting to the database after setup
+1. Type `su postgres`
+2. Type `psql`
+3. Type `\connect DCS`
+
+#####Some helpful commands include:
+1. `\dt` to list all tables
+2. `\q` to quit
+3. `psql -d DCS -f /path/to/script/script.sql` for running scripts without having to connect
+
 
 ###Migrate the Database Schema using South
 [South](http://south.aeracode.org/) is a schema and data migration tool for Django. It is used for easily
