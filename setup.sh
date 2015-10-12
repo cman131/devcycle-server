@@ -25,6 +25,6 @@ sudo aptitude install libapache2-mod-wsgi
 sudo service apache2 restart
 
 # Install the required python eggs
-sudo pip install -r /usr/local/devcycle-server/requirements.txt
+sudo pip install -r /usr/local/devcycle/requirements.txt
 
 sudo chmod 777 /var/www/django-logs/default.log
