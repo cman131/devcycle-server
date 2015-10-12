@@ -42,7 +42,6 @@ The server component to the TourTrak system built using Django.
   CREATE EXTENSION postgis;
   CREATE EXTENSION postgis-topology;
   \q
-
 ```
 
 ## Postgres Database Commands
