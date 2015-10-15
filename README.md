@@ -1,6 +1,6 @@
 TourTrak Data Collection Server
 ===============
-The server component to the TourTrak system built using Django.
+The server component to the TourTrak system built using Django on an <b>Ubuntu 12.04</b> Server.
 
 ![screenshot](https://raw.githubusercontent.com/tofferrosen/devcycle-server/master/preview.png)
 
