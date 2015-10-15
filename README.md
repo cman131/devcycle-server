@@ -5,7 +5,7 @@ The server component to the TourTrak system built using Django.
 ![screenshot](https://raw.githubusercontent.com/tofferrosen/devcycle-server/master/preview.png)
 
 ###Dependencies
-<b><font color="red"/>Note:</font></b> These will be installed by a script in the Installation instructions below
+**Note:** These will be installed by a script in the Installation instructions below
 
 * Python 2.7
 * Pip for Python2
@@ -25,7 +25,7 @@ The server component to the TourTrak system built using Django.
 
 ## Install Postgres with PostGIS (Install The Database)
 
-<i>(This is where you begin the server setup instructions)</i>
+_(This is where you begin the server setup instructions)_
 
 1. Install postgreSQL
 
@@ -40,7 +40,7 @@ The server component to the TourTrak system built using Django.
 	`sudo -iu postgres`
 * create a user w/ read and write permissions:
 
-	`createuser --pwprompt`
+	`createuser --pwprompt dev` _(Change "dev" to what you want the database username to be)_
 * Create the DCS database used to collect rider information:
 
 	`createdb DCS`
@@ -53,18 +53,6 @@ The server component to the TourTrak system built using Django.
   \q
 ```
 
-## Postgres Database Commands
-<i>(This is not part of the install. Just advice)</i>
-#####Connecting to the database after setup
-1. Type `sudo -iu postgres`
-2. Type `psql DCS`
-
-#####Some helpful commands include:
-1. `\dt` to list all tables
-2. `\q` to quit
-3. `psql DCS < /path/to/script/script.sql` for running scripts without having to connect
-
-
 ##Install The Application
 
 1. Install git
@@ -76,12 +64,12 @@ The server component to the TourTrak system built using Django.
 3. Clone this repository into /usr/local/devcycle
  
 	`sudo git clone https://github.com/tourtrak/devcycle-server.git /usr/local/devcycle`
-4. <b><font color="red">IMPORTANT:</font> The directory must be named 'devcycle' and not 'devcycle-server'. Django does not support hyphen names for it's applications.</b>
+4. **IMPORTANT:** The directory must be named 'devcycle' and not 'devcycle-server'. Django does not support hyphen names for it's applications.</b>
 5. Inside the root directory of your application, install all project dependencies by running our setup script
 
 	`cd /usr/local/devcycle`
 
-	`sudo bash setup.sh`
+	`sudo bash setup.sh` _(This will take a significant amount of time on mod_wsgi-httpd, 10-20 mins)_
 6. Create a virtual host & WSGI file for the Apache server to display the Django application. Open the httpd.conf file
 
 	`sudo vim /etc/apache2/httpd.conf`.
@@ -330,3 +318,15 @@ Go to this URL: http://www.paehl.com/open_source/?CURL_7.39.0&PHPSESSID=b155d4a6
 Select "Download libcurl.dll (all versions) only"
 
 Extract the contents of the archive, copy libcurl.dll from the SSL folder, and paste it into your Ruby /bin folder (probably C:\Ruby193\bin if you're on Windows)
+
+
+# Tips
+## Postgres Database Commands
+#####Connecting to the database after setup
+1. Type `sudo -iu postgres`
+2. Type `psql DCS`
+
+#####Some helpful commands include:
+1. `\dt` to list all tables
+2. `\q` to quit
+3. `psql DCS < /path/to/script/script.sql` for running scripts without having to connect
