@@ -25,11 +25,14 @@ The server component to the TourTrak system built using Django.
 
 ## Install Postgres with PostGIS (Install The Database)
 
-<i>(This is where you begin the server setup instructions)</i><br>
+<i>(This is where you begin the server setup instructions)</i>
+
 1. Install postgreSQL
-	<br>`sudo apt-get install postgresql`<br>
+
+	`sudo apt-get install postgresql`
 2. After, install postGIS, which is a postgreSQL extention for handling spatial data
-	<br>`sudo apt-get install postgresql-9.3-postgis-2.1`<br>
+
+	`sudo apt-get install postgresql-9.3-postgis-2.1`
 3. Setup the postgreSQL database:
 
 * switch to the default postgresql user by running `su postgres`
@@ -59,17 +62,23 @@ The server component to the TourTrak system built using Django.
 ##Install The Application
 
 1. Install git
-	<br>`sudo apt-get install git`
+
+	`sudo apt-get install git`
 2. Create a 'devcycle' directory in /usr/local/
-	<br>`sudo mkdir /usr/local/devcycle`
+
+	`sudo mkdir /usr/local/devcycle`
 3. Clone this repository into /usr/local/devcycle
- 	<br>`sudo git clone https://github.com/tourtrak/devcycle-server.git /usr/local/devcycle`
+ 
+	`sudo git clone https://github.com/tourtrak/devcycle-server.git /usr/local/devcycle`
 4. <b><font color="red">IMPORTANT:</font> The directory must be named 'devcycle' and not 'devcycle-server'. Django does not support hyphen names for it's applications.</b>
 5. Inside the root directory of your application, install all project dependencies by running our setup script
-	<br>`cd /usr/local/devcycle`
-	<br>`sudo bash setup.sh`
+
+	`cd /usr/local/devcycle`
+
+	`sudo bash setup.sh`
 6. Create a virtual host & WSGI file for the Apache server to display the Django application. Open the httpd.conf file
-	<br>`sudo vim /etc/apache2/httpd.conf`.
+
+	`sudo vim /etc/apache2/httpd.conf`.
 7. Copy and paste the following, you may edit these values if desired (such as where to collect static files).
 
 ```
@@ -288,7 +297,7 @@ To look at the Server performance in real time the linux command `top` is used. 
 the load tests it is important to record the performance of the server. When you run the
 load test make sure you run top on the server simultaneously in order to record the
 performance of the server at the time of the tests. By using this command and
-pipping the results this is achievable to analyze the data. Then after recording,
+piping the results this is achievable to analyze the data. Then after recording,
 grep the text in order to get the parameters you want then simply graph the numbers.
 
 The command below pipes the top command every 1 second into a text file called example.
