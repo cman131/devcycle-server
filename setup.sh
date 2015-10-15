@@ -5,23 +5,32 @@
 
 # Install necessary dependencies
 sudo apt-get update
-sudo apt-get install python2 python-pip python-dev build-essential 
-sudo pip install --upgrade pip 
-sudo apt-get install git
-sudo apt-get install binutils
-sudo apt-get install gdal-bin
-sudo apt-get install libproj-dev
-sudo apt-get install memcached
-sudo apt-get install rabbitmq-server
-sudo apt-get install postgresql
-sudo apt-get install python-psycopg2
-sudo apt-get install postgresql-9.3-postgis-2.1
+sudo apt-get install git --yes
+sudo apt-get install python2 --yes
+sudo apt-get install python-pip --yes
+sudo apt-get install python-dev --yes
+sudo apt-get install build-essential --yes
+sudo pip install --upgrade pip
+sudo apt-get install binutils --yes
+sudo apt-get install gdal-bin --yes
+sudo apt-get install libproj-dev --yes
+sudo apt-get install memcached --yes
+sudo apt-get install rabbitmq-server --yes
+sudo apt-get install postgresql --yes
+sudo apt-get install python-psycopg2 --yes
+sudo apt-get install postgresql-9.3-postgis-2.1 --yes
 
 # Install the Apache server
-sudo apt-get install apache2 apache2.2-common apache2-mpm-prefork apache2-utils libexpat1 ssl-cert apache2-dev
+sudo apt-get install apache2 --yes
+sudo apt-get install apache2.2-common --yes
+sudo apt-get install apache2-mpm-prefork --yes
+sudo apt-get install apache2-utils --yes
+sudo apt-get install libexpat1 --yes
+sudo apt-get install ssl-cert --yes
+sudo apt-get install apache2-dev --yes
 
 # Install mod_wsgi
-sudo aptitude install libapache2-mod-wsgi
+sudo aptitude install libapache2-mod-wsgi --yes
 sudo service apache2 restart
 
 # Install the required python eggs
