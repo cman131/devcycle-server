@@ -35,15 +35,21 @@ The server component to the TourTrak system built using Django.
 	`sudo apt-get install postgresql-9.3-postgis-2.1`
 3. Setup the postgreSQL database:
 
-* switch to the default postgresql user by running `su postgres`
-* create a user w/ read and write permissions: `createuser --pwprompt`
-* Create the DCS database used to collect rider information: `createdb DCS`
+* switch to the default postgresql user by running
+
+	`sudo -iu postgres`
+* create a user w/ read and write permissions:
+
+	`createuser --pwprompt`
+* Create the DCS database used to collect rider information:
+
+	`createdb DCS`
 * Setup the postGIS functions:
 
 ```
   psql DCS
   CREATE EXTENSION postgis;
-  CREATE EXTENSION postgis-topology;
+  CREATE EXTENSION postgis_topology;
   \q
 ```
 
@@ -135,7 +141,7 @@ sudo /etc/init.d/apache2 reload
 ```
 
 
-###Migrate the Database Schema using South (Setup The Database)
+###Setup The Database
 [South](http://south.aeracode.org/) is a schema and data migration tool for Django. It is used for easily
 migrating the database schema from database to database if needed. It is also used in the case of making updates
 to models then wanting those changes reflected in the database schema. South is already installed if you ran the `bash setup.sh` command. Recommend looking at the docs for more information [docs](http://south.readthedocs.org/en/latest/index.html)
