@@ -1,6 +1,6 @@
 ﻿TourTrak Data Collection Server
 ===============
-The server component to the TourTrak system built using Django.
+The server component to the TourTrak system built using Django on **Ubuntu 14.04**.
 
 ![screenshot](https://raw.githubusercontent.com/tofferrosen/devcycle-server/master/preview.png)
 
@@ -52,6 +52,9 @@ _(This is where you begin the server setup instructions)_
   CREATE EXTENSION postgis_topology;
   \q
 ```
+* Sign out of postgresuser
+
+    `exit`
 
 ##Install The Application
 
@@ -70,9 +73,9 @@ _(This is where you begin the server setup instructions)_
 	`cd /usr/local/devcycle`
 
 	`sudo bash setup.sh` _(This will take a significant amount of time on mod_wsgi-httpd, 10-20 mins)_
-6. Create a virtual host & WSGI file for the Apache server to display the Django application. Open the httpd.conf file
+6. Create a virtual host & WSGI file for the Apache server to display the Django application by creating a new .conf file.
 
-	`sudo vim /etc/apache2/httpd.conf`.
+	`sudo vim /etc/apache2/sites-available/001-devcycle.conf`.
 7. Copy and paste the following, you may edit these values if desired (such as where to collect static files).
 
 ```
@@ -92,7 +95,7 @@ WSGIPythonPath usr/local/devcycle
 
         WSGIDaemonProcess devcycle processes=2 threads=15 display-name=%{GROUP} python-path=/usr/local/devcycle/
         WSGIProcessGroup devcycle
-        WSGIScriptAlias / /usr/local/devcycle-server/dataCollection/wsgi.py
+        WSGIScriptAlias / /usr/local/devcycle/dataCollection/wsgi.py
 
         <Directory /usr/local/devcycle/dataCollection>
                 <Files wsgi.py>
@@ -119,7 +122,7 @@ KEY to a random string of hex characters a multiple of 16 long
 SECRET to a random string of numeric characters a multiple of 16
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-  '‘/usr/local/devcycle-server/tour_config/static/’
+  '‘/usr/local/devcycle/tour_config/static/’
   )
 
 Restart the apache server to put all changes into effect.
@@ -140,7 +143,7 @@ At this point the database schema for the Server does not exist yet. We will use
 
 This command will create the migrations:
 
-`./manage.py makemigrations`
+`./manage.py syncdb --all`
 
 These commands will then apply the newly created migrations to the database:
 

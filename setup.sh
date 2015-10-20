@@ -18,6 +18,8 @@ sudo apt-get install memcached --yes
 sudo apt-get install rabbitmq-server --yes
 sudo apt-get install postgresql --yes
 sudo apt-get install python-psycopg2 --yes
+sudo apt-get install python-gobject --yes
+sudo apt-get install python-pycurl --yes
 sudo apt-get install postgresql-9.3-postgis-2.1 --yes
 
 # Install the Apache server
@@ -30,10 +32,8 @@ sudo apt-get install ssl-cert --yes
 sudo apt-get install apache2-dev --yes
 
 # Install mod_wsgi
-sudo aptitude install libapache2-mod-wsgi --yes
+sudo apt-get install libapache2-mod-wsgi --yes
 sudo service apache2 restart
 
 # Install the required python eggs
 sudo pip install -r /usr/local/devcycle/requirements.txt
-
-sudo chmod 777 /var/www/django-logs/default.log
