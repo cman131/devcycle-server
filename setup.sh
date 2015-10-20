@@ -24,7 +24,6 @@ sudo apt-get install postgresql-9.3-postgis-2.1 --yes
 
 # Install the Apache server
 sudo apt-get install apache2 --yes
-sudo apt-get install apache2.2-common --yes
 sudo apt-get install apache2-mpm-prefork --yes
 sudo apt-get install apache2-utils --yes
 sudo apt-get install libexpat1 --yes
