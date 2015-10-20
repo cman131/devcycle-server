@@ -145,13 +145,15 @@ This command will create the migrations:
 
 `./manage.py syncdb --all`
 
+ - _**Note:** this may prompt you to create a django auth user. Follow that process as well if it does._
+
 These commands will then apply the newly created migrations to the database:
 
-`./manage.py migrate rider 0001`
+`./manage.py migrate rider 0001 --fake`
 
-`./manage.py migrate location_update 0001`
+`./manage.py migrate location_update 0001 --fake`
 
-`./manage.py migrate tour_config 0001`
+`./manage.py migrate tour_config 0001 --fake`
 
 Restart server again.
 
