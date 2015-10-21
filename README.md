@@ -112,9 +112,10 @@ WSGIPythonPath usr/local/devcycle
 </VirtualHost>
 ```
 
-* Change the application settings:
+* Create and Change the application settings:
 
 ```
+sudo cp /usr/local/devcycle/dataCollection/settings.py.template /usr/local/devcycle/dataCollection/settings.py
 sudo vim /usr/local/devcycle/dataCollection/settings.py
 ```
 
