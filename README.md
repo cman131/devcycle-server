@@ -27,20 +27,26 @@ The server component to the TourTrak system built using Django on **Ubuntu 14.04
 
 _(This is where you begin the server setup instructions)_
 
-1. Install postgreSQL
+1. Update aptitude
+
+	`sudo apt-get update`
+2. Install postgreSQL
 
 	`sudo apt-get install postgresql`
-2. After, install postGIS, which is a postgreSQL extention for handling spatial data
+3. After, install postGIS, which is a postgreSQL extention for handling spatial data
 
 	`sudo apt-get install postgresql-9.3-postgis-2.1`
-3. Setup the postgreSQL database:
+4. Setup the postgreSQL database:
 
 * switch to the default postgresql user by running
 
 	`sudo -iu postgres`
 * create a user w/ read and write permissions:
 
-	`createuser --pwprompt dev` _(Change "dev" to what you want the database username to be)_
+	`createuser --pwprompt dev`
+	
+	 - _**Note:** Change "dev" to what you want the database username to be_
+	 - _**Note:** The password cannot be blank_
 * Create the DCS database used to collect rider information:
 
 	`createdb DCS`
