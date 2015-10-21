@@ -145,38 +145,38 @@ to models then wanting those changes reflected in the database schema. South is 
 
 At this point the database schema for the Server does not exist yet. We will use South to add it. South will look at the current models to set-up the schema that the Server requires.
 
-*Note all commands below need to be ran within the root directory of the Django Project*
+*Note all commands below need to be ran within the root directory of the Django Project (/usr/local/devcycle)*
 
 This command will create the migrations:
 
-`./manage.py syncdb --all`
+`sudo python manage.py syncdb --all`
 
  - _**Note:** this may prompt you to create a django auth user. Follow that process as well if it does._
 
 These commands will then apply the newly created migrations to the database:
 
-`./manage.py migrate rider 0001 --fake`
+`sudo python manage.py migrate rider 0001 --fake`
 
-`./manage.py migrate location_update 0001 --fake`
+`sudo python manage.py migrate location_update 0001 --fake`
 
-`./manage.py migrate tour_config 0001 --fake`
+`sudo python manage.py migrate tour_config 0001 --fake`
 
 Restart server again.
 
 ```
-/etc/init.d/apache2 reload
+sudo service apache2 reload
 ```
 
 * Import all static files.
 
 ```
-python manage.py collectstatic
+sudo python manage.py collectstatic
 ```
 
 Restart server again:
 
 ```
-/etc/init.d/apache2 reload
+sudo service apache2 reload
 ```
 
 
