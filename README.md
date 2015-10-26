@@ -154,14 +154,6 @@ This command will create the migrations:
 
  - _**Note:** this may prompt you to create a django auth user. Follow that process as well if it does._
 
-These commands will then apply the newly created migrations to the database:
-
-`sudo python manage.py migrate rider 0001 --fake`
-
-`sudo python manage.py migrate location_update 0001 --fake`
-
-`sudo python manage.py migrate tour_config 0001 --fake`
-
 Restart server again.
 
 ```
@@ -342,3 +334,23 @@ Extract the contents of the archive, copy libcurl.dll from the SSL folder, and p
 1. `\dt` to list all tables
 2. `\q` to quit
 3. `psql DCS < /path/to/script/script.sql` for running scripts without having to connect
+
+## Creating Migrations
+When you make changes to the model, you need to create migrations to reflect the
+changes in the database. You can do so by running this command:
+
+`sudo python manage.py makemigrations`
+
+These commands will then apply the newly created migrations to the database:
+
+`sudo python manage.py migrate rider 0001`
+
+`sudo python manage.py migrate location_update 0001`
+
+`sudo python manage.py migrate tour_config 0001`
+
+Now you need to reload the server
+
+```
+sudo service apache2 reload
+```
