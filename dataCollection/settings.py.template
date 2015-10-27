@@ -8,7 +8,7 @@ DEBUG_PROPAGATE_EXCEPTIONS = True
 #TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Tom Moore', 'tjm3772@rit.edu'),
+    ('Sally PandaFace', 'spf3000@rit.edu'),
     # ('Your Name', 'your_email@example.com'),
 )
 
@@ -20,11 +20,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'DCS',
-#        'NAME':'dev_test1',
-        'USER': 'admin',
-        'PASSWORD': 'pedalRIT',
+        'USER': 'USERNAME',
+        'PASSWORD': 'PASSWORD',
         'HOST': 'localhost',
-#        'HOST':'cycl-ops.se.rit.edu',
         'PORT': '',
     }
 }

@@ -4,7 +4,11 @@
 
 # Environment Specific #
 #####################
-/Projects/SeniorProject/devcycle-server/dataCollection/wsgi.py
+/dataCollection/wsgi.py
+/dataCollection/settings.py
+*.swp
+*.swo
+*~
 
 # CTAGS FILE #
-/Projects/SeniorProject/devcycle-server/dataCollection/tags
+/dataCollection/tags

@@ -4,44 +4,35 @@
 # all the required dependencies.
 
 # Install necessary dependencies
-sudo apt-get install python-pip python-dev build-essential 
-sudo pip install --upgrade pip 
-sudo apt-get install python-django
-sudo apt-get install binutils
-sudo apt-get install gdal-bin
-sudo apt-get install libproj-dev
-sudo apt-get install memcached
-sudo apt-get install rabbitmq-server
 sudo apt-get update
-sudo apt-get install postgresql-9.1
-sudo apt-get install postgresql-server-dev-9.1
+sudo apt-get install git --yes
+sudo apt-get install python2 --yes
+sudo apt-get install python-pip --yes
+sudo apt-get install python-dev --yes
+sudo apt-get install build-essential --yes
+sudo pip install --upgrade pip
+sudo apt-get install binutils --yes
+sudo apt-get install gdal-bin --yes
+sudo apt-get install libproj-dev --yes
+sudo apt-get install memcached --yes
+sudo apt-get install rabbitmq-server --yes
+sudo apt-get install postgresql --yes
+sudo apt-get install python-psycopg2 --yes
+sudo apt-get install python-gobject --yes
+sudo apt-get install python-pycurl --yes
+sudo apt-get install postgresql-9.3-postgis-2.1 --yes
 
 # Install the Apache server
-sudo aptitude install apache2 apache2.2-common apache2-mpm-prefork apache2-utils libexpat1 ssl-cert
+sudo apt-get install apache2 --yes
+sudo apt-get install apache2-mpm-prefork --yes
+sudo apt-get install apache2-utils --yes
+sudo apt-get install libexpat1 --yes
+sudo apt-get install ssl-cert --yes
+sudo apt-get install apache2-dev --yes
 
 # Install mod_wsgi
-sudo aptitude install libapache2-mod-wsgi
+sudo apt-get install libapache2-mod-wsgi --yes
 sudo service apache2 restart
 
 # Install the required python eggs
-sudo pip install distribute
-sudo pip install Crypto
-sudo pip install Django==1.5.5
-sudo pip install Markdown
-sudo pip install PyYAML
-sudo pip install South
-sudo pip install django-filter
-sudo pip install django-rest
-sudo pip install djangorestframework
-sudo pip install mimeparse
-sudo pip install pep8
-sudo pip install pycrypto
-sudo pip install python-dateutil
-sudo pip install wsgiref
-sudo pip install python-memcached
-sudo pip install celery
-sudo pip install django-celery
-sudo pip install psycopg2
-sudo pip install django-admin-bootstrapped
-
-sudo chmod 777 /var/www/django-logs/default.log
+sudo pip install -r /usr/local/devcycle/requirements.txt

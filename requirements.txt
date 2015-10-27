@@ -1,265 +1,58 @@
-2013-11-03 23:51:53,218 [WARNING] django.request: Not Found: /static/bootstrap/css/bootstrap.css
-2013-11-03 23:51:54,153 [WARNING] django.request: Not Found: /static/bootstrap.min.js
-2013-11-03 23:51:54,156 [WARNING] django.request: Not Found: /static/bootstrap/css/bootstrap-responsive.css
-2013-11-03 23:52:23,681 [WARNING] django.request: Not Found: /static/bootstrap/css/bootstrap.css
-2013-11-03 23:52:24,678 [WARNING] django.request: Not Found: /static/bootstrap/css/bootstrap-responsive.css
-2013-11-03 23:52:24,683 [WARNING] django.request: Not Found: /static/bootstrap.min.js
-2013-11-03 23:52:30,389 [WARNING] django.request: Not Found: /accounts/login/
-2013-11-03 23:52:37,504 [WARNING] django.request: Not Found: /static/bootstrap.min.js
-2013-11-03 23:52:37,507 [WARNING] django.request: Not Found: /static/bootstrap/css/bootstrap.css
-2013-11-03 23:52:38,040 [WARNING] django.request: Not Found: /static/bootstrap/css/bootstrap-responsive.css
-2013-11-03 23:52:40,280 [WARNING] django.request: Not Found: /static/bootstrap.min.js
-2013-11-03 23:52:40,282 [WARNING] django.request: Not Found: /static/bootstrap/css/bootstrap-responsive.css
-2013-11-03 23:52:40,286 [WARNING] django.request: Not Found: /static/bootstrap/css/bootstrap.css
-2013-11-03 23:52:42,474 [WARNING] django.request: Not Found: /accounts/login/
-2013-11-03 23:53:58,129 [ERROR] django.request: Internal Server Error: /home/
-Traceback (most recent call last):
-  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
-    response = callback(request, *callback_args, **callback_kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/utils/decorators.py", line 91, in _wrapped_view
-    response = view_func(request, *args, **kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/contrib/auth/decorators.py", line 25, in _wrapped_view
-    return view_func(request, *args, **kwargs)
-  File "/usr/local/devcycle/analysis/views.py", line 62, in home_view
-    current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url').latest('pk')
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 516, in latest
-    return obj.get()
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 404, in get
-    self.model._meta.object_name)
-DoesNotExist: TourConfig matching query does not exist.
-2013-11-03 23:54:35,572 [WARNING] django.request: Not Found: /static/bootstrap.min.js
-2013-11-03 23:54:35,573 [WARNING] django.request: Not Found: /static/bootstrap/css/bootstrap-responsive.css
-2013-11-03 23:54:35,578 [WARNING] django.request: Not Found: /static/bootstrap/css/bootstrap.css
-2013-11-03 23:54:45,298 [ERROR] django.request: Internal Server Error: /
-Traceback (most recent call last):
-  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
-    response = callback(request, *callback_args, **callback_kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/utils/decorators.py", line 91, in _wrapped_view
-    response = view_func(request, *args, **kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/contrib/auth/decorators.py", line 25, in _wrapped_view
-    return view_func(request, *args, **kwargs)
-  File "/usr/local/devcycle/analysis/views.py", line 62, in home_view
-    current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url').latest('pk')
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 516, in latest
-    return obj.get()
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 404, in get
-    self.model._meta.object_name)
-DoesNotExist: TourConfig matching query does not exist.
-2013-11-03 23:55:13,840 [WARNING] django.request: Not Found: /static/css/tourconfig.css
-2013-11-03 23:55:13,844 [WARNING] django.request: Not Found: /static/css/jquery-ui.css
-2013-11-03 23:55:13,848 [WARNING] django.request: Not Found: /static/bootstrap.min.js
-2013-11-03 23:55:13,850 [WARNING] django.request: Not Found: /static/jquery-1.9.1.js
-2013-11-03 23:55:13,854 [WARNING] django.request: Not Found: /static/bootstrap/css/bootstrap-responsive.css
-2013-11-03 23:55:13,858 [WARNING] django.request: Not Found: /static/bootstrap/css/bootstrap.css
-2013-11-03 23:55:13,886 [WARNING] django.request: Not Found: /static/jquery-ui.js
-2013-11-04 00:08:40,159 [ERROR] django.request: Internal Server Error: /
-Traceback (most recent call last):
-  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
-    response = callback(request, *callback_args, **callback_kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/utils/decorators.py", line 91, in _wrapped_view
-    response = view_func(request, *args, **kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/contrib/auth/decorators.py", line 25, in _wrapped_view
-    return view_func(request, *args, **kwargs)
-  File "/usr/local/devcycle/analysis/views.py", line 62, in home_view
-    current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url').latest('pk')
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 516, in latest
-    return obj.get()
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 404, in get
-    self.model._meta.object_name)
-DoesNotExist: TourConfig matching query does not exist.
-2013-11-04 00:08:42,828 [ERROR] django.request: Internal Server Error: /
-Traceback (most recent call last):
-  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
-    response = callback(request, *callback_args, **callback_kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/utils/decorators.py", line 91, in _wrapped_view
-    response = view_func(request, *args, **kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/contrib/auth/decorators.py", line 25, in _wrapped_view
-    return view_func(request, *args, **kwargs)
-  File "/usr/local/devcycle/analysis/views.py", line 62, in home_view
-    current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url').latest('pk')
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 516, in latest
-    return obj.get()
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 404, in get
-    self.model._meta.object_name)
-DoesNotExist: TourConfig matching query does not exist.
-2013-11-04 00:08:45,049 [ERROR] django.request: Internal Server Error: /
-Traceback (most recent call last):
-  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
-    response = callback(request, *callback_args, **callback_kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/utils/decorators.py", line 91, in _wrapped_view
-    response = view_func(request, *args, **kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/contrib/auth/decorators.py", line 25, in _wrapped_view
-    return view_func(request, *args, **kwargs)
-  File "/usr/local/devcycle/analysis/views.py", line 62, in home_view
-    current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url').latest('pk')
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 516, in latest
-    return obj.get()
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 404, in get
-    self.model._meta.object_name)
-DoesNotExist: TourConfig matching query does not exist.
-2013-11-04 00:08:45,946 [ERROR] django.request: Internal Server Error: /
-Traceback (most recent call last):
-  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
-    response = callback(request, *callback_args, **callback_kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/utils/decorators.py", line 91, in _wrapped_view
-    response = view_func(request, *args, **kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/contrib/auth/decorators.py", line 25, in _wrapped_view
-    return view_func(request, *args, **kwargs)
-  File "/usr/local/devcycle/analysis/views.py", line 62, in home_view
-    current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url').latest('pk')
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 516, in latest
-    return obj.get()
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 404, in get
-    self.model._meta.object_name)
-DoesNotExist: TourConfig matching query does not exist.
-2013-11-04 00:08:49,033 [ERROR] django.request: Internal Server Error: /
-Traceback (most recent call last):
-  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
-    response = callback(request, *callback_args, **callback_kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/utils/decorators.py", line 91, in _wrapped_view
-    response = view_func(request, *args, **kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/contrib/auth/decorators.py", line 25, in _wrapped_view
-    return view_func(request, *args, **kwargs)
-  File "/usr/local/devcycle/analysis/views.py", line 62, in home_view
-    current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url').latest('pk')
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 516, in latest
-    return obj.get()
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 404, in get
-    self.model._meta.object_name)
-DoesNotExist: TourConfig matching query does not exist.
-2013-11-04 00:08:54,512 [WARNING] django.request: Not Found: /start
-2013-11-04 00:09:11,209 [ERROR] django.request: Internal Server Error: /
-Traceback (most recent call last):
-  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
-    response = callback(request, *callback_args, **callback_kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/utils/decorators.py", line 91, in _wrapped_view
-    response = view_func(request, *args, **kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/contrib/auth/decorators.py", line 25, in _wrapped_view
-    return view_func(request, *args, **kwargs)
-  File "/usr/local/devcycle/analysis/views.py", line 62, in home_view
-    current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url').latest('pk')
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 516, in latest
-    return obj.get()
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 404, in get
-    self.model._meta.object_name)
-DoesNotExist: TourConfig matching query does not exist.
-2013-11-04 00:11:08,159 [ERROR] django.request: Internal Server Error: /
-Traceback (most recent call last):
-  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
-    response = callback(request, *callback_args, **callback_kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/utils/decorators.py", line 91, in _wrapped_view
-    response = view_func(request, *args, **kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/contrib/auth/decorators.py", line 25, in _wrapped_view
-    return view_func(request, *args, **kwargs)
-  File "/usr/local/devcycle/analysis/views.py", line 62, in home_view
-    current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url').latest('pk')
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 516, in latest
-    return obj.get()
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 404, in get
-    self.model._meta.object_name)
-DoesNotExist: TourConfig matching query does not exist.
-2013-11-04 00:11:49,486 [ERROR] django.request: Internal Server Error: /
-Traceback (most recent call last):
-  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
-    response = callback(request, *callback_args, **callback_kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/utils/decorators.py", line 91, in _wrapped_view
-    response = view_func(request, *args, **kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/contrib/auth/decorators.py", line 25, in _wrapped_view
-    return view_func(request, *args, **kwargs)
-  File "/usr/local/devcycle/analysis/views.py", line 62, in home_view
-    current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url').latest('pk')
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 516, in latest
-    return obj.get()
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 404, in get
-    self.model._meta.object_name)
-DoesNotExist: TourConfig matching query does not exist.
-2013-11-04 00:14:54,859 [ERROR] django.request: Internal Server Error: /
-Traceback (most recent call last):
-  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
-    response = callback(request, *callback_args, **callback_kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/utils/decorators.py", line 91, in _wrapped_view
-    response = view_func(request, *args, **kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/contrib/auth/decorators.py", line 25, in _wrapped_view
-    return view_func(request, *args, **kwargs)
-  File "/usr/local/devcycle/analysis/views.py", line 62, in home_view
-    current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url').latest('pk')
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 516, in latest
-    return obj.get()
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 404, in get
-    self.model._meta.object_name)
-DoesNotExist: TourConfig matching query does not exist.
-2013-11-04 00:15:45,164 [ERROR] django.request: Internal Server Error: /
-Traceback (most recent call last):
-  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
-    response = callback(request, *callback_args, **callback_kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/utils/decorators.py", line 91, in _wrapped_view
-    response = view_func(request, *args, **kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/contrib/auth/decorators.py", line 25, in _wrapped_view
-    return view_func(request, *args, **kwargs)
-  File "/usr/local/devcycle/analysis/views.py", line 62, in home_view
-    current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url').latest('pk')
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 516, in latest
-    return obj.get()
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 404, in get
-    self.model._meta.object_name)
-DoesNotExist: TourConfig matching query does not exist.
-2013-11-04 00:15:53,079 [ERROR] django.request: Internal Server Error: /
-Traceback (most recent call last):
-  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
-    response = callback(request, *callback_args, **callback_kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/utils/decorators.py", line 91, in _wrapped_view
-    response = view_func(request, *args, **kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/contrib/auth/decorators.py", line 25, in _wrapped_view
-    return view_func(request, *args, **kwargs)
-  File "/usr/local/devcycle/analysis/views.py", line 62, in home_view
-    current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url').latest('pk')
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 516, in latest
-    return obj.get()
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 404, in get
-    self.model._meta.object_name)
-DoesNotExist: TourConfig matching query does not exist.
-2013-11-04 00:16:04,345 [ERROR] django.request: Internal Server Error: /
-Traceback (most recent call last):
-  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
-    response = callback(request, *callback_args, **callback_kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/utils/decorators.py", line 91, in _wrapped_view
-    response = view_func(request, *args, **kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/contrib/auth/decorators.py", line 25, in _wrapped_view
-    return view_func(request, *args, **kwargs)
-  File "/usr/local/devcycle/analysis/views.py", line 62, in home_view
-    current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url').latest('pk')
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 516, in latest
-    return obj.get()
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 404, in get
-    self.model._meta.object_name)
-DoesNotExist: TourConfig matching query does not exist.
-2013-11-04 00:16:12,513 [ERROR] django.request: Internal Server Error: /
-Traceback (most recent call last):
-  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
-    response = callback(request, *callback_args, **callback_kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/utils/decorators.py", line 91, in _wrapped_view
-    response = view_func(request, *args, **kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/contrib/auth/decorators.py", line 25, in _wrapped_view
-    return view_func(request, *args, **kwargs)
-  File "/usr/local/devcycle/analysis/views.py", line 62, in home_view
-    current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url').latest('pk')
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 516, in latest
-    return obj.get()
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 404, in get
-    self.model._meta.object_name)
-DoesNotExist: TourConfig matching query does not exist.
-2013-11-04 00:29:08,507 [ERROR] django.request: Internal Server Error: /
-Traceback (most recent call last):
-  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
-    response = callback(request, *callback_args, **callback_kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/utils/decorators.py", line 91, in _wrapped_view
-    response = view_func(request, *args, **kwargs)
-  File "/usr/local/lib/python2.7/dist-packages/django/contrib/auth/decorators.py", line 25, in _wrapped_view
-    return view_func(request, *args, **kwargs)
-  File "/usr/local/devcycle/analysis/views.py", line 62, in home_view
-    current_tour = TourConfig.objects.values('tour_id', 'tour_name', 'start_time', 'max_tour_time', 'tour_organization', 'tour_logo', 'dcs_url').latest('pk')
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 516, in latest
-    return obj.get()
-  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 404, in get
-    self.model._meta.object_name)
-DoesNotExist: TourConfig matching query does not exist.
+amqp==1.4.6
+anyjson==0.3.3
+apt-xapian-index==0.45
+billiard==3.3.0.20
+celery==3.1.18
+chardet==2.0.1
+colorama==0.2.5
+configobj==4.7.2
+crypto==1.4.1
+distribute==0.7.3
+Django==1.6.11
+django-admin-bootstrapped==1.6.4
+django-celery==3.1.16
+django-filter==0.11.0
+django-rest==0.0.1
+djangorestframework==3.2.4
+html5lib==0.999
+httplib2==0.8
+keyring==3.5
+kombu==3.0.26
+Landscape-Client==14.12
+launchpadlib==1.10.2
+Markdown==2.6.2
+mimeparse==0.1.3
+mod_wsgi==4.4.17
+mod_wsgi-httpd==2.4.12.6
+Naked==0.1.31
+oauth==1.0.1
+PAM==0.4.2
+pbr==1.8.0
+pep8==1.6.2
+pexpect==3.1
+pycrypto==2.6.1
+pyOpenSSL==0.13
+pyserial==2.6
+python-apt===0.9.3.5ubuntu1
+python-dateutil==2.4.2
+python-debian===0.1.21-nmu2ubuntu2
+python-memcached==1.57
+pytz==2015.6
+PyYAML==3.11
+requests==2.2.1
+SecretStorage==2.0.0
+shellescape==3.4.1
+simplejson==3.3.1
+six==1.9.0
+South==1.0.2
+ssh-import-id==3.21
+stevedore==1.8.0
+Twisted-Core==13.2.0
+urllib3==1.7.1
+virtualenv==13.1.2
+virtualenv-clone==0.2.6
+virtualenvwrapper==4.7.1
+wadllib==1.3.2
+wheel==0.24.0
+wsgiref==0.1.2
+zope.interface==4.0.5
