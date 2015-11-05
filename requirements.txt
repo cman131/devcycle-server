@@ -18,7 +18,6 @@ html5lib==0.999
 httplib2==0.8
 keyring==3.5
 kombu==3.0.26
-Landscape-Client==14.12
 launchpadlib==1.10.2
 Markdown==2.6.2
 mimeparse==0.1.3
