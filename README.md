@@ -79,35 +79,29 @@ _(This is where you begin the server setup instructions)_
 	`cd /usr/local/devcycle`
 
 	`sudo bash setup.sh` _(This will take a significant amount of time on mod_wsgi-httpd, 10-20 mins)_
-6. Create a virtual host & WSGI file for the Apache server to display the Django application by creating a new .conf file.
+6. Create a virtual host & WSGI file for the Apache server to display the Django application by creating a new .conf file from the template.
 
-	`sudo vim /etc/apache2/sites-available/001-devcycle.conf`.
-7. Create the apache conf file for mod_wsgi hosting.
-
-```
+ ```
 sudo cp /usr/local/devcycle/001-devcycle.conf.template /etc/apache2/sites-available/001-devcycle.conf
 sudo vim /etc/apache2/sites-available/001-devcycle.conf
-```
+ ```
+ * Change "SERVER_NAME" to match your server's name ex: `devcycle`
+ * Change "SERVER_ADDRESS" to match your domain ex: `devcycle.se.rit.edu`
+ * Change "SERVER_EMAIL_ADDRESS" to match your email address ex: `pandaman@example.com`
 
-* Modify the Server alias to match your domain: `ServerAlias YOURSUBDOMAIN.se.rit.edu`
+7. Create and Change the application settings:
 
-
-8. Create and Change the application settings:
-
-```
+ ```
 sudo cp /usr/local/devcycle/dataCollection/settings.py.template /usr/local/devcycle/dataCollection/settings.py
 sudo vim /usr/local/devcycle/dataCollection/settings.py
-```
-
- * Set DEBUG to False
+ ```
  * Under DATABASES, modify USER and PASSWORD fields to reflect the database user you created in "Install The Database" (above).
- * HOST should be localhost.
 
-Restart the apache server to put all changes into effect.
+8. Restart the apache server to put all changes into effect.
 
-```
+ ```
 sudo /etc/init.d/apache2 reload
-```
+ ```
 
 
 ###Setup The Database
@@ -144,7 +138,7 @@ sudo service apache2 reload
 ```
 
 
-##Configure the Analysis Dashboard
+##Configure the Analysis Dashboard for a Non-Default setup
 1. Edit the settings file in '/usr/local/devcycle/dataCollections/settings.py'
 
 * TIME_ZONE to reflect the timezone of the server in “tz database” format (e.g. ‘America/New_York’)
