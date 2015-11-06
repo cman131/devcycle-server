@@ -1,9 +1,9 @@
 WSGIPythonPath usr/local/devcycle
 
 <VirtualHost *:80>
-        ServerName devcycle.se.rit.edu
-        ServerAlias devcycle.se.rit.edu
-        ServerAdmin someaddress@example.com
+        ServerName SERVER_NAME
+        ServerAlias SERVER_ADDRESS
+        ServerAdmin ADMIN_EMAIL_ADDRESS
 
         Alias /static /var/www/static/
 
