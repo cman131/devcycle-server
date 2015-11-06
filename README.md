@@ -82,55 +82,26 @@ _(This is where you begin the server setup instructions)_
 6. Create a virtual host & WSGI file for the Apache server to display the Django application by creating a new .conf file.
 
 	`sudo vim /etc/apache2/sites-available/001-devcycle.conf`.
-7. Copy and paste the following, you may edit these values if desired (such as where to collect static files).
+7. Create the apache conf file for mod_wsgi hosting.
 
 ```
-WSGIPythonPath usr/local/devcycle
-
-<VirtualHost *:80>
-        ServerName devcycle.se.rit.edu
-        ServerAlias devcycle.se.rit.edu
-        ServerAdmin someaddress@example.com
-
-        Alias /static /var/www/static/
-
-        <Directory /public/static/>
-                Order allow,deny
-                Allow from all
-        </Directory>
-
-        WSGIDaemonProcess devcycle processes=2 threads=15 display-name=%{GROUP} python-path=/usr/local/devcycle/
-        WSGIProcessGroup devcycle
-        WSGIScriptAlias / /usr/local/devcycle/dataCollection/wsgi.py
-
-        <Directory /usr/local/devcycle/dataCollection>
-                <Files wsgi.py>
-                Order deny,allow
-                Allow from all
-                </Files>
-        </Directory>
-</VirtualHost>
+sudo cp /usr/local/devcycle/001-devcycle.conf.template /etc/apache2/sites-available/001-devcycle.conf
+sudo vim /etc/apache2/sites-available/001-devcycle.conf
 ```
 
-* Create and Change the application settings:
+* Modify the Server alias to match your domain: `ServerAlias YOURSUBDOMAIN.se.rit.edu`
+
+
+8. Create and Change the application settings:
 
 ```
 sudo cp /usr/local/devcycle/dataCollection/settings.py.template /usr/local/devcycle/dataCollection/settings.py
 sudo vim /usr/local/devcycle/dataCollection/settings.py
 ```
 
-Set DEBUG to False
-Under DATABASES, modify USER and PASSWORD fields to reflect the database user you created in "Install The Database" (above).
-HOST should be localhost.
-STATIC_ROOT to point to '/var/www/static' unless you modified where to collect these in
-step 6.
-SECRET_KEY is a string of at least 32 random characters
-KEY to a random string of hex characters a multiple of 16 long
-SECRET to a random string of numeric characters a multiple of 16
-STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-  '‘/usr/local/devcycle/tour_config/static/’
-  )
+ * Set DEBUG to False
+ * Under DATABASES, modify USER and PASSWORD fields to reflect the database user you created in "Install The Database" (above).
+ * HOST should be localhost.
 
 Restart the apache server to put all changes into effect.
 
