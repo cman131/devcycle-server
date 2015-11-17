@@ -142,17 +142,19 @@ class RiderAPI(APIView):
     def post(self, request, format=None):
         try:
             logger.debug('trying')
-            data = request.DATA
+            data = request.data
             serializer = riderSerializer(data=data)
             if serializer.is_valid():
-                serializer.save()
-                rider_uuid = create_uuid(serializer.object.pk)
+                rider_data = serializer.save()
+                rider_data.save()
 
-                return Response(
-                    #{settings.JSON_KEYS['RIDER_ID']: rider_uuid},
-                    {settings.JSON_KEYS['RIDER_ID']: serializer.object.pk},
-		    status=status.HTTP_201_CREATED
-                )
+                if(rider_data.id != None):
+                    logger.debug('Rider',rider_data.id,'has been registered.')
+
+                    return Response(
+                        {settings.JSON_KEYS['RIDER_ID']: rider_data.id},
+                status=status.HTTP_201_CREATED
+                    )
 
             return Response(
                 serializer.errors,
@@ -169,7 +171,7 @@ class RiderAPI(APIView):
 class RiderPushUpdateAPI(APIView):
 
     def post(self, request, format=None):
-        data = request.DATA
+        data = request.data
         id = decrypt_uuid(data[settings.JSON_KEYS['RIDER_ID']])
         try:
             rider = Rider.objects.get(id=id)
