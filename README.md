@@ -95,7 +95,7 @@ sudo vim /etc/apache2/sites-available/001-devcycle.conf
 sudo cp /usr/local/devcycle/dataCollection/settings.py.template /usr/local/devcycle/dataCollection/settings.py
 sudo vim /usr/local/devcycle/dataCollection/settings.py
  ```
- * Under DATABASES, modify USER and PASSWORD fields to reflect the database user you created in "Install The Database" (above).
+ * Under DATABASES, modify USER and PASSWORD fields to reflect the database user you created in ["Install The Database"](#install-postgres-with-postgis-install-the-database).
 
 8. Restart the apache server to put all changes into effect.
 
