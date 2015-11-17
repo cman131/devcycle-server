@@ -1,0 +1,25 @@
+WSGIPythonPath usr/local/devcycle
+
+<VirtualHost *:80>
+        ServerName SERVER_NAME
+        ServerAlias SERVER_ADDRESS
+        ServerAdmin ADMIN_EMAIL_ADDRESS
+
+        Alias /static /var/www/static/
+
+        <Directory /public/static/>
+                Order allow,deny
+                Allow from all
+        </Directory>
+
+        WSGIDaemonProcess devcycle processes=2 threads=15 display-name=%{GROUP} python-path=/usr/local/devcycle/
+        WSGIProcessGroup devcycle
+        WSGIScriptAlias / /usr/local/devcycle/dataCollection/wsgi.py
+
+        <Directory /usr/local/devcycle/dataCollection>
+                <Files wsgi.py>
+                Order deny,allow
+                Allow from all
+                </Files>
+        </Directory>
+</VirtualHost>

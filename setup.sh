@@ -21,6 +21,7 @@ sudo apt-get install python-psycopg2 --yes
 sudo apt-get install python-gobject --yes
 sudo apt-get install python-pycurl --yes
 sudo apt-get install postgresql-9.3-postgis-2.1 --yes
+sudo apt-get install landscape-client --yes
 
 # Install the Apache server
 sudo apt-get install apache2 --yes
