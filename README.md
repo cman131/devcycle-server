@@ -88,6 +88,10 @@ sudo vim /etc/apache2/sites-available/001-devcycle.conf
  * Change "SERVER_NAME" to match your server's name ex: `devcycle`
  * Change "SERVER_ADDRESS" to match your domain ex: `devcycle.se.rit.edu`
  * Change "SERVER_EMAIL_ADDRESS" to match your email address ex: `pandaman@example.com`
+ * Change "DEBUG" to `True` if you are *not* in production
+ * Change "TIME_ZONE" to match the timezone of the server in “tz database” format (e.g. ‘America/New_York’)
+ * Change "DEFAULT_MAP_LAT" and "DEFAULT_MAP_LON" to match the latitude and longitude, respectively, that maps in the dashboard should default to.
+ * Change "MAP_TILE_SERVER" to match the hostname of the server to retrieve map tiles from (currently configured to use MapQuest's free OSM tile server)
 
 7. Create and Change the application settings:
 
@@ -137,13 +141,6 @@ Restart server again:
 sudo service apache2 reload
 ```
 
-
-##Configure the Analysis Dashboard for a Non-Default setup
-1. Edit the settings file in '/usr/local/devcycle/dataCollections/settings.py'
-
-* TIME_ZONE to reflect the timezone of the server in “tz database” format (e.g. ‘America/New_York’)
-* DEFAULT_MAP_LAT and DEFAULT_MAP_LON to the latitude and longitude, respectively, that maps in the dashboard should default to.
-* MAP_TILE_SERVER to the hostname of the server to retrieve map tiles from - currently configured to use MapQuest's free OSM tile server hosting.
 
 ##Devcycle Load Test Framework
 
