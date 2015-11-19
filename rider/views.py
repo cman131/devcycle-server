@@ -143,18 +143,27 @@ class RiderAPI(APIView):
         try:
             logger.debug('trying')
             data = request.data
-            serializer = riderSerializer(data=data)
-            if serializer.is_valid():
+            rider_data = Rider.objects.filter(id=data[u'id'])
+            if rider_data:
+                rider_data = Rider.objects.get(id=data[u'id'])
+                logger.debug('Rider',rider_data.id,'was already registered.')
+            else:
+                serializer = riderSerializer(data=data)
+                if not serializer.is_valid():
+                    return Response(
+                        serializer.errors,
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
                 rider_data = serializer.save()
                 rider_data.save()
+                logger.debug('Rider',rider_data.id,'has been registered.')
 
-                if(rider_data.id != None):
-                    logger.debug('Rider',rider_data.id,'has been registered.')
+            if(rider_data.id != None):
 
-                    return Response(
-                        {settings.JSON_KEYS['RIDER_ID']: rider_data.id},
-                status=status.HTTP_201_CREATED
-                    )
+                return Response(
+                    {settings.JSON_KEYS['RIDER_ID']: rider_data.id},
+                    status=status.HTTP_201_CREATED
+                )
 
             return Response(
                 serializer.errors,
