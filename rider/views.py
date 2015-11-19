@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 def list_group_view(request, r_id):
 	#Check that the rider exists
-	rider_exists_test = Rider.objects.filter(id=r_id)
+	rider_exists_test = Rider.objects.filter(id=r_id).exists()
 	if not rider_exists_test:
 		write_response(request, json.dumps([{"success":"false","message":"ERROR: Rider does not exist"}]))
 
@@ -143,10 +143,10 @@ class RiderAPI(APIView):
         try:
             logger.debug('trying')
             data = request.data
-            rider_data = Rider.objects.filter(id=data[u'id'])
+            rider_data = Rider.objects.filter(id=data[u'id']).exists()
             if rider_data:
                 rider_data = Rider.objects.get(id=data[u'id'])
-                logger.debug('Rider',rider_data.id,'was already registered.')
+                logger.debug('Rider' + str(rider_data.id) + 'was already registered.')
             else:
                 serializer = riderSerializer(data=data)
                 if not serializer.is_valid():
@@ -156,7 +156,7 @@ class RiderAPI(APIView):
                     )
                 rider_data = serializer.save()
                 rider_data.save()
-                logger.debug('Rider',rider_data.id,'has been registered.')
+                logger.debug('Rider' + str(rider_data.id) + 'has been registered.')
 
             if(rider_data.id != None):
 
