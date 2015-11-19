@@ -18,8 +18,8 @@ logger = logging.getLogger(__name__)
 
 def list_group_view(request, r_id):
     # Check that the rider exists
-    rider_exists_test = Rider.objects.filter(id=r_id).exists()
-    if not rider_exists_test:
+    rider_exists = Rider.objects.filter(id=r_id).exists()
+    if not rider_exists:
         write_response(request, json.dumps([{"success":"false","message":"ERROR: Rider does not exist"}]))
 
     # response object placeholder
@@ -27,12 +27,12 @@ def list_group_view(request, r_id):
     json_data.append({"success": "true", "message": "success"}) #can assume success since if we fail this never gets returned
 
     # get the list of groups the rider is associated with
-    rider_data = Group.objects.filter(rider__id=r_id)
+    rider_groups = Group.objects.filter(rider__id=r_id)
     # check that they're in a group
-    if rider_data:
+    if rider_groups:
         # iterate over groups they're in
         # get the group ID and group name to return to the client
-        for group in rider_data:
+        for group in rider_groups:
             # affinity_group = group.code
             affinity_group = group.id
             group_data = Group.objects.get(id=affinity_group)
