@@ -9,7 +9,7 @@ from django.core.validators import RegexValidator
 from affinity.models import Group
 
 class Rider(models.Model):
-    id = models.AutoField(primary_key=True)
+    id = models.CharField(primary_key=True, max_length=64)
     os = models.CharField(max_length=125, null=True, blank=True)
     start_time = models.BigIntegerField(null=True, blank=True)
     push_id = models.CharField(max_length=512, null=True, blank=True)

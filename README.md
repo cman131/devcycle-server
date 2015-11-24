@@ -301,7 +301,10 @@ Extract the contents of the archive, copy libcurl.dll from the SSL folder, and p
 When you make changes to the model, you need to create migrations to reflect the
 changes in the database. You can do so by running this command:
 
-`sudo python manage.py makemigrations`
+`sudo python manage.py schemamigration MODEL_NAME NAME_OF_MIGRATION --auto`
+
+* change "MODEL_NAME" to the model you changed ex: "rider"
+* change "NAME_OF_MIGRATION" to what you want to call it.
 
 These commands will then apply the newly created migrations to the database:
 
