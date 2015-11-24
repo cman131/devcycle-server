@@ -150,10 +150,9 @@ class RiderAPI(APIView):
         try:
             data = request.data
             logger.debug('[RiderAPI:Register] Attempting to find rider with id: '+str(data[u'id']))
-            rider_data = Rider.objects.filter(id=data[u'id']).exists()
-            if rider_data:
-                rider_data = Rider.objects.get(id=data[u'id'])
-                logger.debug('[API:Register] Rider' + str(rider_data.id) + 'was already registered.')
+            rider_exists = Rider.objects.filter(id=data[u'id']).exists()
+            if rider_exists:
+                logger.debug('[API:Register] Rider' + str(data[u'id']) + 'was already registered.')
             else:
                 logger.debug('[RiderAPI:Register] Rider with id: ' + str(data[u'id'] + ' was not found. Registering...'))
                 serializer = riderSerializer(data=data)
@@ -167,7 +166,7 @@ class RiderAPI(APIView):
                 logger.debug('[RiderAPI:Register] Rider' + str(rider_data.id) + 'has been registered.')
 
             return Response(
-                {settings.JSON_KEYS['RIDER_ID']: rider_data.id},
+                {settings.JSON_KEYS['RIDER_ID']: data[u'id']},
                 status=status.HTTP_201_CREATED
             )
 

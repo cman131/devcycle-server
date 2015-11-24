@@ -54,3 +54,4 @@ class Migration(SchemaMigration):
     }
 
     complete_apps = ['rider']
+
