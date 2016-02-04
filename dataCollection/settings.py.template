@@ -20,8 +20,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'DCS',
-        'USER': 'USERNAME',
-        'PASSWORD': 'PASSWORD',
+        'USER': 'dev',
+        'PASSWORD': 'panda13',
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -153,7 +153,6 @@ INSTALLED_APPS = (
     'location_update',
     'tour_config',
     'rest_framework',
-    'south',
     'djcelery',
     'analysis',
     #'bootstrap_toolkit',
