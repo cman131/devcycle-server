@@ -12,8 +12,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 class TourConfigAddForm(forms.ModelForm):
-    start_time = UnixDateTimeField(widget=widgets.AdminSplitDateTime)
-    max_tour_time = UnixDateTimeField(label="End time", widget=widgets.AdminSplitDateTime)
+    start_time = UnixDateTimeField(widget=forms.SplitDateTimeWidget())
+    max_tour_time = UnixDateTimeField(label="End time", widget=forms.SplitDateTimeWidget())
     label_suffix = ":"
     class Meta:
         model = TourConfig
