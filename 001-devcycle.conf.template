@@ -1,5 +1,5 @@
 WSGIScriptAlias / /usr/local/devcycle/dataCollection/wsgi.py
-WSGIPythonPath usr/local/devcycle
+WSGIPythonPath /usr/local/devcycle
 Alias /static/ /var/www/static/
 
 <Directory /usr/local/devcycle/dataCollection>
