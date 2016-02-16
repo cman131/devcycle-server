@@ -168,7 +168,6 @@ INSTALLED_APPS = (
 # more details on how to customize your logging configuration.
 LOGGING = {
     'version': 1,
-    # 'disable_existing_loggers': False,
     'disable_existing_loggers': True,
     'formatters': {
         'standard': {
@@ -179,7 +178,7 @@ LOGGING = {
         'default': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': 'django-logs/default.log',
+            'filename': '/var/log/devcycle-logs/default.log',
             'maxBytes': 1024*1024*5,  # 5 MB
             'backupCount': 5,
             'formatter': 'standard',
@@ -187,15 +186,11 @@ LOGGING = {
         'request_handler': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': 'django-logs/requests.log',
+            'filename': '/var/log/devcycle-logs/requests.log',
             'maxBytes': 1024*1024*5,  # 5 MB
             'backupCount': 5,
             'formatter': 'standard',
-        },
-        #'logfile': {
-        #    'class': 'logging.handlers.WatchedFileHandler',
-        #    'filename': '/var/log/django/myapp.log'
-        #}
+        }
     },
     'loggers': {
 
@@ -206,39 +201,11 @@ LOGGING = {
         },
         'django.request': {
             'handlers': ['request_handler'],
-            #'level': 'ERROR',
              'level': 'DEBUG',
-            #'propagate': True
              'propagate': False
-        },
-        #'django': {
-        #    'handlers': ['logfile'],
-        #    'level': 'ERROR',
-        #    'propagate': False,
-        #}
+        }
     }
 }
-#LOGGING = {
-#    'version': 1,
-#    'disable_existing_loggers': False,
-#    'filters': {
-#        'require_debug_false': {
-#            '()': 'django.utils.log.RequireDebugFalse'
-#        }
-#    },
-#    'handlers': {
-#        'mail_admins': {
-#            'level': 'ERROR',
-#            'filters': ['require_debug_false'],
-#            'class': 'django.utils.log.AdminEmailHandler'
-#        },
-#        'console': {
-#            'level': 'DEBUG',
-#            'class': 'logging.StreamHandler',
-#        },
-#    }
-#}
-
 
 KEY = '52af783df367b7a5c7d01457d82544bf'
 SALT = '58268845878249858254353589767595'

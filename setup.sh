@@ -33,6 +33,7 @@ sudo apt-get install apache2-dev --yes
 
 # Install mod_wsgi
 sudo apt-get install libapache2-mod-wsgi --yes
+sudo apt-get install libapache2-mod-python --yes
 sudo service apache2 restart
 
 # Install the required python eggs
