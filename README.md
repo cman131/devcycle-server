@@ -83,6 +83,7 @@ _(This is where you begin the server setup instructions)_
 
  ```
 sudo cp /usr/local/devcycle/001-devcycle.conf.template /etc/apache2/sites-available/001-devcycle.conf
+sudo ln -s /etc/apache2/sites-available/001-devcycle.conf /etc/apache2/sites-enabled/001-devcycle.conf
  ```
  
 7. Create and Change the application settings:
